@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 //Importation des routers pour les requêtes articles/users
 const articleRoutes = require("./routers/article");
-//const userRoutes = require("./routes/user");
+const userRoutes = require("./routers/user");
 
 //Importation pour accéder au path du server
 const path = require("path");
@@ -15,28 +15,8 @@ const path = require("path");
 //Importation du fichier cors.js pour permettre l'échange entre serveurs
 const cors = require("./services/cors");
 
-//Plugin dotenv (masquage des données de connexion à la DBbase via un fichier dotenv et une création de variables pour le nom du user et le password)
-const dotenv = require("dotenv");
-
-//Importation du package mysql, , pour l'accès à la base de données et à ses fonctionnalités pour un site dynamique
-var mysql = require("mysql");
-
-//Connexion à la base de données avec dotenv
-dotenv.config();
-var connection = mysql.createConnection({
-    host : "localhost",
-    user: process.env.DB_USER,
-    password : process.env.DB_PASS,
-    database : process.env.DB_DATABASE
-});
-
-connection.connect(function(error) {
-    if (error) {
-        console.error("La connexion à MySQL a échoué !"); 
-        return;
-    }
-    console.log("Connexion à MySQL réussie !");
-});
+//Importation du fichier de configuration de la connection à la base de données MySQL
+var connection = require("./services/mysql.config");
 
 //Déclaration de notre appli comme fonctionnant avec express (et donc Node)
 const app = express();
@@ -56,7 +36,7 @@ app.use(bodyParser.json());
 //Définit les route des deux routeurs "Sauce"/"User" ainsi que pour les images téléchargées
 //app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/api/articles", articleRoutes);
-//app.use("/api/auth", userRoutes);
+app.use("/api/auth", userRoutes);
 
 //Exportation de l'appli vers server.js 
 module.exports = app;

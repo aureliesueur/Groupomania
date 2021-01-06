@@ -1,5 +1,4 @@
-//const sql = require("./mysql.config.js");
-
+//Importation du plugin mysql 
 var mysql = require("mysql");
 
 //Constructeur
@@ -13,4 +12,5 @@ const Article = function(article) {
     this.date_post = article.date_post;
 };
 
+//Exportation du modèle de données
 module.exports = Article;

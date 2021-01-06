@@ -4,27 +4,27 @@ const express = require("express");
 //Création d'un router Express qui contient toutes les routes des requêtes "Articles"
 const router = express.Router();
 //Importation du middleware d'authentification pour protéger les routes
-//const auth = require("../middleware/auth");
+const auth = require("../middleware/auth");
 //Importation du plugin multer pour le téléchargement d'images/d'articles
-//const multer = require("../middleware/multer-config");
+const multer = require("../middleware/multer");
 //Importation du controller
 const articleCtrl = require("../controllers/article");
 
 
 //Requête POST pour poster un nouvel article sur le réseau social
-router.post("/", articleCtrl.createArticle); //AJOUTER AUTH/MULTER !!!!
+router.post("/", /*auth, */multer, articleCtrl.createArticle); 
 
 //Requête PUT pour modifier un article déjà posté
-router.put("/:id", articleCtrl.modifyArticle); //AJOUTER AUTH/MULTER !!!!
+router.put("/:id", /*auth, */multer, articleCtrl.modifyArticle); 
 
 //Requête DELETE pour supprimer un article qu'on a posté
-router.delete("/:id", articleCtrl.deleteArticle); //AJOUTER AUTH !!!!
+router.delete("/:id", /*auth, */articleCtrl.deleteArticle); 
 
 //Requête GET pour afficher tous les articles postés
-router.get("/", articleCtrl.getAllArticles); //AJOUTER AUTH !!!!
+router.get("/", /*auth, */articleCtrl.getAllArticles); 
 
 //Requête GET pour afficher un article en particulier
-router.get("/:id", articleCtrl.getOneArticle); //AJOUTER AUTH !!!!
+router.get("/:id", /*auth, */articleCtrl.getOneArticle); 
 
 //Exportation du router
 module.exports = router;

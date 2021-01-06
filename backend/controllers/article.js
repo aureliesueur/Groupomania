@@ -12,12 +12,12 @@ var db = require("../services/mysql.config.js");
 
 //Fontion qui gère la logique métier de la route POST (ajout d'un nouvel article)
 exports.createArticle = (req, res, next) => {
-  let sql = `INSERT INTO Articles(title, description, subject, image, user_id, date_post) VALUES (?)`;
-  let values = ['2021, année succès', 'Après une année difficile, 2021 promet une belle croissance économique', 'Economie', 'NULL', 2, '2020-12-20'
+  let sql = `INSERT INTO Articles(title, description, subject, lien_web, imageURL, user_id, date_post) VALUES (?)`;
+  let values = ['2021, année succès', 'Après une année difficile, 2021 promet une belle croissance économique', 'Economie', 'https://pro.orange.fr/actualites/nicaragua-naissance-dans-un-zoo-d-une-petite-tigresse-blanche-CNT000001w4hAK.html', 'NULL', 2, '2020-12-20'
     /*req.body.title,
     req.body.description,
     req.body.subject,
-    req.body.image,
+    req.body.imageURL,
     req.body.user_id,
     req.body.date_post*/
     ];
@@ -54,8 +54,8 @@ exports.getOneArticle = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route PUT (modification d'un article posté par son auteur)
  exports.modifyArticle = (req, res, next) => {
-    let sql = `UPDATE Articles SET title = ?, description = ?, subject = ?, image = ?, user_id = ?, date_post = ? WHERE id = ?`;
-    let values = ['Embrassons-nous', 'Le Covid est responsable de davantage de solitude affective', 'Société', 'NULL', 1, '2020-11-20', 2];
+    let sql = `UPDATE Articles SET title = ?, description = ?, subject = ?, imageURL = ?, user_id = ?, date_post = ? WHERE id = ?`;
+    let values = ['Embrassons-nous', 'Le Covid est responsable de davantage de solitude affective', 'Société', 'NULL', 'NULL', 1, '2020-11-20', 2];
     /*req.body.title,
     req.body.description,
     req.body.subject,
@@ -75,7 +75,7 @@ exports.getOneArticle = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route DELETE (suppression d'un article posté)
 exports.deleteArticle = (req, res, next) => {
-  db.query("DELETE FROM Articles WHERE id = ?", [3 /*req.param.id*/], function(err, data) {
+  db.query("DELETE FROM Articles WHERE id = ?", [5 /*req.param.id*/], function(err, data) {
     if (err) {
         throw err;
     }
