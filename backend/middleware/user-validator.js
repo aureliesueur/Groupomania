@@ -24,7 +24,7 @@ exports.validateSignup = (req, res, next) => {
         .withMessage("Merci d'entrer votre email !")
         .isEmail()
         .withMessage("Votre email n'est pas valide !")
-        .normalizeEmail(),,
+        .normalizeEmail(),
     check("password")
         .exists()
         .withMessage("Merci d'entrer un mot de passe !")

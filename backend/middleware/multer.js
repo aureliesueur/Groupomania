@@ -8,7 +8,6 @@ const MIME_TYPES = {
     "image/jpg": "jpg",
     "image/jpeg": "jpg",
     "image/png": "png"
-    //"video/mpeg": "mpeg"
 };
 
 //Création d'un objet de configuration pour multer

@@ -24,7 +24,7 @@ CREATE TABLE Users (
 /*Création de la table des articles postés, avec id, titre, description, sujet (pour classement des posts), auteur, date du post, et éventuellement photo de l'article */
 CREATE TABLE Articles (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    title VARCHAR(50) UNIQUE NOT NULL,
+    title VARCHAR(50) UNIQUE,
     description TEXT,
     subject VARCHAR(50) NOT NULL,
     lien_web VARCHAR(400),

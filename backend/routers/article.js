@@ -12,10 +12,10 @@ const articleCtrl = require("../controllers/article");
 
 
 //Requête POST pour poster un nouvel article sur le réseau social
-router.post("/", /*auth, */multer, articleCtrl.createArticle); 
+router.post("/", /*auth, multer,*/ articleCtrl.validate("createArticle"), articleCtrl.createArticle); 
 
 //Requête PUT pour modifier un article déjà posté
-router.put("/:id", /*auth, */multer, articleCtrl.modifyArticle); 
+router.put("/:id", /*auth, multer,*/ articleCtrl.validate("modifyArticle"), articleCtrl.modifyArticle); 
 
 //Requête DELETE pour supprimer un article qu'on a posté
 router.delete("/:id", /*auth, */articleCtrl.deleteArticle); 

@@ -3,8 +3,6 @@ const express = require("express");
 //Importation du package bodyparser, pour rendre les données du corps de tous types de requêtes 
 const bodyParser = require("body-parser");
 
-//Importation du package pour l'accès à la base de données et à ses fonctionnalités pour un site dynamique ????
-
 //Importation des routers pour les requêtes articles/users
 const articleRoutes = require("./routers/article");
 const userRoutes = require("./routers/user");
@@ -26,12 +24,6 @@ app.use(cors);
 
 //Mise à un format exploitable du body des requêtes
 app.use(bodyParser.json());
-
-/*app.use((req, res, next) => {
-    res.json({message : "Welcome to Groupomania application !"});
-    next();
-});*/
-
 
 //Définit les route des deux routeurs "Sauce"/"User" ainsi que pour les images téléchargées
 //app.use("/images", express.static(path.join(__dirname, "images")));

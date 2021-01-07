@@ -9,7 +9,7 @@ const Article = function(article) {
     this.subject = article.subject;
     this.image = article.image;
     this.user_id = article.user_id;
-    this.date_post = article.date_post;
+    this.date_post = new Date();
 };
 
 //Exportation du modèle de données
