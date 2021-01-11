@@ -12,7 +12,7 @@ const articleCtrl = require("../controllers/article");
 
 
 //Requête POST pour poster un nouvel article sur le réseau social
-router.post("/", /*auth, multer,*/ articleCtrl.validate("createArticle"), articleCtrl.createArticle); 
+router.post("/add", /*auth, multer,*/ articleCtrl.validate("createArticle"), articleCtrl.createArticle); 
 
 //Requête PUT pour modifier un article déjà posté
 router.put("/:id", /*auth, multer,*/ articleCtrl.validate("modifyArticle"), articleCtrl.modifyArticle); 

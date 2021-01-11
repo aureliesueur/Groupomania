@@ -24,13 +24,13 @@ CREATE TABLE Users (
 /*Création de la table des articles postés, avec id, titre, description, sujet (pour classement des posts), auteur, date du post, et éventuellement photo de l'article */
 CREATE TABLE Articles (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    title VARCHAR(50) UNIQUE,
+    title VARCHAR(50) UNIQUE NOT NULL,
     description TEXT,
     subject VARCHAR(50) NOT NULL,
     lien_web VARCHAR(400),
     imageURL VARCHAR(100),
-    user_id SMALLINT UNSIGNED NOT NULL,
-    date_post DATE NOT NULL,
+    user_id SMALLINT UNSIGNED,
+    date_post DATE,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB ;
 
