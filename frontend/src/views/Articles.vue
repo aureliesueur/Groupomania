@@ -27,6 +27,8 @@
             </div>
         </div>
         
+        <Identification />
+        
         <div>
             <Footer />
         </div>
@@ -36,13 +38,14 @@
 <script>
 
 import Footer from "../components/Footer"
+import Identification from "../components/Identification"
 import ArticlesItem from "../components/ArticlesItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
     
 export default {
     name: "Articles",
     components: {
-		Footer, ArticlesItem
+		Footer, Identification, ArticlesItem
 	},
     data () {
         return {

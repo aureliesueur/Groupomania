@@ -5,7 +5,7 @@
         <div v-if="!submitted" class="container text-center">
             <h2>Pour poster un nouvel article, merci de remplir les champs suivants :</h2>
             <div class="form row">
-                <div class="col-12 col-md-9">
+                <div class="form__box col-12 col-md-9">
                     <div class="form-group">
                         <label for="title">Titre</label>
                         <input 
@@ -22,7 +22,8 @@
                                class="form-control"
                                required
                                v-model="article.description"
-                               name="description" />
+                               name="description"
+                               id="description"/>
                     </div>
                     <div class="form-group">
                         <label for="subject">Sujet</label>
@@ -57,6 +58,8 @@
         <div v-else>
             <h3>Votre article a bien été envoyé !</h3>
         </div>
+        
+        <Identification />
            
         <div>
             <Footer />
@@ -66,12 +69,14 @@
 
 <script>
 import Footer from "../components/Footer"
+import Identification from "../components/Identification"
 import ArticlesDataServices from "../services/ArticlesDataServices"
+//import { eventBus } from "./main"
     
 export default {
     name: "PostArticle",
     components: {
-		Footer
+		Footer, Identification
 	},
     data () {
         return {
@@ -81,7 +86,8 @@ export default {
                 subject: "",
                 lien_web: "",
             },
-            submitted: false
+            submitted: false,
+            //userId: 0
         };
     },
     methods: {
@@ -100,13 +106,30 @@ export default {
                     this.submitted = true;
                 })
                 .catch(error => console.log(error));
-        }
-    } 
+        }/*,
+        onUser() {
+            eventBus.$on("LoggedInUser", (user) => {
+                this.userid = user.id;
+                console.log(user);
+            })
+        }*/
+    }/*,
+    created() {
+        this.onUser();
+    }*/
 }
 </script>
 
+
 <style lang="scss">
-  
+
+.form__box {
+    margin: auto;
+}
+#description {
+    height: 150px!important;
+}
+    
 </style>
 
 

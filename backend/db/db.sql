@@ -17,6 +17,7 @@ CREATE TABLE Users (
     password VARCHAR(60) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
+    is_admin TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB ;
 
@@ -48,10 +49,10 @@ CREATE TABLE Comments (
 ) ENGINE = InnoDB ;
 
 INSERT INTO Users VALUES 
-    (1, 'Bambi', 'aureliesueur@wanadoo.fr', 'bambi01as', 'Aurélie', 'Sueur'),
-    (2, 'Chipolata', 'pauline.amartin@free.fr', 'figaro22', 'Pauline', 'Amartin'),
-    (3, 'Pussicat', 'francedesmarais@gmail.com', 'bidibul65', 'France', 'Desmarais'),
-    (4, 'Barbu55', 'guillaume.voisin@orange.fr', 'mouflon00', 'Guillaume', 'Voisin');
+    (1, 'Bambi', 'aureliesueur@wanadoo.fr', 'bambi01as', 'Aurélie', 'Sueur', 1),
+    (2, 'Chipolata', 'pauline.amartin@free.fr', 'figaro22', 'Pauline', 'Amartin', 0),
+    (3, 'Pussicat', 'francedesmarais@gmail.com', 'bidibul65', 'France', 'Desmarais', 0),
+    (4, 'Barbu55', 'guillaume.voisin@orange.fr', 'mouflon00', 'Guillaume', 'Voisin', 0);
     
 INSERT INTO Articles VALUES 
     (1, 'Nos coups de coeur', 'Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis.', 'Sports', 'https://wrex.com/2021/01/05/family-video-to-close-all-remaining-locations/?fbclid=IwAR0noxFLpSdMIeRraoU9L33B-rzz91xOkp3Fw53nbyKcNXEjlHNc4nO-xOs', NULL, 2, '2020-12-21'),
@@ -66,6 +67,7 @@ INSERT INTO Comments VALUES
     (4, 'Intéressant', 'Un point de vue original !', 15, 1, 3, '2021-01-03'),
     (5, 'Bof', 'Vu et revu cent fois... Haec similiaque memorabile nihil vel serium agi Romae permittunt. ergo redeundum ad textum.', 7, 4, 4, '2020-12-21'),
     (6, 'Passionnant, bravo !', 'A accrocher sur son frigo et à relire tous les jours...', 18, 1, 4, '2020-12-18');
+    
     
 ALTER TABLE Articles ADD CONSTRAINT fk_article_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;
 

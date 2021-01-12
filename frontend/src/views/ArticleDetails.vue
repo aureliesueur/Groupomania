@@ -5,7 +5,7 @@
             <h1>Cet article vous intéresse ? Découvrez-le en détails...</h1>
             <div class="container">
                 <div class='row'>
-                    <div class="col-12 col-md-9"><ArticlesItem 
+                    <div class="article__box col-12 col-md-9"><ArticlesItem 
                         :key="currentArticle[0].title"
                         :id="currentArticle[0].id"
                         :title="currentArticle[0].title"
@@ -20,6 +20,8 @@
                 </div>
             </div>
         </div>
+        
+        <Identification />
 
         <div>
             <Footer />
@@ -30,12 +32,13 @@
 
 <script>
 import Footer from "../components/Footer"
+import Identification from "../components/Identification"
 import ArticlesItem from "../components/ArticlesItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
 export default {
     name: "ArticleDetails",
     components: {
-		Footer, ArticlesItem
+		Footer, Identification, ArticlesItem
 	},
     data () {
         return {
@@ -59,7 +62,10 @@ export default {
 </script>
 
 <style lang="scss">
-  
+
+    .article__box {
+        margin: auto;
+    }
 </style>
 
 

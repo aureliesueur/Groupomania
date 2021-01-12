@@ -5,7 +5,7 @@ class ArticlesDataServices {
         return http.get("/articles");
     }
     getOne(id) {
-        return http.get(`/articles/${id}`);//OU (`/Articles?id=${id}`);
+        return http.get(`/articles/${id}`);
     }
     create(data) {
         return http.post('/articles/add', data);

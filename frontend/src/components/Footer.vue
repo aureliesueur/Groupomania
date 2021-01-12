@@ -56,6 +56,7 @@ footer {
     background: #222;
     color: #aaa;
     padding-top: 10px;
+    margin-top: 60px;
     & h3 {
         color: #c0190e;
         letter-spacing: 1px;

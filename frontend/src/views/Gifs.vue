@@ -1,21 +1,28 @@
 <!--PAGE D'ACCUEIL DU FORUM GIFS, A DEVELOPPER-->
 
 <template>
-    <div class="gifs jumbotron">
-        <h1>Plateforme de partage de Gifs : A développer...</h1>
-    </div>  
+    <div>
+        <div class="gifs jumbotron">
+            <h1>Plateforme de partage de Gifs : A développer...</h1>
+        </div>  
+
+        <Identification />
+
+        <div>
+            <Footer />
+        </div>
+    </div>
 </template>
 
 <script>
-    export default {
-        name: "Gifs",
-        data () {
-            return {
-            }
-        },
-        components: {
-        }
+import Identification from "../components/Identification"
+    
+export default {
+    name: "Gifs",
+    components: {
+        Identification
     }
+}
 </script>
 
 <style>
