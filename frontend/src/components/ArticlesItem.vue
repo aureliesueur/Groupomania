@@ -2,6 +2,10 @@
 export default {
 	name: "ArticlesItem",
 	props: {
+        id: {
+            type: Number,
+            required: true
+        },
 		title: {
 			type: String,
 			required: true
@@ -17,18 +21,19 @@ export default {
         lien_web: {
 			type: String,
 		},
-		imageURL: {
+		username: {
 			type: String,
-		},
-		user_id: {
-			type: Number,
 			required: true
 		},
 		date_post: {
 			type: String,
 			required: true
 		}
-	}
+	},
+    data() {
+        return {
+        }
+    },
 }
 </script>
 
@@ -37,11 +42,9 @@ export default {
         <div class="card-body">
             <h3 class="card-title">{{ title }}</h3>
             <p class="card-subtitle">{{ subject }}</p>
-            <p>Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA', options) }} par {{ user_id }}</p>
-            <p class="card-text">{{ description }}</p>
-            <iframe :src="lien_web" class="card-link btn btn-primary" target="_blank" width="150" height="100" sandbox>
-                <p><a :href="lien_web" target="_blank" class="card-link btn btn-primary">Lien vers l'article</a></p>
-            </iframe>
+            <p>Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
+            <p class="card-text card__description">{{ description }}</p>
+            <p class="card__link"><a :href="lien_web" target="_blank" class="card-link btn btn-primary" >Lien vers l'article</a></p>
         </div>
     </div>
 </template>

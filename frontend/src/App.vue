@@ -9,12 +9,12 @@
 
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><router-link to="/" class="nav-link" >Accueil</router-link></li> 
-                    <li class="nav-item"><router-link to="/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>  
-                    <li class="nav-item dropdown"><router-link to="/articles" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">Partagez vos articles</router-link>
+                    <li class="nav-item active"><router-link to="/api/" class="nav-link" >Accueil</router-link></li> 
+                    <li class="nav-item"><router-link to="/api/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>  
+                    <li class="nav-item dropdown"><router-link to="/api/articles" class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown">Partagez vos articles</router-link>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li class="dropdown-item"><router-link to="/articles" class="nav-link dropdown-item">Découvrir tous les articles</router-link></li>  
-                            <li class="dropdown-item"><router-link to="/articles/add" class="nav-link dropdown-item">Poster un nouvel article</router-link></li>  
+                            <li class="dropdown-item"><router-link to="/api/articles" class="nav-link dropdown-item">Découvrir tous les articles</router-link></li>  
+                            <li class="dropdown-item"><router-link to="/api/articles/add" class="nav-link dropdown-item">Poster un nouvel article</router-link></li>  
                         </div>
                     </li>
                 </ul>

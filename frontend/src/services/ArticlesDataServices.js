@@ -2,13 +2,13 @@ import http from "../http-common";
 
 class ArticlesDataServices {
     getAll() {
-        return http.get("/Articles");
+        return http.get("/articles");
     }
-    get(id) {
-        return http.get(`/Articles/${id}`);
+    getOne(id) {
+        return http.get(`/articles/${id}`);//OU (`/Articles?id=${id}`);
     }
     create(data) {
-        return http.post('/Articles/add', data);
+        return http.post('/articles/add', data);
     }
 }
 

@@ -29,8 +29,8 @@ CREATE TABLE Articles (
     subject VARCHAR(50) NOT NULL,
     lien_web VARCHAR(400),
     imageURL VARCHAR(100),
-    user_id SMALLINT UNSIGNED,
-    date_post DATE,
+    user_id SMALLINT UNSIGNED NOT NULL,
+    date_post DATE NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB ;
 

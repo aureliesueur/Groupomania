@@ -147,7 +147,7 @@ exports.deleteArticle = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route GET (affichage de tous les articles)
 exports.getAllArticles = (req, res, next) => {
-  let sql = "SELECT * FROM Articles"; 
+  let sql = "SELECT Articles.id, title, description, subject, lien_web, date_post, username FROM Articles INNER JOIN Users ON Articles.user_id = Users.id"; 
   db.query(sql, function(err, data) {
     if (err) {
         return res.status(400).json({err});
@@ -159,7 +159,7 @@ exports.getAllArticles = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route GET (affichage d'un article en particulier)
 exports.getOneArticle = (req, res, next) => {
-    let sql = "SELECT * FROM Articles WHERE id = ?";
+    let sql = "SELECT Articles.id, title, description, subject, lien_web, date_post, username FROM Articles INNER JOIN Users ON Articles.user_id = Users.id WHERE Articles.id = ?";
     db.query(sql, [req.params.id], function(err, data, fields) {
     if (err) {
         return res.status(404).json({err});

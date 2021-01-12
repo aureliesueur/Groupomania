@@ -1,15 +1,15 @@
 <!--PAGE D'ACCUEIL PRESENTANT LES ACCES AUX DEUX PLATEFORMES-->
 <template>
-    <div>
-        <section class="jumbotron">
+    <div class="container">
+        <section class="jumbotron row">
             <h1>Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
-            <div class="card">
+            <div class="card col-12 col-sm-6">
                 <h2>Partagez vos articles préférés</h2>
-                <router-link to="/articles">Accès au Forum Groupomania Articles</router-link>
+                <router-link to="/api/articles">Accès au Forum Groupomania Articles</router-link>
             </div>
-            <div class="card card-body">
+            <div class="card col-12 col-sm-6">
                 <h2>Partagez vos vidéos préférées</h2>
-                <router-link to="/gifs">Accès au Forum Groupomania Vidéos</router-link>
+                <router-link to="/api/gifs">Accès au Forum Groupomania Vidéos</router-link>
             </div>
             <router-view />
         </section>

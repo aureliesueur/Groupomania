@@ -8,17 +8,19 @@
             <div class="container">
                 <div class='row'>
                     <ul class="col-12 col-md-9">
-                        <li><ArticlesItem 
-                            v-for="article in articles"
-                            :key="article.title"
+                        <li class="row" v-for="article in articles" :key="article.title">
+                            <ArticlesItem 
+                            :id="article.id"
                             :title="article.title"
                             :description="article.description"
                             :subject="article.subject"
                             :lien_web="article.lien_web"
                             :imageURL="article.image_URL"
-                            :user_id="article.user_id"
+                            :username="article.username"
                             :date_post="article.date_post"
+                            class="col-9"
                             />
+                            <a class="btn btn-secondary col-3" :href="'/api/articles/' + article.id">En savoir plus</a>
                         </li>
                     </ul>
                 </div>
@@ -45,6 +47,7 @@ export default {
     data () {
         return {
             articles:[],
+            activeArticle: null
         };
     },
     methods: {
@@ -56,29 +59,26 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
-    }, 
+    },
     beforeMount() {
         this.getAllArticles();
     }
 };
     
-    
-/*<li><ArticlesItem 
-                    v-for="item in articles"
-                    @click="showArticle(item)"
-                    :title="item.title"
-                    :description="item.description"
-                    :subject="item.subject"
-                    :lien_web="item.lien_web"
-				    :imageURL="item.imageURL"
-				    :user_id="item.user_id"
-				    :date_post="item.date_post"
-				    :key="item.title"
-                    /></li>
-            */
 </script>
 
-<style>
+<style lang="scss">
+
+ul, li {
+    list-style: none;
+}
+
+a {
+    height: 50px;
+    margin-top: 40px!important;
+}
+    
+
     
 </style>
 
