@@ -88,7 +88,7 @@ export default {
                 description: this.article.description,
                 subject: this.article.subject,
                 lien_web: this.article.lien_web,
-                user_id: 3,//Trouver comment récupérer l'id du user connecté
+                user_id: 6,//Trouver comment récupérer l'id du user connecté
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             ArticlesDataServices.create(data) 
