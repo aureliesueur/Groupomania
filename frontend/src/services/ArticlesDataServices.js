@@ -10,6 +10,12 @@ class ArticlesDataServices {
     create(data) {
         return http.post('/articles/add', data);
     }
+    update(id, data) {
+        return http.put(`/articles/${id}`, data);
+    }
+    delete(id) {
+        return http.delete(`/articles/${id}`);
+    }
 }
 
 //A compléter pour les autres requêtes

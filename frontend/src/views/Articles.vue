@@ -20,11 +20,18 @@
                             :date_post="article.date_post"
                             class="col-9"
                             />
-                            <a class="btn btn-secondary col-3" :href="'/api/articles/' + article.id">En savoir plus</a>
+                            <!--@click="askForDetails"
+                            <div v-if="detailsAsked">
+                                <p>Pour profiter de cette fonctionnalité, vous devez d'abord vous connecter ou créer un compte.</p>
+                                <router-link to="/api/auth/signup" class="auth__signup"><button  type= "button" class="btn btn-primary">Inscription</button></router-link><br/>
+                                <router-link to="/api/auth/login" class="auth__login"><button type= "button" class="btn btn-primary">Connexion</button></router-link>
+                                <router-view />
+                            </div>-->
                         </li>
                     </ul>
                 </div>
             </div>
+            <p v-if="articles.length == 0">{{ message }}</p>
         </div>
         
         <Identification />
@@ -50,7 +57,9 @@ export default {
     data () {
         return {
             articles:[],
-            activeArticle: null
+            activeArticle: null,
+            message: "Il n'y a aucun article posté sur la plateforme à ce jour.",
+            detailsAsked: false
         };
     },
     methods: {
@@ -61,7 +70,10 @@ export default {
                 console.log(response.data.data);
                 })
                 .catch(error => console.log(error));
-        },
+        }/*,
+        askForDetails() {
+            return (this.detailsAsked = true)
+        }*/
     },
     beforeMount() {
         this.getAllArticles();
@@ -80,8 +92,6 @@ a {
     height: 50px;
     margin-top: 40px!important;
 }
-    
-
     
 </style>
 

@@ -17,13 +17,14 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input 
-                               type="text" 
-                               class="form-control"
-                               required
-                               v-model="article.description"
-                               name="description"
-                               id="description"/>
+                        <textarea 
+                                type="textarea" 
+                                rows="5"
+                                cols="30"
+                                class="form-control"
+                                v-model="article.description"
+                                name="description"
+                                id="description"/>
                     </div>
                     <div class="form-group">
                         <label for="subject">Sujet</label>
@@ -42,14 +43,6 @@
                                v-model="article.lien_web"
                                name="lien-web" />
                     </div>
-                    <!--<div class="form-group">
-                        <label for="imageURL">URL de l'image</label>
-                        <input 
-                               type="text" 
-                               class="form-control"
-                               v-model="article.imageURL"
-                               name="imageURL" />
-                    </div>-->
 
                     <button class="btn btn-success" @click="saveArticle">Envoyer votre post</button>
                 </div>
@@ -71,7 +64,6 @@
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesDataServices from "../services/ArticlesDataServices"
-//import { eventBus } from "./main"
     
 export default {
     name: "PostArticle",
@@ -87,7 +79,6 @@ export default {
                 lien_web: "",
             },
             submitted: false,
-            //userId: 0
         };
     },
     methods: {
@@ -106,17 +97,8 @@ export default {
                     this.submitted = true;
                 })
                 .catch(error => console.log(error));
-        }/*,
-        onUser() {
-            eventBus.$on("LoggedInUser", (user) => {
-                this.userid = user.id;
-                console.log(user);
-            })
-        }*/
-    }/*,
-    created() {
-        this.onUser();
-    }*/
+        }
+    }
 }
 </script>
 
