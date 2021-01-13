@@ -23,8 +23,13 @@
                 
                 <div class="col-12 col-md-2">
                     <button  type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
-                    <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
-                    <p>{{ message }}</p>
+                    <button type= "button" class="btn btn-primary" @click="secureDelete">Supprimer</button>
+                    <p>{{ messageUpdate }}</p>
+                    <div v-if="confirmation">
+                        <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
+                        <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
+                        <button type= "button" class="btn btn-primary" @click="refreshPage">Annuler</button>
+                    </div>
                     <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                     <router-view />
                 </div> 
@@ -99,8 +104,9 @@ export default {
     data () {
         return {
             currentArticle: [],
-            message: "",
-            askForUpdate: false
+            messageUpdate: "",
+            askForUpdate: false, 
+            confirmation:false
         }
     },
     methods: {
@@ -115,6 +121,13 @@ export default {
         showUpdate() {
             return (this.askForUpdate = true)
         },
+        secureDelete() {
+            return (this.confirmation = true)
+        },
+        refreshPage() {
+          this.getOneArticle(this.$route.params.id);
+          this.confirmation = false;
+        },
         updateArticle() {
             var data = {
                 title: this.currentArticle[0].title,
@@ -127,7 +140,8 @@ export default {
             ArticlesDataServices.update(this.currentArticle[0].id, data) 
                 .then(response => {
                     console.log(response.data);
-                    this.message = "Cet article a été modifié avec succès.";
+                    this.messageUpdate = "Cet article a été modifié avec succès.";
+                    this.askForUpdate = false;
                 })
                 .catch(error => console.log(error));
         },
@@ -135,7 +149,6 @@ export default {
             ArticlesDataServices.delete(this.currentArticle[0].id)
                 .then(response => {
                     console.log(response.data);
-                    this.message = "Cet article a bien été supprimé.";
                     this.$router.push({ path: "/api/articles" });
                 })
                 .catch(error => console.log(error));
