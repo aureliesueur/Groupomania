@@ -25,6 +25,7 @@
                     <button  type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
                     <button type= "button" class="btn btn-primary" @click="secureDelete">Supprimer</button>
                     <p>{{ messageUpdate }}</p>
+                    <p>{{ messageDelete }}</p>
                     <div v-if="confirmation">
                         <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
@@ -105,6 +106,7 @@ export default {
         return {
             currentArticle: [],
             messageUpdate: "",
+            messageDelete:"",
             askForUpdate: false, 
             confirmation:false
         }
@@ -118,11 +120,29 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
-        showUpdate() {
-            return (this.askForUpdate = true)
+        showUpdate() {  
+            var storedId = localStorage.getItem('userId');
+            var userId = JSON.parse(storedId);
+            console.log(userId);
+            console.log(this.currentArticle[0].user_id);
+            if (this.currentArticle[0].user_id !== userId) {
+                this.messageUpdate = "Vous n'êtes pas autorisé à modifier ce post, car vous n'en êtes pas l'auteur.";
+                this.askForUpdate = false;  
+            } else {
+                return (this.askForUpdate = true);
+            }
         },
         secureDelete() {
-            return (this.confirmation = true)
+            var storedId = localStorage.getItem('userId');
+            var userId = JSON.parse(storedId);
+            console.log(userId);
+            console.log(this.currentArticle[0].user_id);
+            if (this.currentArticle[0].user_id !== userId) {
+                this.messageDelete = "Vous n'êtes pas autorisé à supprimer ce post, car vous n'en êtes pas l'auteur.";
+                this.confirmation = false;  
+            } else {
+                return (this.confirmation = true);
+            }
         },
         refreshPage() {
           this.getOneArticle(this.$route.params.id);
@@ -134,7 +154,7 @@ export default {
                 description: this.currentArticle[0].description,
                 subject: this.currentArticle[0].subject,
                 lien_web: this.currentArticle[0].lien_web,
-                user_id: 3,//Trouver comment récupérer l'id du user connecté
+                user_id: this.currentArticle[0].user_id,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             ArticlesDataServices.update(this.currentArticle[0].id, data) 
