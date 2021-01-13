@@ -69,8 +69,6 @@ export default {
                 .then(response => {
                     console.log(response.data);
                     this.submitted = true;
-                })
-                .then(response => {
                     localStorage.setItem('userId', JSON.stringify(response.data.userId));
                 })
                 .catch(error => console.log(error));
