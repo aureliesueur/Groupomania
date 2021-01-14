@@ -57,7 +57,7 @@ export default {
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
                 <p class="card-text card__description">{{ description }}</p>
             </div>
-            <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3">Lien vers l'article</a>
+            <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
         </div>
     </div>
 </template>
