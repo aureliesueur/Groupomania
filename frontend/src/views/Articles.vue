@@ -19,18 +19,9 @@
                             :username="article.username"
                             :date_post="article.date_post"
                             class="col-9"
-                            /><!--:details="askForDetails"-->
+                            />
                         </li>
                     </ul>
-                    
-                    <!--<div v-if="detailsAsked">
-                        <p>Pour profiter de cette fonctionnalité, vous devez d'abord vous connecter ou créer un compte.</p>
-                        <div>
-                            <router-link to="/api/auth/signup" class="auth__signup"><button  type= "button" class="btn btn-primary">Inscription</button></router-link><br/>
-                            <router-link to="/api/auth/login" class="auth__login"><button type= "button" class="btn btn-primary">Connexion</button></router-link>
-                        </div>
-                        <router-view />
-                    </div>-->
                     
                     <div class="col-12 col-md-3">
                         <router-link to="/api/articles/add"><button  type= "button" class="btn btn-primary" >Poster un nouvel article</button></router-link>
@@ -87,9 +78,6 @@ export default {
                 })
                 .catch(error => console.log(error));
         }/*,
-        askForDetails() {
-            return (this.detailsAsked = true)
-        },
         askForPost() {
             return(this.postAsked = true)
         }*/
