@@ -50,6 +50,8 @@
         </div>
         <div v-else>
             <h3>Votre article a bien été envoyé !</h3>
+            <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+            <router-view />
         </div>
         
         <Identification />
@@ -83,12 +85,14 @@ export default {
     },
     methods: {
         saveArticle() {
+            var storedId = localStorage.getItem('userId');
+            var userId = JSON.parse(storedId);
             var data = {
                 title: this.article.title,
                 description: this.article.description,
                 subject: this.article.subject,
                 lien_web: this.article.lien_web,
-                user_id: 6,//Trouver comment récupérer l'id du user connecté
+                user_id: userId,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             ArticlesDataServices.create(data) 

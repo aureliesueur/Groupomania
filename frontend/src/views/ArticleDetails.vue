@@ -21,11 +21,9 @@
                     </div>
                 </div>
                 
-                <div class="col-12 col-md-2">
-                    <button  type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
-                    <button type= "button" class="btn btn-primary" @click="secureDelete">Supprimer</button>
-                    <p>{{ messageUpdate }}</p>
-                    <p>{{ messageDelete }}</p>
+                <div v-if="validUser" class="col-12 col-md-2">
+                    <button type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
+                    <button type= "button" class="btn btn-primary" @click="confirmDelete">Supprimer</button>
                     <div v-if="confirmation">
                         <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
@@ -33,7 +31,11 @@
                     </div>
                     <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                     <router-view />
-                </div> 
+                </div>
+                <div v-else>
+                    <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                    <router-view />
+                </div>
             </div>
         </div>
         
@@ -105,9 +107,8 @@ export default {
     data () {
         return {
             currentArticle: [],
-            messageUpdate: "",
-            messageDelete:"",
-            askForUpdate: false, 
+            validUser: false,
+            askForUpdate: false,
             confirmation:false
         }
     },
@@ -115,34 +116,26 @@ export default {
         getOneArticle(id) {
             ArticlesDataServices.getOne(id) 
                 .then(response => {
-                this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
-                console.log(response.data.data);
+                    this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
+                    console.log(response.data.data);
+                    console.log(this.currentArticle[0].user_id);
+                    var storedId = localStorage.getItem('userId');
+                    var userId = JSON.parse(storedId);
+                    console.log(userId);
+                    console.log(this.currentArticle[0].user_id);
+                    if (this.currentArticle[0].user_id !== userId) {
+                        this.validUser = false;  
+                    } else {
+                        return (this.validUser = true);
+                    }
                 })
                 .catch(error => console.log(error));
         },
         showUpdate() {  
-            var storedId = localStorage.getItem('userId');
-            var userId = JSON.parse(storedId);
-            console.log(userId);
-            console.log(this.currentArticle[0].user_id);
-            if (this.currentArticle[0].user_id !== userId) {
-                this.messageUpdate = "Vous n'êtes pas autorisé à modifier ce post, car vous n'en êtes pas l'auteur.";
-                this.askForUpdate = false;  
-            } else {
-                return (this.askForUpdate = true);
-            }
+            return (this.askForUpdate = true);
         },
-        secureDelete() {
-            var storedId = localStorage.getItem('userId');
-            var userId = JSON.parse(storedId);
-            console.log(userId);
-            console.log(this.currentArticle[0].user_id);
-            if (this.currentArticle[0].user_id !== userId) {
-                this.messageDelete = "Vous n'êtes pas autorisé à supprimer ce post, car vous n'en êtes pas l'auteur.";
-                this.confirmation = false;  
-            } else {
-                return (this.confirmation = true);
-            }
+        confirmDelete() {
+            return (this.confirmation = true);
         },
         refreshPage() {
           this.getOneArticle(this.$route.params.id);
@@ -175,10 +168,10 @@ export default {
         }   
     }, 
     beforeMount() {
-        this.message = "";
         this.getOneArticle(this.$route.params.id);
         this.askForUpdate = false;
-    }
+        this.validUser = false;
+    },
 }
 </script>
 
@@ -188,4 +181,5 @@ export default {
         margin: auto;
     }
 </style>
+
 
