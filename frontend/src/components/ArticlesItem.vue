@@ -59,7 +59,13 @@ export default {
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
                 <p class="card-text card__description">{{ description }}</p>
             </div>
-            <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            <div v-if="lien_web == 'null'">
+                <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            </div> 
+            <div v-else>
+                <iframe  :src="lien_web" width="200px" height="200px" sandbox></iframe>
+                <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            </div>
         </div>
     </div>
 </template>
