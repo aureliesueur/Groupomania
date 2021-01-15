@@ -31,7 +31,7 @@
             </form>
         </div>
         <div v-else>
-            <h3>Votre compte a bien été créé, nous sommes ravis de vous compter parmi nous !</h3>
+            <h3>Bienvenue, nous sommes ravis de vous retrouver !</h3>
             <router-link to="/api/articles"><button class="btn btn-primary">Revenir au Forum Groupomania Articles</button></router-link>
             <router-link to="/api/gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
         </div>
@@ -55,7 +55,7 @@ export default {
         return {
             email: "",
             password: "",
-            submitted: false
+            submitted: false,
         }
     },
     methods: {
@@ -69,6 +69,7 @@ export default {
                 .then(response => {
                     console.log(response.data);
                     this.submitted = true;
+                    localStorage.setItem('userId', JSON.stringify(response.data.userId));
                 })
                 .catch(error => console.log(error));
         }

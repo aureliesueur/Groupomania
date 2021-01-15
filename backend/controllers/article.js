@@ -159,7 +159,7 @@ exports.getAllArticles = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route GET (affichage d'un article en particulier)
 exports.getOneArticle = (req, res, next) => {
-    let sql = "SELECT Articles.id, title, description, subject, lien_web, date_post, username FROM Articles INNER JOIN Users ON Articles.user_id = Users.id WHERE Articles.id = ?";
+    let sql = "SELECT Articles.id, title, description, subject, lien_web, date_post, username, user_id FROM Articles INNER JOIN Users ON Articles.user_id = Users.id WHERE Articles.id = ?";
     db.query(sql, [req.params.id], function(err, data, fields) {
     if (err) {
         return res.status(404).json({err});

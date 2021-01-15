@@ -15,7 +15,7 @@ const articleCtrl = require("../controllers/article");
 router.post("/add", /*auth, multer,*/ articleCtrl.validate("createArticle"), articleCtrl.createArticle); 
 
 //Requête PUT pour modifier un article déjà posté
-router.put("/:id", /*auth, multer,*/ articleCtrl.validate("modifyArticle"), articleCtrl.modifyArticle); 
+router.put("/:id", auth, /*multer,*/ articleCtrl.validate("modifyArticle"), articleCtrl.modifyArticle); 
 
 //Requête DELETE pour supprimer un article qu'on a posté
 router.delete("/:id", /*auth, */articleCtrl.deleteArticle); 

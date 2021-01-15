@@ -1,3 +1,4 @@
+
 DROP DATABASE IF EXISTS groupomania;
 CREATE DATABASE IF NOT EXISTS groupomania;
 USE groupomania;

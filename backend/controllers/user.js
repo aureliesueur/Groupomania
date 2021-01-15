@@ -1,3 +1,4 @@
+
 /*LOGIQUE METIER POUR CE QUI CONCERNE L'AUTHENTIFICATION DES USERS */
 
 //Importation du fichier de configuration de la connection à MySQL
@@ -75,6 +76,8 @@ exports.login = (req, res, next) => {
                 }
                 res.status(200).json({
                     userId: data[0].id,
+                    username: data[0].username,
+                    isAdmin: data[0].is_admin,
                     //Encodage d'un nouveau token
                     token: jwt.sign(
                         {userId : data.id},

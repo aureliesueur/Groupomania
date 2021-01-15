@@ -30,6 +30,9 @@ export default {
 			type: String,
 			required: true
 		},
+        details: {
+            type: Function
+        }
 	},
     data() {
         return {
@@ -46,7 +49,7 @@ export default {
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__link col-4 col-md-3" :href="'/api/articles/' + id" >En savoir plus</a>
+            <a class="btn btn-secondary card__link col-4 col-md-3" :href="'/api/articles/' + id">En savoir plus</a><!--@click="details" pour ajouter messages de connexion dans articles.vue-->
         </div>
         
         
@@ -57,7 +60,13 @@ export default {
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
                 <p class="card-text card__description">{{ description }}</p>
             </div>
-            <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            <div v-if="lien_web == 'null'">
+                <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            </div> 
+            <div v-else>
+                <iframe  :src="lien_web" width="200px" height="200px" sandbox></iframe>
+                <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            </div>
         </div>
     </div>
 </template>

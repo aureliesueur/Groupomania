@@ -17,7 +17,7 @@ const userCtrl = require("../controllers/user");
 router.post("/signup", /*body("email").isEmail(), body("password").isLength({min:5}),*/userCtrl.validate("signup"), userCtrl.signup); //Le middleware validateSignup ne fonctionne pas !
 
 //Requête POST pour connexion
-router.post("/login", userCtrl.validate("login"), userCtrl.login);
+router.post("/login", /*userCtrl.validate("login"), */userCtrl.login);
 
 //Requête DELETE pour suppression de compte
 router.delete("/:id", userCtrl.deleteAccount);

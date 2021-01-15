@@ -21,10 +21,9 @@
                     </div>
                 </div>
                 
-                <div class="col-12 col-md-2">
-                    <button  type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
-                    <button type= "button" class="btn btn-primary" @click="secureDelete">Supprimer</button>
-                    <p>{{ messageUpdate }}</p>
+                <div v-if="validUser" class="col-12 col-md-2">
+                    <button type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
+                    <button type= "button" class="btn btn-primary" @click="confirmDelete">Supprimer</button>
                     <div v-if="confirmation">
                         <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
@@ -32,7 +31,11 @@
                     </div>
                     <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                     <router-view />
-                </div> 
+                </div>
+                <div v-else>
+                    <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                    <router-view />
+                </div>
             </div>
         </div>
         
@@ -61,13 +64,19 @@
                                 id="description"/>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input 
-                               type="text" 
-                               class="form-control"
-                               required
-                               v-model="currentArticle[0].subject"
-                               name="sujet" />
+                        <select name="subject" v-model="currentArticle[0].subject">
+                            <option value="">--Choisissez un sujet--</option>
+                            <option value="Economie">Economie</option>
+                            <option value="Politique">Politique</option>
+                            <option value="Média">Média</option>
+                            <option value="Societé">Société</option>
+                            <option value="Psychologie">Psychologie</option>
+                            <option value="Climat">Climat</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                        <span> Sujet de l'article : {{ currentArticle[0].subject }}</span>
                     </div>
                     <div class="form-group">
                         <label for="lien-web">Lien web de l'article</label>
@@ -104,8 +113,8 @@ export default {
     data () {
         return {
             currentArticle: [],
-            messageUpdate: "",
-            askForUpdate: false, 
+            validUser: false,
+            askForUpdate: false,
             confirmation:false
         }
     },
@@ -113,16 +122,26 @@ export default {
         getOneArticle(id) {
             ArticlesDataServices.getOne(id) 
                 .then(response => {
-                this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
-                console.log(response.data.data);
+                    this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
+                    console.log(response.data.data);
+                    console.log(this.currentArticle[0].user_id);
+                    var storedId = localStorage.getItem('userId');
+                    var userId = JSON.parse(storedId);
+                    console.log(userId);
+                    console.log(this.currentArticle[0].user_id);
+                    if (this.currentArticle[0].user_id !== userId) {
+                        this.validUser = false;  
+                    } else {
+                        return (this.validUser = true);
+                    }
                 })
                 .catch(error => console.log(error));
         },
-        showUpdate() {
-            return (this.askForUpdate = true)
+        showUpdate() {  
+            return (this.askForUpdate = true);
         },
-        secureDelete() {
-            return (this.confirmation = true)
+        confirmDelete() {
+            return (this.confirmation = true);
         },
         refreshPage() {
           this.getOneArticle(this.$route.params.id);
@@ -134,7 +153,7 @@ export default {
                 description: this.currentArticle[0].description,
                 subject: this.currentArticle[0].subject,
                 lien_web: this.currentArticle[0].lien_web,
-                user_id: 3,//Trouver comment récupérer l'id du user connecté
+                user_id: this.currentArticle[0].user_id,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             ArticlesDataServices.update(this.currentArticle[0].id, data) 
@@ -155,10 +174,10 @@ export default {
         }   
     }, 
     beforeMount() {
-        this.message = "";
         this.getOneArticle(this.$route.params.id);
         this.askForUpdate = false;
-    }
+        this.validUser = false;
+    },
 }
 </script>
 
@@ -168,4 +187,5 @@ export default {
         margin: auto;
     }
 </style>
+
 
