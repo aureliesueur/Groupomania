@@ -14,7 +14,7 @@ const userCtrl = require("../controllers/user");
 
 
 //Requête POST pour inscription
-router.post("/signup", /*body("email").isEmail(), body("password").isLength({min:5}),*/userCtrl.validate("signup"), userCtrl.signup); //Le middleware validateSignup ne fonctionne pas !
+router.post("/signup", /*body("email").isEmail(), body("password").isLength({min:5})/userCtrl.validate("signup"), */userCtrl.signup); //Le middleware validateSignup ne fonctionne pas !
 
 //Requête POST pour connexion
 router.post("/login", /*userCtrl.validate("login"), */userCtrl.login);

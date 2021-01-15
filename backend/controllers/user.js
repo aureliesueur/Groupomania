@@ -80,7 +80,7 @@ exports.login = (req, res, next) => {
                     isAdmin: data[0].is_admin,
                     //Encodage d'un nouveau token
                     token: jwt.sign(
-                        {userId : data.id},
+                        {userId : data[0].id},
                         "DD49869BBAD47",
                         {expiresIn: "24h"}
                     )
