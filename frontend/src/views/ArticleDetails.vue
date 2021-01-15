@@ -64,13 +64,19 @@
                                 id="description"/>
                     </div>
                     <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input 
-                               type="text" 
-                               class="form-control"
-                               required
-                               v-model="currentArticle[0].subject"
-                               name="sujet" />
+                        <select name="subject" v-model="currentArticle[0].subject">
+                            <option value="">--Choisissez un sujet--</option>
+                            <option value="Economie">Economie</option>
+                            <option value="Politique">Politique</option>
+                            <option value="Média">Média</option>
+                            <option value="Societé">Société</option>
+                            <option value="Psychologie">Psychologie</option>
+                            <option value="Climat">Climat</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Autre">Autre</option>
+                        </select>
+                        <span> Sujet de l'article : {{ currentArticle[0].subject }}</span>
                     </div>
                     <div class="form-group">
                         <label for="lien-web">Lien web de l'article</label>
