@@ -23,6 +23,7 @@
                 
                 <div v-if="validUser" class="col-12 col-md-2">
                     <button type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
+                    <p>{{ messageUpdate }}</p>
                     <button type= "button" class="btn btn-primary" @click="confirmDelete">Supprimer</button>
                     <div v-if="confirmation">
                         <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
@@ -115,7 +116,8 @@ export default {
             currentArticle: [],
             validUser: false,
             askForUpdate: false,
-            confirmation:false
+            confirmation: false,
+            messageUpdate: ""
         }
     },
     methods: {
