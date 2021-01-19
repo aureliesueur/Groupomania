@@ -73,17 +73,11 @@ export default {
             };
             UsersDataServices.login(data) 
                 .then(response => {
-                    console.log(response.data);
-                    let token = response.data.token;
-                    let userId = response.data.userId;
-                    let isAdmin = response.data.isAdmin;
-                    console.log(token, userId, isAdmin);
-                    this.setUserId(userId);
-                    this.setToken(token);
-                    this.setIsAdmin(isAdmin);
+                    this.setUserId(response.data.userId);
+                    this.setToken(response.data.token);
+                    this.setIsAdmin(response.data.isAdmin);
                     this.submitted = true;
-                    this.$router.push('/api/articles');
-                    //localStorage.setItem('userId', JSON.stringify(response.data.userId));
+                    this.$router.push('/api/');
                 })
                 .catch(error => console.log(error));
         }
@@ -92,7 +86,11 @@ export default {
 
 </script>
 
-<style scoped>
-    
+<style scoped lang="scss">
+
+form {
+    display: flex;
+    justify-content: center;
+}
 </style>
 

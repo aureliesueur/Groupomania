@@ -1,9 +1,9 @@
 <!--Component du footer identique présent sur toutes les pages-->
 <template>
     <footer>
-        <div class="container-fluid footer">
-            <div class="row">
-                  <div class="col-lg-4 col-md-6 footer__social ">
+        <div class="container footer">
+            <div class="row footer__box">
+                  <div class="col-12 col-md-5 footer__social ">
                         <h3 class="footer__title">Rejoignez-nous sur les réseaux sociaux</h3>
                         <ul class="social">
                             <li class="col-sm-3">
@@ -21,7 +21,7 @@
                         </ul>
                     </div>
 
-                    <div class="col-lg-4 col-md-6 footer__links links">
+                    <div class="col-12 col-md-5 footer__links links">
                         <h3 class="footer__title">Liens utiles</h3>
                         <div class="links__item">
                             <a href="#" target="_blank" class="pull-left">Site Officiel CONNECT-E</a>
@@ -34,8 +34,8 @@
                         </div> 
                     </div>
 
-                    <div class="col-lg-4">
-                        <img src="/images/icon.png" width="150" alt="Site logo"/>
+                    <div class="col-md-2">
+                        <img src="/images/icon.png" width="100" alt="Site logo" class="footer__logo"/>
                     </div>
                 </div>
             </div>
@@ -52,13 +52,14 @@ export default {
 
 <style scoped lang="scss">
 
-footer {
+.footer {
     background: #222;
     color: #aaa;
-    padding-top: 10px;
+    padding: 20px 20px 20px 40px;
     margin-top: 60px;
     & h3 {
         color: #c0190e;
+        font-size: 1.2em;
         letter-spacing: 1px;
         margin: 30px 0 20px;
     }
@@ -67,6 +68,9 @@ footer {
         &:hover {
             color: #fff;
         }
+    }
+    &__logo {
+        margin-top: 30px;
     }
 }
 
@@ -89,7 +93,7 @@ footer {
             opacity: 1;
         }
     }
-}
+}    
 
 </style>
 

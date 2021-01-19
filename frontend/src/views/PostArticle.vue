@@ -37,6 +37,7 @@
                             <option value="Climat">Climat</option>
                             <option value="Sport">Sport</option>
                             <option value="Culture">Culture</option>
+                            <option value="Santé">Santé</option>
                             <option value="Autre">Autre</option>
                         </select>
                         <span> Sujet de l'article : {{ article.subject }}</span>
@@ -60,8 +61,14 @@
             <router-view />
         </div>
         
-        <div v-if="!isLoggedIn">
-            <Identification />
+         <div> 
+            <div v-if="!isLoggedIn">
+                <Identification />
+            </div>
+            <div v-else id="deconnect">
+                <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+            </div>
+            <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
         </div>
            
         <div>
@@ -96,11 +103,10 @@ export default {
         ...mapGetters(['isLoggedIn']),
         ...mapState({ token: "token"}),
         ...mapState({ userId: "userId"}),
+        ...mapGetters(['isUserAdmin'])
     },
     methods: {
         saveArticle(data, Authorization) {
-            //var storedId = localStorage.getItem('userId');
-            //var userId = JSON.parse(storedId);
             data = {
                 title: this.article.title,
                 description: this.article.description,
@@ -116,6 +122,9 @@ export default {
                     this.submitted = true;
                 })
                 .catch(error => console.log(error));
+        },
+        logout() {
+            this.$store.commit("logout")
         }
     }
 }
@@ -130,7 +139,20 @@ export default {
 #description {
     height: 150px!important;
 }
-    
+
+.form {
+    position: absolute;
+    top: 20%;
+    z-index: 2;
+    margin-left: 10%!important;
+    background-color: #DDD;
+    border-radius: 20px;
+    border: 2px solid #cc2810;
+    padding: 20px;
+    &__box {
+        margin: auto;
+    }
+}
 </style>
 
 

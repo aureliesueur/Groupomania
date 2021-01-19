@@ -75,6 +75,7 @@
 <script>
 import Footer from "../components/Footer"
 import UsersDataServices from "../services/UsersDataServices"
+import { mapMutations } from 'vuex'
     
 export default {
     name: 'Signup',
@@ -94,6 +95,11 @@ export default {
         }
     },
     methods: {
+        ...mapMutations([
+            'setUserId',
+            'setToken',
+            'setIsAdmin'
+        ]),
         createNewUser(e) {
             e.preventDefault()
             var data = {
@@ -104,9 +110,12 @@ export default {
                 last_name: this.user.last_name
             };
             UsersDataServices.signup(data) 
-                .then(response => {
-                    console.log(response.data);
+               .then(response => {
+                    this.setUserId(response.data.userId);
+                    this.setToken(response.data.token);
+                    this.setIsAdmin(response.data.isAdmin);
                     this.submitted = true;
+                    this.$router.push('/api/');
                 })
                 .catch(error => console.log(error));
         }

@@ -25,27 +25,23 @@
                     
                     <div class="col-12 col-md-3">
                         <router-link to="/api/articles/add"><button  type= "button" class="btn btn-primary">Poster un nouvel article</button></router-link>
-                        <!--<div v-if="postAsked"> /@click="askForPost"
-                            <p>Pour profiter de cette fonctionnalité, vous devez d'abord vous connecter ou créer un compte.</p>
-                            <div>
-                                <router-link to="/api/auth/signup" class="auth__signup"><button  type= "button" class="btn btn-primary">Inscription</button></router-link><br/>
-                                <router-link to="/api/auth/login" class="auth__login"><button type= "button" class="btn btn-primary">Connexion</button></router-link>
-                                <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
-                            </div>
-                            <router-view />    
-                        </div>-->
                     </div> 
                 </div>
             </div>
             <p v-if="articles.length == 0">{{ message }}</p>
         </div>
-        <div v-if="!isLoggedIn">
-            <Identification />
-        </div>
         
-        <!--<div v-else>
-            <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
-        </div>-->
+        <CallToLogin v-if="!isLoggedIn" />
+        
+        <div> 
+            <div v-if="!isLoggedIn">
+                <Identification />
+            </div>
+            <div v-else id="deconnect">
+                <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+            </div>
+            <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
+        </div>
         
         <div>
             <Footer />
@@ -57,26 +53,27 @@
 
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
+import CallToLogin from "../components/CallToLogin"
 import ArticlesItem from "../components/ArticlesItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
 import { mapGetters, mapState } from 'vuex'
-    
+        
 export default {
     name: "Articles",
     components: {
-		Footer, ArticlesItem, Identification, 
+		Footer, ArticlesItem, CallToLogin, Identification, 
 	},
     data () {
         return {
             articles:[],
             activeArticle: null,
             message: "Il n'y a aucun article posté sur la plateforme à ce jour.",
-            detailsAsked: false,
-            postAsked: false
-        };
+            //detailsAsked: false
+        }
     },
    computed: {
         ...mapGetters(['isLoggedIn']),
+        ...mapGetters(['isUserAdmin']),
         ...mapState({ token: "token"})
     },
     methods: {
@@ -88,12 +85,9 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
-        /*logout() {
+        logout() {
             this.$store.commit("logout")
-        }/*,
-        askForPost() {
-            return(this.postAsked = true)
-        }*/
+        }
     },
     beforeMount() {
         this.getAllArticles();
@@ -104,6 +98,16 @@ export default {
 
 <style lang="scss">
 
+ #call-to-login {
+    position: absolute;
+    top: 40%;
+    z-index: 2;
+    background-color: #DDD;
+    border-radius: 20px;
+    border: 2px solid #cc2810;
+    padding: 50px;
+}    
+    
 ul, li {
     list-style: none;
 }

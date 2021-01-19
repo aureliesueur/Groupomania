@@ -8,10 +8,11 @@
 </template>
 
 <script>
+    
 export default {
   name: 'Identification',
   props: {
-  }
+    }
 }
 </script>
 
@@ -24,6 +25,9 @@ export default {
     top: 10px;
     & button, & btn-primary {
         margin-bottom: 10px!important;
+        background-color: #FFF!important;
+        border: 2px solid #cc2810!important;
+        color: black!important;
     }
-}   
+}    
 </style>

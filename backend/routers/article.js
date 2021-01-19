@@ -19,7 +19,7 @@ router.put("/:id", auth, articleCtrl.validate("modifyArticle"), articleCtrl.modi
 router.delete("/:id", auth, articleCtrl.deleteArticle); 
 
 //Requête GET pour afficher tous les articles postés
-router.get("/", articleCtrl.getAllArticles); 
+router.get("/", auth, articleCtrl.getAllArticles); 
 
 //Requête GET pour afficher un article en particulier
 router.get("/:id", auth, articleCtrl.getOneArticle); 

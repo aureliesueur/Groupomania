@@ -28,17 +28,23 @@ const store = new Vuex.Store({
         },
         setIsAdmin(state, isAdmin) {
             state.isAdmin = isAdmin;
-        }/*, 
+        }, 
         logout(state) {
             state.userId = null;
             state.isAdmin = null;
-        }*/
+            state.token = null;
+        }
     },
     actions: {},
     getters: {
         isLoggedIn(state) {
             return !!state.token;
         },
+        isUserAdmin(state) {
+            if(state.isAdmin == 1) {
+                return true;
+            }
+        }
     }
 })
 

@@ -53,7 +53,24 @@ exports.signup = (req, res, next) => {
                 if (err) {
                     return res.status(400).json({err}); 
                 }
-                res.json({status: 201, data, message: "Utilisateur créé !"});
+                //Si tout se passe bien, on crée un nouveau token pour ce new user
+                let sql = `SELECT * FROM Users WHERE email = ?`;
+                db.query(sql, [req.body.email], function(err, data, fields) {
+                    if (err) {
+                    return res.status(404).json({err}); 
+                    }
+                    res.status(200).json({ 
+                        userId: data[0].id, 
+                        username: data[0].username, 
+                        isAdmin: data[0].is_admin,
+                        //Encodage d'un nouveau token
+                        token: jwt.sign(
+                            {userId : data[0].id},
+                            "DD49869BBAD47",
+                            {expiresIn: "24h"}
+                        )
+                    });
+                });
             });
         })
         .catch(error => res.status(500).json({error})); 
