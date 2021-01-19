@@ -92,7 +92,9 @@
             </div>
         </div>
         
-        <Identification />
+        <div v-if="!isLoggedIn">
+            <Identification />
+        </div>
 
         <div>
             <Footer />
@@ -106,10 +108,12 @@ import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesItem from "../components/ArticlesItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
+import { mapGetters, mapState } from 'vuex'
+    
 export default {
     name: "ArticleDetails",
     components: {
-		Footer, Identification, ArticlesItem
+		Footer, ArticlesItem, Identification, 
 	},
     data () {
         return {
@@ -120,9 +124,14 @@ export default {
             messageUpdate: ""
         }
     },
+    computed: {
+        ...mapGetters(['isLoggedIn']),
+        ...mapState({ token: "token"})
+    },
     methods: {
-        getOneArticle(id) {
-            ArticlesDataServices.getOne(id) 
+        getOneArticle(id, Authorization) {
+            Authorization = `Bearer ${this.token}`;
+            ArticlesDataServices.getOne(id, { Authorization }) 
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
                     console.log(response.data.data);
@@ -149,8 +158,8 @@ export default {
           this.getOneArticle(this.$route.params.id);
           this.confirmation = false;
         },
-        updateArticle() {
-            var data = {
+        updateArticle(id, data, Authorization) {
+            data = {
                 title: this.currentArticle[0].title,
                 description: this.currentArticle[0].description,
                 subject: this.currentArticle[0].subject,
@@ -158,7 +167,8 @@ export default {
                 user_id: this.currentArticle[0].user_id,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
-            ArticlesDataServices.update(this.currentArticle[0].id, data) 
+            Authorization = `Bearer ${this.token}`;
+            ArticlesDataServices.update(this.currentArticle[0].id, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.messageUpdate = "Cet article a été modifié avec succès.";
@@ -166,8 +176,9 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
-        deleteArticle() {
-            ArticlesDataServices.delete(this.currentArticle[0].id)
+        deleteArticle(id, Authorization) {
+            Authorization = `Bearer ${this.token}`;
+            ArticlesDataServices.delete(this.currentArticle[0].id, { Authorization })
                 .then(response => {
                     console.log(response.data);
                     this.$router.push({ path: "/api/articles" });

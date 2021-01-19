@@ -24,8 +24,8 @@
                     </ul>
                     
                     <div class="col-12 col-md-3">
-                        <router-link to="/api/articles/add"><button  type= "button" class="btn btn-primary" >Poster un nouvel article</button></router-link>
-                        <!--<div v-if="postAsked"> // Ligne dessus :@click="askForPost"
+                        <router-link to="/api/articles/add"><button  type= "button" class="btn btn-primary">Poster un nouvel article</button></router-link>
+                        <!--<div v-if="postAsked"> /@click="askForPost"
                             <p>Pour profiter de cette fonctionnalité, vous devez d'abord vous connecter ou créer un compte.</p>
                             <div>
                                 <router-link to="/api/auth/signup" class="auth__signup"><button  type= "button" class="btn btn-primary">Inscription</button></router-link><br/>
@@ -39,8 +39,13 @@
             </div>
             <p v-if="articles.length == 0">{{ message }}</p>
         </div>
+        <div v-if="!isLoggedIn">
+            <Identification />
+        </div>
         
-        <Identification />
+        <!--<div v-else>
+            <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+        </div>-->
         
         <div>
             <Footer />
@@ -54,11 +59,12 @@ import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesItem from "../components/ArticlesItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
+import { mapGetters, mapState } from 'vuex'
     
 export default {
     name: "Articles",
     components: {
-		Footer, Identification, ArticlesItem
+		Footer, ArticlesItem, Identification, 
 	},
     data () {
         return {
@@ -69,14 +75,21 @@ export default {
             postAsked: false
         };
     },
+   computed: {
+        ...mapGetters(['isLoggedIn']),
+        ...mapState({ token: "token"})
+    },
     methods: {
         getAllArticles() {
-            ArticlesDataServices.getAll()
+            ArticlesDataServices.getAll({ Authorization: `Bearer ${this.token}`})
                 .then(response => {
                 this.articles = JSON.parse(JSON.stringify(response.data.data));
                 console.log(response.data.data);
                 })
                 .catch(error => console.log(error));
+        },
+        /*logout() {
+            this.$store.commit("logout")
         }/*,
         askForPost() {
             return(this.postAsked = true)

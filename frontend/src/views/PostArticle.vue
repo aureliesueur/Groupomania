@@ -60,7 +60,9 @@
             <router-view />
         </div>
         
-        <Identification />
+        <div v-if="!isLoggedIn">
+            <Identification />
+        </div>
            
         <div>
             <Footer />
@@ -72,6 +74,7 @@
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesDataServices from "../services/ArticlesDataServices"
+import { mapGetters, mapState } from 'vuex'
     
 export default {
     name: "PostArticle",
@@ -89,19 +92,25 @@ export default {
             submitted: false,
         };
     },
+     computed: {
+        ...mapGetters(['isLoggedIn']),
+        ...mapState({ token: "token"}),
+        ...mapState({ userId: "userId"}),
+    },
     methods: {
-        saveArticle() {
-            var storedId = localStorage.getItem('userId');
-            var userId = JSON.parse(storedId);
-            var data = {
+        saveArticle(data, Authorization) {
+            //var storedId = localStorage.getItem('userId');
+            //var userId = JSON.parse(storedId);
+            data = {
                 title: this.article.title,
                 description: this.article.description,
                 subject: this.article.subject,
                 lien_web: this.article.lien_web,
-                user_id: userId,
+                user_id: this.userId,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
-            ArticlesDataServices.create(data) 
+            Authorization = `Bearer ${this.token}`;
+            ArticlesDataServices.create(data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.submitted = true;

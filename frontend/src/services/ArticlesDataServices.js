@@ -1,20 +1,20 @@
 import http from "../http-common";
 
 class ArticlesDataServices {
-    getAll() {
-        return http.get("/articles");
+    getAll(headers) {
+        return http.get("/articles", { headers });
     }
-    getOne(id) {
-        return http.get(`/articles/${id}`);
+    getOne(id, headers) {
+        return http.get(`/articles/${id}`, { headers });
     }
-    create(data) {
-        return http.post('/articles/add', data);
+    create(data, headers) {
+        return http.post('/articles/add', data, { headers });
     }
-    update(id, data) {
-        return http.put(`/articles/${id}`, data);
+    update(id, data, headers) {
+        return http.put(`/articles/${id}`, data, { headers });
     }
-    delete(id) {
-        return http.delete(`/articles/${id}`);
+    delete(id, headers) {
+        return http.delete(`/articles/${id}`, { headers });
     }
 }
 

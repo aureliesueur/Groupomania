@@ -14,7 +14,9 @@
             <router-view />
         </section>
         
-        <Identification />
+        <div v-if="!isLoggedIn">
+           <Identification />
+        </div>
         
         <div>
             <Footer />
@@ -26,6 +28,7 @@
 <script>
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
+import { mapGetters } from 'vuex'
     
     
 export default {
@@ -38,6 +41,7 @@ export default {
         }
     },
 	computed: {
+        ...mapGetters(['isLoggedIn']),
 	},
 	methods: {
 	}

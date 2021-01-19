@@ -45,6 +45,7 @@
 <script>
 import Footer from "../components/Footer"
 import UsersDataServices from "../services/UsersDataServices"
+import { mapMutations } from 'vuex'
     
 export default {
     name: 'Login',
@@ -59,6 +60,11 @@ export default {
         }
     },
     methods: {
+        ...mapMutations([
+            'setUserId',
+            'setToken',
+            'setIsAdmin'
+        ]),
         loginSubmit(e) {
             e.preventDefault()
             var data = {
@@ -68,8 +74,16 @@ export default {
             UsersDataServices.login(data) 
                 .then(response => {
                     console.log(response.data);
+                    let token = response.data.token;
+                    let userId = response.data.userId;
+                    let isAdmin = response.data.isAdmin;
+                    console.log(token, userId, isAdmin);
+                    this.setUserId(userId);
+                    this.setToken(token);
+                    this.setIsAdmin(isAdmin);
                     this.submitted = true;
-                    localStorage.setItem('userId', JSON.stringify(response.data.userId));
+                    this.$router.push('/api/articles');
+                    //localStorage.setItem('userId', JSON.stringify(response.data.userId));
                 })
                 .catch(error => console.log(error));
         }
