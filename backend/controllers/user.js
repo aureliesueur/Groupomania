@@ -120,27 +120,6 @@ exports.deleteAccount = (req, res, next) => {
 };
 
 
- /*   
-//Fontion qui gère la logique métier de la route DELETE (suppression d'un compte user existant dans la database) AVEC VERIFICATION DE L'IDENTIFICATION DU USER
-exports.deleteAccount = (req, res, next) => {
-    //Récupération du token contenu dans les headers
-    const token = req.headers.authorization.split(" ")[1];
-    //Décodage du token
-    const decodedToken = jwt.verify(token, "DD49869BBAD47");
-    //Extraction de l'id contenu dans le token
-    const userId = decodedToken.userId;
-    if (req.params.id !== userId) {
-        throw "Suppression de compte impossible : user ID non valable !";
-    } else {
-        let sql = `DELETE FROM Users WHERE id = ?`;
-        db.query(sql, [req.params.id], function(err, data, fields) {
-            if (err) {
-                return res.status(400).json({err: "Désolé, votre demande de suppression de compte n'a pu aboutir."}); 
-            }
-            res.json({status: 200, data, message: "Votre compte a bien été supprimé !"});    
-        });
-    }
-};
-*/  
+ 
     
     

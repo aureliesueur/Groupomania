@@ -1,7 +1,7 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE LES REQUETES SUR LES ARTICLES POSTES */
 
 
-//Importation du modèles Article 
+//Importation du modèle Article 
 const Article = require("../models/Article"); 
 //Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");

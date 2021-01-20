@@ -23,11 +23,6 @@ export default {
     position: absolute;
     right: 20px;
     top: 10px;
-    &__btn {
-        margin-bottom: 10px!important;
-        background-color: #FFF!important;
-        border: 2px solid #cc2810!important;
-        color: black!important;
-    }
+    
 }    
 </style>

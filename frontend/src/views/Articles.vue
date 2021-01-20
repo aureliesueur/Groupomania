@@ -40,7 +40,10 @@
             <div v-else class="deconnect">
                 <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
-            <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
+            <div id="account">
+                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
+                <p v-else >VOTRE COMPTE</p>
+            </div>
         </div>
         
         <div>

@@ -37,10 +37,10 @@
     top: 10px;
 }
     
-#adminConnect {
+#info {
     position: absolute;
     right: 20px;
-    top: 50px;
+    top: 60px;
     color: #FFF;
 } 
     
@@ -50,7 +50,7 @@ button, .card__btnDetails {
     color: #FFF!important;
 }
 
-.auth__btn, .deconnect__btn, .card__btnWeb {
+.auth__btn, .deconnect__btn, .card__btnWeb, .account__btn {
     margin-bottom: 10px!important;
     background-color: #FFF!important;
     border: 2px solid #cc2810!important;

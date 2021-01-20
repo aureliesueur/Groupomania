@@ -35,7 +35,19 @@
             <div v-else class="deconnect">
                 <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
-            <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
+            <div id="info">
+                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
+                <button v-else class="btn btn-primary auth__btn" @click="showAccount">Votre compte</button>
+            </div>
+        </div>
+        
+        <div v-if="accountAsked" class="account">
+            <p>Votre pseudo : {{ username }}</p>
+            <p>Votre email: {{ email }}</p>
+            <p>Votre prénom: {{ first_name }}</p>
+            <p>Votre nom: {{ last_name }}</p>
+            <button class="btn btn-success account__btn" @click="suppressUser">Supprimer votre compte</button><br/>
+            <button class="btn account__btn" @click="hideAccount">Retour</button>
         </div>
         
         <div>
@@ -59,7 +71,8 @@ export default {
 	},
 	data() {
 		return {
-            loginCalled: false
+            loginCalled: false,
+            accountAsked: false
         }
     },
 	computed: {
@@ -74,6 +87,12 @@ export default {
         },
         logout() {
             this.$store.commit("logout")
+        },
+        showAccount() {
+            this.accountAsked = true
+        },
+        hideAccount() {
+          this.accountAsked = false
         }
 	}
 }
@@ -84,6 +103,21 @@ export default {
 .intro {
     &__articles {
         margin-right: 30px;
+    }
+}
+    
+.account {
+    background: #324392;
+    border: 2px solid #FFF;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 4;
+    color: #FFF;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    &__btn {
+        width: 70%;
     }
 }
 
