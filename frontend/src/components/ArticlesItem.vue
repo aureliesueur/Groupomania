@@ -42,35 +42,67 @@ export default {
 </script>
 
 <template>
-    <div class="card container">
+    <div class="card text-center">
         <div v-if="this.$route.name == 'articles-list'" class="row">
-            <div class="card-body col-12 col-md-9">
+            <div class="card-body">
                 <h3 class="card-title card__title">{{ title }}</h3>
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__link col-4 col-md-3" :href="'/api/articles/' + id">En savoir plus</a><!--@click="details" pour ajouter messages de connexion dans articles.vue-->
+            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/api/articles/' + id">En savoir plus</a>
         </div>
         
         
-        <div v-else class="row">
-            <div class="card-body col-12 col-md-9">
+        <div v-else>
+            <div class="card-body card__body ">
                 <h3 class="card-title card__title">{{ title }}</h3>
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
                 <p class="card-text card__description">{{ description }}</p>
             </div>
-            <div v-if="lien_web == 'null'">
-                <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
-            </div> 
-            <div v-else>
-                <iframe  :src="lien_web" width="200px" height="200px" sandbox></iframe>
-                <a :href="lien_web" target="_blank" class="card-link btn btn-primary card__link col-4 col-md-3" >Lien vers l'article</a>
+            <div card__links>
+                <a :href="lien_web" target="_blank" class="btn btn-primary card__btnWeb" >Lien vers l'article</a>
+                <iframe  :src="lien_web" width="200px" height="200px" sandbox class="card__iframe"></iframe>
             </div>
         </div>
     </div>
 </template>
 
 <style lang="scss">
+    
+.card {
+    border: 2px solid #324392!important;
+    padding: 10px 30px 10px 10px!important;
+    margin: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 2px #CCC;
+    &__body {
+        margin: auto!important;
+        width: 80%!important;
+    }
+    &__title {
+        color: #cc2810;
+    }
+    &__subtitle {
+        font-style: italic;
+        font-weight: bold;
+    }
+    &__description {
+        text-align: justify;
+    }
+    &__links iframe, a {
+        display: block;
+        margin: auto;
+    }
+    &__links iframe {
+        margin-bottom: 20px!important;
+    }
+    &__btnWeb {
+        margin-top: 10px!important;
+        max-width: 30%;
+    }
+   
+}
 
 </style>

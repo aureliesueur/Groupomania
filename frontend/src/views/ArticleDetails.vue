@@ -24,7 +24,7 @@
                 <div v-if="validUser || isAdmin" class="col-12 col-md-2">
                     <button type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
                     <p>{{ messageUpdate }}</p>
-                    <button type= "button" class="btn btn-primary" @click="confirmDelete">Supprimer</button>
+                    <button type= "button" class="btn btn-primary btn-suppress" @click="confirmDelete">Supprimer</button>
                     <div v-if="confirmation">
                         <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
@@ -103,8 +103,8 @@
             <div v-if="!isLoggedIn">
                 <Identification />
             </div>
-            <div v-else id="deconnect">
-                <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+            <div v-else class="deconnect">
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
             <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
         </div>
@@ -228,6 +228,10 @@ export default {
     &__box {
         margin: auto;
     }
+}
+    
+.btn-suppress {
+    margin-bottom: 30px;
 }
 </style>
 

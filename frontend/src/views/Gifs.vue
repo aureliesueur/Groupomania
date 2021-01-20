@@ -6,12 +6,14 @@
             <h1>Plateforme de partage de Gifs : A développer...</h1>
         </div>  
 
+        <CallToLogin v-if="!isLoggedIn" />
+        
         <div> 
             <div v-if="!isLoggedIn">
                 <Identification />
             </div>
-            <div v-else id="deconnect">
-                <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+            <div v-else class="deconnect">
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
             <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
         </div>
@@ -25,12 +27,13 @@
 <script>
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
+import CallToLogin from "../components/CallToLogin"
 import { mapGetters, mapState } from 'vuex'
     
 export default {
     name: "Gifs",
     components: {
-        Identification, Footer
+        Identification, Footer, CallToLogin
     }, 
     data () {
         return {

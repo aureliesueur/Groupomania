@@ -27,6 +27,8 @@ export default {
     position: absolute;
     top: 40%;
     z-index: 2;
+    max-width: 50%;
+    margin-left: 20%;
     background-color: #DDD;
     border-radius: 20px;
     border: 2px solid #cc2810;

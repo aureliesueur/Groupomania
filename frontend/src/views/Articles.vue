@@ -7,8 +7,8 @@
             <h2>Liste de tous les articles postés</h2>
             <div class="container">
                 <div class='row'>
-                    <ul class="col-12 col-md-9">
-                        <li class="row" v-for="article in articles" :key="article.title">
+                    <ul class="col-12 col-md-10">
+                        <li v-for="article in articles" :key="article.title">
                             <ArticlesItem 
                             :id="article.id"
                             :title="article.title"
@@ -23,7 +23,7 @@
                         </li>
                     </ul>
                     
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-2">
                         <router-link to="/api/articles/add"><button  type= "button" class="btn btn-primary">Poster un nouvel article</button></router-link>
                     </div> 
                 </div>
@@ -37,8 +37,8 @@
             <div v-if="!isLoggedIn">
                 <Identification />
             </div>
-            <div v-else id="deconnect">
-                <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+            <div v-else class="deconnect">
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
             <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
         </div>
@@ -96,17 +96,7 @@ export default {
     
 </script>
 
-<style lang="scss">
-
- #call-to-login {
-    position: absolute;
-    top: 40%;
-    z-index: 2;
-    background-color: #DDD;
-    border-radius: 20px;
-    border: 2px solid #cc2810;
-    padding: 50px;
-}    
+<style lang="scss">   
     
 ul, li {
     list-style: none;

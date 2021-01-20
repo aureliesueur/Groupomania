@@ -89,8 +89,9 @@ export default {
 <style scoped lang="scss">
 
 form {
-    display: flex;
     justify-content: center;
+    margin: auto;
+    max-width: 60%!important;
 }
 </style>
 

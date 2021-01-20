@@ -2,9 +2,9 @@
 <template>
     <div class="jumbotron">
         <h1>Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
-        <div v-if="!submitted" class="container text-center">
+        <div v-if="!submitted" class="container text-center form">
             <h2>Pour poster un nouvel article, merci de remplir les champs suivants :</h2>
-            <div class="form row">
+            <div class="row">
                 <div class="form__box col-12 col-md-9">
                     <div class="form-group">
                         <label for="title">Titre</label>
@@ -32,7 +32,7 @@
                             <option value="Economie">Economie</option>
                             <option value="Politique">Politique</option>
                             <option value="Média">Média</option>
-                            <option value="Societé">Société</option>
+                            <option value="Société">Société</option>
                             <option value="Psychologie">Psychologie</option>
                             <option value="Climat">Climat</option>
                             <option value="Sport">Sport</option>
@@ -65,8 +65,8 @@
             <div v-if="!isLoggedIn">
                 <Identification />
             </div>
-            <div v-else id="deconnect">
-                <button type="button" class="btn btn-secondary" @click="logout">Déconnexion</button>
+            <div v-else class="deconnect">
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
             <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
         </div>
@@ -144,7 +144,8 @@ export default {
     position: absolute;
     top: 20%;
     z-index: 2;
-    margin-left: 10%!important;
+    max-width: 60%!important;
+    margin-left: 8%!important;
     background-color: #DDD;
     border-radius: 20px;
     border: 2px solid #cc2810;

@@ -5,7 +5,7 @@
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
-            <div class="form row">
+            <form class="row">
                 <div class="form__box col-10 col-md-7">
                     <div class="form-group">
                         <label for="username">Votre pseudo</label>
@@ -60,7 +60,7 @@
                     
                     <button class="btn btn-success" @click="createNewUser">Créer votre compte</button>
                 </div>
-            </div>
+            </form>
         </div>
         <div v-else>
             <h3>Votre compte a bien été créé, nous sommes ravis de vous compter parmi nous !</h3>
@@ -124,6 +124,12 @@ export default {
 
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    
+form {
+    justify-content: center;
+    margin: auto;
+    max-width: 60%!important;
+}
 </style>
 

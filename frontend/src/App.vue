@@ -31,11 +31,12 @@
   color: #2c3e50;
 }
 
-#deconnect {
+.deconnect {
     position: absolute;
     right: 20px;
     top: 10px;
 }
+    
 #adminConnect {
     position: absolute;
     right: 20px;
@@ -43,14 +44,22 @@
     color: #FFF;
 } 
     
-button {
-    background: rgb(50, 67, 146)!important;//#324392
+button, .card__btnDetails {
+    background: #324392!important;
     border: 2px solid black!important;
     color: #FFF!important;
 }
 
+.auth__btn, .deconnect__btn, .card__btnWeb {
+    margin-bottom: 10px!important;
+    background-color: #FFF!important;
+    border: 2px solid #cc2810!important;
+    color: black!important;
+}
+
 h1 {
     font-size: 2em!important;
+    margin-bottom: 30px!important;
 }
     
 h2 {
@@ -58,6 +67,6 @@ h2 {
     color: #cc2810;
     font-weight: bold;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px!important;
 }
 </style>
