@@ -19,6 +19,9 @@ router.post("/signup", /*body("email").isEmail(), body("password").isLength({min
 //Requête POST pour connexion
 router.post("/login", /*userCtrl.validate("login"), */userCtrl.login);
 
+//Requête GET pour connexion
+router.get("/:id", userCtrl.getOneUser);
+
 //Requête DELETE pour suppression de compte
 router.delete("/:id", userCtrl.deleteAccount);
 

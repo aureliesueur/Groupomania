@@ -108,7 +108,6 @@
             </div>
             <div id="account">
                 <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-                <p v-else >VOTRE COMPTE</p>
             </div>
         </div>
 
@@ -153,6 +152,7 @@ export default {
             ArticlesDataServices.getOne(id, { Authorization }) 
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
+                    console.log(this.currentArticle[0].user_id);
                         if (this.currentArticle[0].user_id !== this.userId) {
                             this.validUser = false;  
                         } else if (this.isAdmin == 1) {
@@ -201,7 +201,8 @@ export default {
                 .catch(error => console.log(error));
         },
         logout() {
-            this.$store.commit("logout")
+            this.$store.commit("logout");
+            this.$router.push({ path: "/api/" });
         }
     }, 
     beforeMount() {

@@ -70,7 +70,6 @@
             </div>
             <div id="account">
                 <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-                <p v-else >VOTRE COMPTE</p>
             </div>
         </div>
            
@@ -127,7 +126,8 @@ export default {
                 .catch(error => console.log(error));
         },
         logout() {
-            this.$store.commit("logout")
+            this.$store.commit("logout");
+            this.$router.push({ path: "/api/" });
         }
     }
 }

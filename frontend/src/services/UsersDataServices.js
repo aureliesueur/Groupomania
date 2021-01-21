@@ -7,6 +7,12 @@ class UsersDataServices {
     signup(data) {
         return http.post('/auth/signup', data);
     }
+    getCurrentUser(id) {
+        return http.get(`/auth/${id}`);
+    }
+    deleteUser(id) {
+        return http.delete(`/auth/${id}`);
+    }
 }
 
 

@@ -40,9 +40,8 @@
             <div v-else class="deconnect">
                 <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
             </div>
-            <div id="account">
+            <div class="info">
                 <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-                <p v-else >VOTRE COMPTE</p>
             </div>
         </div>
         
@@ -71,7 +70,6 @@ export default {
             articles:[],
             activeArticle: null,
             message: "Il n'y a aucun article posté sur la plateforme à ce jour.",
-            //detailsAsked: false
         }
     },
    computed: {
@@ -89,7 +87,8 @@ export default {
                 .catch(error => console.log(error));
         },
         logout() {
-            this.$store.commit("logout")
+            this.$store.commit("logout");
+            this.$router.push({ path: "/api/" });
         }
     },
     beforeMount() {

@@ -107,7 +107,19 @@ exports.login = (req, res, next) => {
     });
 };
     
-   
+  
+//Fontion qui gère la logique métier de la route GET (affichage d'un user)
+exports.getOneUser = (req, res, next) => {
+    let sql = `SELECT * FROM Users WHERE id = ?`;
+    db.query(sql, [req.params.id], function(err, data, fields) {
+    if (err) {
+        return res.status(404).json({err});
+    }
+    res.json({status: 200, data, message: "User affiché avec succès !"})
+  });
+};
+
+
 //Fontion qui gère la logique métier de la route DELETE (suppression d'un compte user existant dans la database)
 exports.deleteAccount = (req, res, next) => {
     let sql = `DELETE FROM Users WHERE id = ?`;
@@ -120,6 +132,5 @@ exports.deleteAccount = (req, res, next) => {
 };
 
 
- 
     
     

@@ -9,9 +9,9 @@
 
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><router-link to="/api/" class="nav-link" >Accueil</router-link></li> 
-                    <li class="nav-item"><router-link to="/api/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>  
+                    <li class="nav-item active"><router-link to="/api/" class="nav-link" >Accueil</router-link></li>   
                     <li class="nav-item"><router-link to="/api/articles" class="nav-link">Partagez vos articles</router-link></li>
+                    <li class="nav-item"><router-link to="/api/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>
                 </ul>
             </div>
         </nav>
@@ -37,11 +37,15 @@
     top: 10px;
 }
     
-#info {
+.info {
     position: absolute;
     right: 20px;
     top: 60px;
     color: #FFF;
+    margin-right: -20px;
+    &__btn {
+        width: 140px;
+    }
 } 
     
 button, .card__btnDetails {
@@ -50,7 +54,7 @@ button, .card__btnDetails {
     color: #FFF!important;
 }
 
-.auth__btn, .deconnect__btn, .card__btnWeb, .account__btn {
+.auth__btn, .deconnect__btn, .card__btnWeb, .account__btn, .confirm__btn {
     margin-bottom: 10px!important;
     background-color: #FFF!important;
     border: 2px solid #cc2810!important;
