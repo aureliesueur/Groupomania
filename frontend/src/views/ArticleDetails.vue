@@ -6,17 +6,27 @@
             <div class="row">
                 <div v-if="currentArticle[0]" class="container col-12 col-md-10">
                     <div class='row'>
-                        <div class="article__box col-12 col-md-9"><ArticlesItem 
-                            :key="currentArticle[0].title"
-                            :id="currentArticle[0].id"
-                            :title="currentArticle[0].title"
-                            :description="currentArticle[0].description"
-                            :subject="currentArticle[0].subject"
-                            :lien_web="currentArticle[0].lien_web"
-                            :imageURL="currentArticle[0].image_URL"
-                            :username="currentArticle[0].username"
-                            :date_post="currentArticle[0].date_post"                                                  
-                            />
+                        <div class="article__box col-12 col-md-9">
+                            <ArticlesItem 
+                                :key="currentArticle[0].title"
+                                :id="currentArticle[0].id"
+                                :title="currentArticle[0].title"
+                                :description="currentArticle[0].description"
+                                :subject="currentArticle[0].subject"
+                                :lien_web="currentArticle[0].lien_web"
+                                :imageURL="currentArticle[0].image_URL"
+                                :username="currentArticle[0].username"
+                                :date_post="currentArticle[0].date_post"                                                  
+                                />
+                            <ul id="commentsList">
+                                <li v-for="comment in comments" :key="comment.id">
+                                    <CommentsItem
+                                        :id="comment.id"
+                                        :content="comment.content"
+                                        :username="comment.username"
+                                        :date_post="comment.date_post" />
+                                </li>
+                            </ul>                        
                         </div>
                     </div>
                 </div>
@@ -122,17 +132,20 @@
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesItem from "../components/ArticlesItem"
+import CommentsItem from "../components/CommentsItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
+import CommentsDataServices from "../services/CommentsDataServices"
 import { mapGetters, mapState } from 'vuex'
     
 export default {
     name: "ArticleDetails",
     components: {
-		Footer, ArticlesItem, Identification, 
+		Footer, ArticlesItem, CommentsItem, Identification
 	},
     data () {
         return {
             currentArticle: [],
+            comments: [],
             validUser: false,
             askForUpdate: false,
             confirmation: false,
@@ -152,7 +165,6 @@ export default {
             ArticlesDataServices.getOne(id, { Authorization }) 
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
-                    console.log(this.currentArticle[0].user_id);
                         if (this.currentArticle[0].user_id !== this.userId) {
                             this.validUser = false;  
                         } else if (this.isAdmin == 1) {
@@ -203,20 +215,34 @@ export default {
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/api/" });
+        },
+        getAllComments() {
+            CommentsDataServices.getAll({ Authorization: `Bearer ${this.token}`})
+                .then(response => {
+                this.comments = JSON.parse(JSON.stringify(response.data.data));
+                })
+                .catch(error => console.log(error));
         }
-    }, 
+    },    
     beforeMount() {
         this.getOneArticle(this.$route.params.id);
+        this.getAllComments();
         this.askForUpdate = false;
         this.validUser = false;
-    },
+    }
 }
+    
+    
 </script>
 
 <style lang="scss">
-
+    
 .article__box {
     margin: auto;
+}
+  
+#commentsList {
+   padding:0 30px;     
 }
     
 .form {

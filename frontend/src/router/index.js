@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Gifs from '../views/Gifs.vue'
 import Articles from '../views/Articles.vue'
+import CommentForm from '../views/CommentForm.vue'
 import ArticleDetails from '../views/ArticleDetails.vue'
 import PostArticle from '../views/PostArticle.vue'
 import Login from '../views/Login.vue'
@@ -45,7 +46,18 @@ const routes = [
         path: '/api/articles/:id',
         name: 'one-article-details',
         component: ArticleDetails
-    }
+    },
+    {
+        path: '/api/articles/:id/comments',
+        name: 'comments-list',
+        component: CommentForm
+    }/*,
+    {
+        path: '/api/articles/:id/comments/:id',
+        name: 'one-comment-details',
+        component: CommentDetails
+    }*/
+    
 ]
 
 const router = new VueRouter({

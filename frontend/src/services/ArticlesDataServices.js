@@ -18,6 +18,6 @@ class ArticlesDataServices {
     }
 }
 
-//A compléter pour les autres requêtes
+
 
 export default new ArticlesDataServices();

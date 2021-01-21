@@ -77,7 +77,7 @@ exports.deleteComment = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route GET (affichage de tous les articles)
 exports.getAllComments = (req, res, next) => { 
-    let articleId = 3; //req.url.split("/")[5]; 
+    let articleId = 3; //req.url.split("/")[3]; 
     let sql = "SELECT Comments.id, content, note, Comments.date_post, username, Articles.title FROM Comments INNER JOIN Users ON Comments.user_id = Users.id INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Articles.id = ?"; 
     db.query(sql, [articleId], function(err, data) {
         if (err) {
