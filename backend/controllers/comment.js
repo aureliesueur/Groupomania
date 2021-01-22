@@ -65,7 +65,7 @@ exports.createComment = (req, res, next) => {
       
 //Fontion qui gère la logique métier de la route DELETE (suppression d'un commentaire posté)
 exports.deleteComment = (req, res, next) => {
-  let sql = "DELETE FROM Comments WHERE id = ?";
+  let sql = "UPDATE Comments SET deleted = true WHERE id = ?";
   db.query(sql, [req.params.id], function(err, data) {
     if (err) {
         return res.status(400).json({err});
@@ -78,7 +78,7 @@ exports.deleteComment = (req, res, next) => {
 //Fontion qui gère la logique métier de la route GET (affichage de tous les articles)
 exports.getAllComments = (req, res, next) => { 
     let articleId = 3; //req.url.split("/")[3]; 
-    let sql = "SELECT Comments.id, content, note, Comments.date_post, username, Articles.title FROM Comments INNER JOIN Users ON Comments.user_id = Users.id INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Articles.id = ?"; 
+    let sql = "SELECT Comments.id, content, note, Comments.date_post, username, Articles.title FROM Comments INNER JOIN Users ON Comments.user_id = Users.id INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Articles.id = ? AND Comments.deleted = false ORDER BY Comments.date_post DESC"; 
     db.query(sql, [articleId], function(err, data) {
         if (err) {
             return res.status(400).json({err});

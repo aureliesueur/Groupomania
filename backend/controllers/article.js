@@ -91,7 +91,7 @@ exports.deleteArticle = (req, res, next) => {
         var articleToModify = data[0];
         //Comparaison de l'id du user courant avec l'id du user ayant posté l'article
         if (articleToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
-              let sql = "DELETE FROM Articles WHERE id = ?";
+              let sql = "UPDATE Articles SET deleted = true WHERE id = ?";
               db.query(sql, [req.params.id], function(err, data) {
                 if (err) {
                     return res.status(400).json({err});
@@ -107,7 +107,7 @@ exports.deleteArticle = (req, res, next) => {
 
 //Fontion qui gère la logique métier de la route GET (affichage de tous les articles)
 exports.getAllArticles = (req, res, next) => {
-  let sql = "SELECT Articles.id, title, description, subject, lien_web, date_post, username FROM Articles INNER JOIN Users ON Articles.user_id = Users.id"; 
+  let sql = "SELECT Articles.id, title, description, subject, lien_web, date_post, username FROM Articles INNER JOIN Users ON Articles.user_id = Users.id WHERE Articles.deleted = false ORDER BY date_post DESC"; 
   db.query(sql, function(err, data) {
     if (err) {
         return res.status(400).json({err});
