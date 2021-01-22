@@ -5,6 +5,8 @@ const express = require("express");
 const router = express.Router();
 //Importation du middleware d'authentification pour protéger les routes
 const auth = require("../middleware/auth");
+//Importation du middleware d'autorisation pour identifier le user avant d'updater ou de delete un article
+const autorisation = require("../middleware/autorisation");
 //Importation du controller
 const articleCtrl = require("../controllers/article");
 
