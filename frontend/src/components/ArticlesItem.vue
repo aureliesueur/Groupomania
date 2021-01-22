@@ -13,7 +13,7 @@
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <a href="#commentsList">Voir tous les commentaires</a>
-                <router-link to="/api/articles/:id/comments">Poster un commentaire</router-link>
+                <p @click="showCommentForm">Poster un commentaire</p>
             </div>
             <div class="card-body card__body ">
                 <h3 class="card-title card__title">{{ title }}</h3>
@@ -31,6 +31,7 @@
 
 
 <script>
+
 export default {
 	name: "ArticlesItem",
 	props: {
@@ -68,6 +69,15 @@ export default {
 	},
     data() {
         return {
+        }
+    },
+    methods: {
+        showCommentForm() {//Récupérer l'id dans les params de l'url !!!
+            this.$router.push({ path: "/api/articles/3/comments" });
+        },
+        logout() {
+            this.$store.commit("logout");
+            this.$router.push({ path: "/api/" });
         }
     }
 }

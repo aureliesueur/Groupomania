@@ -4,50 +4,61 @@
         <div class="row">
             <div class="col-12 col-md-9 text-center form__box ">
                 <div class="form-group">
+                    <label for="content"></label>
                     <textarea
                         type="textarea" 
                         rows="5"
                         cols="30"
                         class="form-control"
                         required
-                        v-model="content"
+                        v-model="comment.content"
                         placeholder="Formidable !"
                         name="content" />
                 </div>
-                <button class="btn btn-success" @click="publishComment">Poster ce commentaire</button>
+                <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'ItemForm',
-        props: {
-            message: {
-                type: String,
-                required: true
-            },
-            title: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            },
-            subject: {
-                type: String,
-                required: true
-            },
-            lien_web: {
-                type: String,
-            },
-            doWithArticle:  {
-                type: Function
+    
+import CommentsDataServices from "../services/CommentsDataServices"
+import { mapState } from 'vuex'
+    
+export default {
+    name: 'CommentForm',
+    data () {
+        return {
+            comment: {
+                content: "",
+                user_id: "", 
+                date_post: "",
             }
         }
+    },
+    computed: {
+        ...mapState({ token: "token"}),
+        ...mapState({ userId: "userId"}),
+    },
+    methods: {
+        postComment(id,data, Authorization) {
+        data = {
+            content: this.comment.content,
+            user_id: this.userId,
+            date_post: new Date().toLocaleDateString('fr-CA'), 
+        };
+        Authorization = `Bearer ${this.token}`;
+        CommentsDataServices.create(data, { Authorization }) 
+            .then(response => {
+                console.log(response.data);
+                this.submitted = true;
+            })
+            .catch(error => console.log(error));
+        }
     }
+}
+    
 </script>
 
 <style scoped lang="scss">

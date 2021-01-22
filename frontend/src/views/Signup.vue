@@ -137,7 +137,7 @@ export default {
         },
         handleSubmit() {
             var data = {
-                username: this.user.username,
+                username: this.user.username, 
                 email: this.user.email,
                 password: this.user.password,
                 first_name: this.user.first_name,

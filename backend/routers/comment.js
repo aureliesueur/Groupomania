@@ -10,7 +10,7 @@ const commentCtrl = require("../controllers/comment");
 
 
 //Requête POST pour poster un nouveau commentaire sur un article
-router.post("/add", /*auth, articleCtrl.validate("createComment"),*/ commentCtrl.createComment); 
+router.post("/", /*auth, articleCtrl.validate("createComment"),*/ commentCtrl.createComment); 
 
 //Requête PUT pour modifier un commentaire déjà posté
 router.put("/:id", /*auth, articleCtrl.validate("modifyArticle"), */commentCtrl.modifyComment); 

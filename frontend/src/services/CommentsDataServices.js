@@ -8,7 +8,7 @@ class CommentsDataServices {
         return http.get(`/articles/${id}`, { headers });
     }*/
     create(id, data, headers) {
-        return http.post(`/articles/${id}/comments`, data, { headers });
+        return http.post(`/articles/3/comments`, data, { headers });//${id}
     }
     /*update(id, data, headers) {
         return http.put(`/articles/${id}`, data, { headers });
