@@ -32,8 +32,8 @@
         </div>
         <div v-else>
             <h3>Bienvenue, nous sommes ravis de vous retrouver !</h3>
-            <router-link to="/api/articles"><button class="btn btn-primary">Revenir au Forum Groupomania Articles</button></router-link>
-            <router-link to="/api/gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
+            <router-link to="/articles"><button class="btn btn-primary">Revenir au Forum Groupomania Articles</button></router-link>
+            <router-link to="/gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
         </div>
 
         <div>
@@ -77,7 +77,7 @@ export default {
                     this.setToken(response.data.token);
                     this.setIsAdmin(response.data.isAdmin);
                     this.submitted = true;
-                    this.$router.push('/api/');
+                    this.$router.push('/');
                 })
                 .catch(error => console.log(error));
         }

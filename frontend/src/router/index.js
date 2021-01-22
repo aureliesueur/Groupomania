@@ -13,42 +13,42 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/api/auth/login',
+        path: '/auth/login',
         name: 'login',
         component: Login
     },
    {
-        path: '/api/auth/signup',
+        path: '/auth/signup',
         name: 'signup',
         component: Signup
     },
     {
-        path: '/api/',
+        path: '/',
         name: 'home',
         component: Home
     },
     {
-        path: '/api/gifs',
+        path: '/gifs',
         name: 'gifs',
         component: Gifs
     },
     {
-        path: '/api/articles/add',
+        path: '/articles/add',
         name: 'post-article',
         component: PostArticle
     },
     {
-        path: '/api/articles',
+        path: '/articles',
         name: 'articles-list',
         component: Articles
     },
     {
-        path: '/api/articles/:id',
+        path: '/articles/:id',
         name: 'one-article-details',
         component: ArticleDetails
     },
     {
-        path: '/api/articles/:id/comments',
+        path: '/articles/:id/comments',
         name: 'comments-list',
         component: CommentForm
     }/*,

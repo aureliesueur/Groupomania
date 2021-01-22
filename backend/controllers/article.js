@@ -79,8 +79,6 @@ exports.createArticle = (req, res, next) => {
     });
  }
 
-    
-   
         
 //Fontion qui gère la logique métier de la route DELETE (suppression d'un article posté)
 exports.deleteArticle = (req, res, next) => {

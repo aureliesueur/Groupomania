@@ -6,7 +6,7 @@
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/api/articles/' + id">En savoir plus</a>
+            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + id">En savoir plus</a>
         </div>
         
         
@@ -73,11 +73,11 @@ export default {
     },
     methods: {
         showCommentForm() {//Récupérer l'id dans les params de l'url !!!
-            this.$router.push({ path: "/api/articles/3/comments" });
+            this.$router.push({ path: "/articles/3/comments" });
         },
         logout() {
             this.$store.commit("logout");
-            this.$router.push({ path: "/api/" });
+            this.$router.push({ path: "/" });
         }
     }
 }

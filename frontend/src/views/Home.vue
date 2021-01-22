@@ -5,11 +5,11 @@
             <h1>Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
             <div class="card col-12 col-sm-5 intro__articles">
                 <h2>Partagez vos articles préférés</h2>
-                <router-link to="/api/articles"><button class="btn btn-primary">Accès au Forum Groupomania Articles</button></router-link>
+                <router-link to="/articles"><button class="btn btn-primary">Accès au Forum Groupomania Articles</button></router-link>
             </div>
             <div class="card col-12 col-sm-5 intro__gifs">
                 <h2>Partagez vos vidéos préférées</h2>
-                <router-link to="/api/gifs"><button class="btn btn-primary">Accès au Forum Groupomania Vidéos</button></router-link>
+                <router-link to="/gifs"><button class="btn btn-primary">Accès au Forum Groupomania Vidéos</button></router-link>
             </div>
             <router-view />
         </section>
@@ -102,7 +102,7 @@ export default {
         },
         logout() {
             this.$store.commit("logout");
-            this.$router.push({ path: "/api/" });
+            this.$router.push({ path: "/" });
         },
         showAccount() {
             this.accountAsked = true
@@ -137,7 +137,7 @@ export default {
             return (this.confirmation = true);
         },
         refreshPage() {
-            this.$router.push({ path: "/api/" });
+            this.$router.push({ path: "/" });
             this.hideAccount();
             this.confirmation = false;
         },

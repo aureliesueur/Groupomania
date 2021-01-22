@@ -9,9 +9,9 @@
 
             <div class="collapse navbar-collapse" id="nav-collapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><router-link to="/api/" class="nav-link" >Accueil</router-link></li>   
-                    <li class="nav-item"><router-link to="/api/articles" class="nav-link">Partagez vos articles</router-link></li>
-                    <li class="nav-item"><router-link to="/api/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>
+                    <li class="nav-item active"><router-link to="/" class="nav-link" >Accueil</router-link></li>   
+                    <li class="nav-item"><router-link to="/articles" class="nav-link">Partagez vos articles</router-link></li>
+                    <li class="nav-item"><router-link to="/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>
                 </ul>
             </div>
         </nav>

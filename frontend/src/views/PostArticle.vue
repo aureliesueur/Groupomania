@@ -57,7 +57,7 @@
         </div>
         <div v-else>
             <h3>Votre article a bien été envoyé !</h3>
-            <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
             <router-view />
         </div>
         
@@ -127,7 +127,7 @@ export default {
         },
         logout() {
             this.$store.commit("logout");
-            this.$router.push({ path: "/api/" });
+            this.$router.push({ path: "/" });
         }
     }
 }

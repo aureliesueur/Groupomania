@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export default axios.create({
     //Attention : changer l'URL en fonction du port indiqué 
-    baseURL: "http://localhost:3000/api",
+    baseURL: "http://localhost:3000",
     headers: {
         "Content-type": "application/json"
     }   

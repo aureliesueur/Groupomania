@@ -48,9 +48,9 @@ app.use(bodyParser.json());
 
 //Définit les route des trois routeurs "Article"/"User"/"Comment" ainsi que pour les images téléchargées
 //app.use("/images", express.static(path.join(__dirname, "images")));
-app.use("/api/articles", articleRoutes);
-app.use("/api/auth", userRoutes);
-app.use("/api/articles/:id/comments", commentRoutes);
+app.use("/articles", articleRoutes);
+app.use("/auth", userRoutes);
+app.use("/articles/:id/comments", commentRoutes);
 
 //Exportation de l'appli vers server.js 
 module.exports = app;

@@ -40,11 +40,11 @@
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
                         <button type= "button" class="btn btn-primary" @click="refreshPage">Annuler</button>
                     </div>
-                    <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                     <router-view />
                 </div>
                 <div v-else>
-                    <router-link to="/api/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                     <router-view />
                 </div>
             </div>
@@ -208,13 +208,13 @@ export default {
             ArticlesDataServices.delete(this.currentArticle[0].id, { Authorization })
                 .then(response => {
                     console.log(response.data);
-                    this.$router.push({ path: "/api/articles" });
+                    this.$router.push({ path: "/articles" });
                 })
                 .catch(error => console.log(error));
         },
         logout() {
             this.$store.commit("logout");
-            this.$router.push({ path: "/api/" });
+            this.$router.push({ path: "/" });
         },
         getAllComments() {
             CommentsDataServices.getAll({ Authorization: `Bearer ${this.token}`})

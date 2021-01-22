@@ -149,7 +149,7 @@ export default {
                     this.setToken(response.data.token);
                     this.setIsAdmin(response.data.isAdmin);
                     this.submitted = true;
-                    this.$router.push('/api/');
+                    this.$router.push('/');
                 })
                 .catch(error => console.log(error));
         }

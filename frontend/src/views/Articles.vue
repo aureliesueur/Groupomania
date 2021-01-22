@@ -24,7 +24,7 @@
                     </ul>
                     
                     <div class="col-12 col-md-2">
-                        <router-link to="/api/articles/add"><button  type= "button" class="btn btn-primary">Poster un nouvel article</button></router-link>
+                        <router-link to="/articles/add"><button  type= "button" class="btn btn-primary">Poster un nouvel article</button></router-link>
                     </div> 
                 </div>
             </div>
@@ -88,7 +88,7 @@ export default {
         },
         logout() {
             this.$store.commit("logout");
-            this.$router.push({ path: "/api/" });
+            this.$router.push({ path: "/" });
         }
     },
     beforeMount() {
