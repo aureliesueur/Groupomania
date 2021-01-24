@@ -6,7 +6,7 @@
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + id">En savoir plus</a>
+            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + slug">En savoir plus</a>
         </div>
         
         
@@ -40,6 +40,10 @@ export default {
             required: true
         },
 		title: {
+			type: String,
+			required: true
+		},
+        slug: {
 			type: String,
 			required: true
 		},

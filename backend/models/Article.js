@@ -5,6 +5,7 @@ var mysql = require("mysql");
 const Article = function(article) {
     this.id = article.id;
     this.title = article.title;
+    this.slug = article.slug;
     this.description = article.description;
     this.subject = article.subject;
     this.image = article.image;

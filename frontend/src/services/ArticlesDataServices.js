@@ -4,17 +4,17 @@ class ArticlesDataServices {
     getAll(headers) {
         return http.get("/articles", { headers });
     }
-    getOne(id, headers) {
-        return http.get(`/articles/${id}`, { headers });
+    getOne(slug, headers) {
+        return http.get(`/articles/${slug}`,{ headers }); 
     }
     create(data, headers) {
         return http.post('/articles/add', data, { headers });
     }
-    update(id, data, headers) {
-        return http.put(`/articles/${id}`, data, { headers });
+    update(slug, data, headers) {
+        return http.put(`/articles/${slug}`, data, { headers });
     }
-    delete(id, headers) {
-        return http.delete(`/articles/${id}`, { headers });
+    delete(slug, headers) {
+        return http.delete(`/articles/${slug}`, { headers });
     }
 }
 

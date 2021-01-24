@@ -94,6 +94,7 @@ export default {
         return {
             article: {
                 title: "",
+                slug: "",
                 description: "", 
                 subject: "",
                 lien_web: "",
@@ -111,6 +112,7 @@ export default {
         saveArticle(data, Authorization) {
             data = {
                 title: this.article.title,
+                slug: this.article.title,
                 description: this.article.description,
                 subject: this.article.subject,
                 lien_web: this.article.lien_web,

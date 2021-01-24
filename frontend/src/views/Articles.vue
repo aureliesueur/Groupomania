@@ -12,10 +12,10 @@
                             <ArticlesItem 
                             :id="article.id"
                             :title="article.title"
+                            :slug="article.slug"
                             :description="article.description"
                             :subject="article.subject"
                             :lien_web="article.lien_web"
-                            :imageURL="article.image_URL"
                             :username="article.username"
                             :date_post="article.date_post"
                             class="col-9"

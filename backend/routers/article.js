@@ -13,16 +13,16 @@ const articleCtrl = require("../controllers/article");
 router.post("/add", auth, articleCtrl.validate("createArticle"), articleCtrl.createArticle); 
 
 //Requête PUT pour modifier un article déjà posté
-router.put("/:id", auth, articleCtrl.validate("modifyArticle"), articleCtrl.modifyArticle); 
+router.put("/:slug", auth, articleCtrl.validate("modifyArticle"), articleCtrl.modifyArticle); 
 
 //Requête DELETE pour supprimer un article qu'on a posté
-router.delete("/:id", auth, articleCtrl.deleteArticle); 
+router.delete("/:slug", auth, articleCtrl.deleteArticle); 
 
 //Requête GET pour afficher tous les articles postés
 router.get("/", auth, articleCtrl.getAllArticles); 
 
 //Requête GET pour afficher un article en particulier
-router.get("/:id", auth, articleCtrl.getOneArticle); 
+router.get("/:slug", auth, articleCtrl.getOneArticle); 
 
 //Exportation du router
 module.exports = router;

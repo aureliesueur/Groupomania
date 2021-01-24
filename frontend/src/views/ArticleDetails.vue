@@ -11,10 +11,10 @@
                                 :key="currentArticle[0].title"
                                 :id="currentArticle[0].id"
                                 :title="currentArticle[0].title"
+                                :slug="currentArticle[0].slug"
                                 :description="currentArticle[0].description"
                                 :subject="currentArticle[0].subject"
                                 :lien_web="currentArticle[0].lien_web"
-                                :imageURL="currentArticle[0].image_URL"
                                 :username="currentArticle[0].username"
                                 :date_post="currentArticle[0].date_post"                                                  
                                 />
@@ -160,9 +160,9 @@ export default {
         ...mapState({ isAdmin: "isAdmin"})
     },
     methods: {
-        getOneArticle(id, Authorization) {
+        getOneArticle(slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
-            ArticlesDataServices.getOne(id, { Authorization }) 
+            ArticlesDataServices.getOne(slug, { Authorization }) 
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
                         if (this.currentArticle[0].user_id !== this.userId) {
@@ -185,9 +185,10 @@ export default {
           this.getOneArticle(this.$route.params.id);
           this.confirmation = false;
         },
-        updateArticle(id, data, Authorization) {
+        updateArticle(slug, data, Authorization) {
             data = {
                 title: this.currentArticle[0].title,
+                slug: this.currentArticle[0].title,
                 description: this.currentArticle[0].description,
                 subject: this.currentArticle[0].subject,
                 lien_web: this.currentArticle[0].lien_web,
@@ -195,7 +196,7 @@ export default {
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             Authorization = `Bearer ${this.token}`;
-            ArticlesDataServices.update(this.currentArticle[0].id, data, { Authorization }) 
+            ArticlesDataServices.update(this.currentArticle[0].slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.messageUpdate = "Cet article a été modifié avec succès.";
@@ -203,9 +204,9 @@ export default {
                 })
             .catch(error => console.log(error));
         },
-        deleteArticle(id, Authorization) {
+        deleteArticle(slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
-            ArticlesDataServices.delete(this.currentArticle[0].id, { Authorization })
+            ArticlesDataServices.delete(this.currentArticle[0].slug, { Authorization })
                 .then(response => {
                     console.log(response.data);
                     this.$router.push({ path: "/articles" });
@@ -225,7 +226,7 @@ export default {
         }
     },    
     beforeMount() {
-        this.getOneArticle(this.$route.params.id);
+        this.getOneArticle(this.$route.params.slug);
         this.getAllComments();
         this.askForUpdate = false;
         this.validUser = false;
