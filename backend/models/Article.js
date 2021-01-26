@@ -11,6 +11,7 @@ const Article = function(article) {
     this.image = article.image;
     this.user_id = article.user_id;
     this.date_post = new Date();
+    this.deleted = article.deleted
 };
 
 //Exportation du modèle de données

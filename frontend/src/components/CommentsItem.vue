@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card text-center">
+        <div v-if="this.$route.name == 'one-comment-details'" class="card text-center">
             <div class="card-header card__header">
                 <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
@@ -8,8 +8,22 @@
                 <p class="card-text card__text ">{{ content }}</p>
             </div>
         </div>
+        
+        <div v-else class="card text-center">   
+            <div class="card-header card__header">
+                <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text card__text ">{{ content }}</p>
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-secondary" :href="slug + '/comments/' + id">Détails</a> 
+            </div>
+        </div> 
     </div>
 </template>
+
+
 
 
 <script>
@@ -18,6 +32,10 @@ export default {
 	name: "CommentsItem",
 	props: {
         id: {
+            type: Number,
+            required: true
+        },
+        user_id: {
             type: Number,
             required: true
         },
@@ -30,6 +48,10 @@ export default {
 			required: true
 		},
 		date_post: {
+			type: String,
+			required: true
+		},
+        slug: {
 			type: String,
 			required: true
 		}

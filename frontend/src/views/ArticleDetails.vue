@@ -22,9 +22,11 @@
                                 <li v-for="comment in comments" :key="comment.id">
                                     <CommentsItem
                                         :id="comment.id"
+                                        :user_id="comment.user_id"
                                         :content="comment.content"
                                         :username="comment.username"
-                                        :date_post="comment.date_post" />
+                                        :date_post="comment.date_post"
+                                        :slug="currentArticle[0].slug" />
                                 </li>
                             </ul>                        
                         </div>
@@ -165,6 +167,9 @@ export default {
             ArticlesDataServices.getOne(slug, { Authorization }) 
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
+                    console.log(this.currentArticle[0].id);
+                    localStorage.setItem("articleId", this.currentArticle[0].id);
+                    localStorage.setItem("articleSlug", this.currentArticle[0].slug);
                         if (this.currentArticle[0].user_id !== this.userId) {
                             this.validUser = false;  
                         } else if (this.isAdmin == 1) {
@@ -217,17 +222,17 @@ export default {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });
         },
-        getAllComments() {
-            CommentsDataServices.getAll({ Authorization: `Bearer ${this.token}`})
+        getAllComments(slug) {
+            CommentsDataServices.getAll(slug, { Authorization: `Bearer ${this.token}`})
                 .then(response => {
-                this.comments = JSON.parse(JSON.stringify(response.data.data));
+                    this.comments = JSON.parse(JSON.stringify(response.data.data));
                 })
                 .catch(error => console.log(error));
         }
     },    
     beforeMount() {
         this.getOneArticle(this.$route.params.slug);
-        this.getAllComments();
+        this.getAllComments(this.$route.params.slug);
         this.askForUpdate = false;
         this.validUser = false;
     }

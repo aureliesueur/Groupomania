@@ -1,21 +1,21 @@
 import http from "../http-common";
 
 class CommentsDataServices {
-    getAll(id, headers) {
-        return http.get(`/articles/${id}/comments`, { headers });
+    getAll(slug, headers) {
+        return http.get(`/articles/${slug}/comments`, { headers });
     }
-    /*getOne(id, headers) {
-        return http.get(`/articles/${id}`, { headers });
-    }*/
-    create(id, data, headers) {
-        return http.post(`/articles/3/comments`, data, { headers });//${id}
+    getOne(id, slug, headers) {
+        return http.get(`/articles/${slug}/comments/${id}`, { headers });
     }
-    /*update(id, data, headers) {
-        return http.put(`/articles/${id}`, data, { headers });
+    create(slug, data, headers) {
+        return http.post(`/articles/${slug}/comments`, data, { headers });
     }
-    delete(id, headers) {
-        return http.delete(`/articles/${id}`, { headers });
-    }*/
+    update(id, slug, data, headers) {
+        return http.put(`/articles/${slug}/comments/${id}`, data, { headers });
+    }
+    delete(id, slug, headers) {
+        return http.delete(`/articles/${slug}/comments/${id}`, { headers });
+    }
 }
 
 

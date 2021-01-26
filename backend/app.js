@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 //app.use("/images", express.static(path.join(__dirname, "images")));
 app.use("/articles", articleRoutes);
 app.use("/auth", userRoutes);
-app.use("/articles/:id/comments", commentRoutes);
+app.use('/articles/:slug/comments', commentRoutes);
 
 //Exportation de l'appli vers server.js 
 module.exports = app;

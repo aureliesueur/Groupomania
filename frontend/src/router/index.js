@@ -5,6 +5,7 @@ import Gifs from '../views/Gifs.vue'
 import Articles from '../views/Articles.vue'
 import CommentForm from '../views/CommentForm.vue'
 import ArticleDetails from '../views/ArticleDetails.vue'
+import CommentDetails from '../views/CommentDetails.vue'
 import PostArticle from '../views/PostArticle.vue'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
@@ -48,15 +49,15 @@ const routes = [
         component: ArticleDetails
     },
     {
-        path: '/articles/:id/comments',
+        path: '/articles/:slug/comments',
         name: 'comments-list',
         component: CommentForm
-    }/*,
+    },
     {
-        path: '/api/articles/:id/comments/:id',
+        path: '/articles/:slug/comments/:id',
         name: 'one-comment-details',
         component: CommentDetails
-    }*/
+    }
     
 ]
 

@@ -7,7 +7,6 @@ module.exports = (req, res, next) => {
     try {
         //Récupération du token contenu dans les headers
         const token = req.headers.authorization.split(" ")[1];
-        console.log(token);
         //Décodage du token
         const decodedToken = jwt.verify(token, "DD49869BBAD47");
         //Extraction de l'id et de l'isAdmin contenus dans le token

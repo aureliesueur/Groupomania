@@ -13,7 +13,7 @@
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <a href="#commentsList">Voir tous les commentaires</a>
-                <p @click="showCommentForm">Poster un commentaire</p>
+                <a :href="'/articles/' + slug + '/comments'">Poster un commentaire</a>
             </div>
             <div class="card-body card__body ">
                 <h3 class="card-title card__title">{{ title }}</h3>
@@ -66,19 +66,13 @@ export default {
 		date_post: {
 			type: String,
 			required: true
-		},
-        details: {
-            type: Function
-        }
+		}
 	},
     data() {
         return {
         }
     },
     methods: {
-        showCommentForm() {//Récupérer l'id dans les params de l'url !!!
-            this.$router.push({ path: "/articles/3/comments" });
-        },
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });

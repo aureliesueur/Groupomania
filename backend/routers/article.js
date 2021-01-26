@@ -2,7 +2,7 @@
 
 const express = require("express");
 //Création d'un router Express qui contient toutes les routes des requêtes "Articles"
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 //Importation du middleware d'authentification pour protéger les routes et donner les autorisations aux users selon leur rôle et leur id
 const auth = require("../middleware/auth");
 //Importation du controller
