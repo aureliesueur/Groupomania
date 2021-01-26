@@ -6,14 +6,14 @@
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + slug">En savoir plus</a>
+            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + slug"><font-awesome-icon :icon="['fas', 'info-circle']" /> En savoir plus</a>
         </div>
         
         
         <div v-else class="card text-center">
             <div class="card-header card__header">
-                <a href="#commentsList">Voir tous les commentaires</a>
-                <a :href="'/articles/' + slug + '/comments'">Poster un commentaire</a>
+                <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
+                <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
             </div>
             <div class="card-body card__body ">
                 <h3 class="card-title card__title">{{ title }}</h3>

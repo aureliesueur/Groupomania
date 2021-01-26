@@ -1,15 +1,17 @@
 <!--PAGE D'ACCUEIL PRESENTANT LES ACCES AUX DEUX PLATEFORMES-->
 <template>
-    <div class="container jumbotron text-center">
-        <section v-if="isLoggedIn" class="row text-center intro">
+    <div class="container jumbotron text-center intro">
+        <section v-if="isLoggedIn" class="row text-center">
             <h1>Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
             <div class="card col-12 col-sm-5 intro__articles">
-                <h2>Partagez vos articles préférés</h2>
-                <router-link to="/articles"><button class="btn btn-primary">Accès au Forum Groupomania Articles</button></router-link>
+                <h2 class="card__title">Partagez vos articles préférés</h2>
+                <span class="card__icon"><i class="fas fa-newspaper"></i></span>
+                <router-link to="/articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
             </div>
             <div class="card col-12 col-sm-5 intro__gifs">
-                <h2>Partagez vos vidéos préférées</h2>
-                <router-link to="/gifs"><button class="btn btn-primary">Accès au Forum Groupomania Vidéos</button></router-link>
+                <h2 class="card__title">Partagez vos vidéos préférées</h2>
+                <span class="card__icon"><i class="fas fa-file-video"></i></span>
+                <router-link to="/gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
             </div>
             <router-view />
         </section>
@@ -17,12 +19,14 @@
         <section v-else class="row">
             <h1>Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
             <div class="card col-12 col-sm-5 intro__articles">
-                <h2>Partagez vos articles préférés</h2>
-                <button class="btn btn-primary" @click="callToLogin">Accès au Forum Groupomania Articles</button>
+                <h2 class="card__title">Partagez vos articles préférés</h2>
+                <span class="card__icon"><i class="fas fa-newspaper"></i></span>
+                <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Articles</button>
             </div>
             <div class="card col-12 col-sm-5">
-                <h2>Partagez vos vidéos préférées</h2>
-                <button class="btn btn-primary" @click="callToLogin">Accès au Forum Groupomania Vidéos</button>
+                <h2 class="card__title">Partagez vos vidéos préférées</h2>
+                <span class="card__icon"><i class="fas fa-file-video"></i></span>
+                <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Vidéos</button>
             </div>
         </section>
         
@@ -33,16 +37,17 @@
                 <Identification />
             </div>
             <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
                 <div class="info">
                     <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-                    <button v-else class="btn btn-primary auth__btn info__btn" @click="showAccount">Votre compte</button>
+                    <button v-else class="btn btn-primary auth__btn info__btn" @click="showAccount"><font-awesome-icon :icon="['fas', 'user']" /> Votre compte</button>
                 </div>
             </div>
             
         </div>
         
         <div v-if="accountAsked" class="account">
+            <span class="card__icon"><font-awesome-icon :icon="['fas', 'user']" /></span>
             <h3>Détails de votre compte</h3>
             <p>Pseudo : {{ username }}</p>
             <p>Email: {{ email }}</p>
@@ -154,6 +159,22 @@ export default {
 .intro {
     &__articles {
         margin-right: 20px!important;
+    }
+}
+  
+.card {
+    justify-content: center;
+    padding: 10px;
+    &__title {
+        margin-bottom: 0!important;
+    }
+    &__icon {
+        font-size: 2em;
+        color: #000;
+    }
+    &__btn {
+        margin-top: 0;
+        margin-bottom: 10px!important;
     }
 }
     

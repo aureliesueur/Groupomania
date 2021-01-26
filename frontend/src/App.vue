@@ -61,6 +61,10 @@ button, .card__btnDetails {
     color: black!important;
 }
 
+.auth__btn, .deconnect__btn {
+    font-size: 0.9em!important;
+}
+    
 h1 {
     font-size: 2em!important;
     margin-bottom: 30px!important;

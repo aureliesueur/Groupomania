@@ -21,7 +21,7 @@
                         </div>
                         
                         <div>
-                            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                            <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                             <router-view />
                         </div>
                         
@@ -59,7 +59,7 @@
                 <Identification />
             </div>
             <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
             </div>
             <div id="account">
                 <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>

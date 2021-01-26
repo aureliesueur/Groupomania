@@ -9,6 +9,23 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
+import { faFileVideo } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+import { faEye } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faUser, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye)
+
+//Configuration de Vee-Validate
 extend("required", {
     ...required,
     message: "Ce champ est obligatoire"
@@ -29,10 +46,12 @@ extend('minmax', {
 Vue.use(BootstrapVue)
 Vue.use(Vuex)
 Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
 Vue.config.productionTip = false
 
+//Configuration du store de Vuex
 const store = new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
