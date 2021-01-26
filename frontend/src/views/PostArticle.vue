@@ -1,8 +1,8 @@
 <!--PAGE D'AJOUT D'UN NOUVEL ARTICLE-->
 <template>
-    <div class="jumbotron">
-        <h1>Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
-        <div v-if="!submitted" class="container text-center form">
+    <div class="jumbotron"> 
+        <h1 v-if="!submitted">Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
+        <div v-if="!submitted" class="container text-center form form">
             <h2>Pour poster un nouvel article, merci de remplir les champs suivants :</h2>
             <div class="row">
                 <div class="form__box col-12 col-md-9">
@@ -136,11 +136,8 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
-.form__box {
-    margin: auto;
-}
 #description {
     height: 150px!important;
 }

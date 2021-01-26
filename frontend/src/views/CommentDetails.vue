@@ -1,22 +1,28 @@
 <template>
    <div>
         <div class="jumbotron container">
-            <h1>Vous n'êtes pas satisfait de votre commentaire ?</h1>
+            <h1>{{ message }}</h1>
             <div class="row">
                 <div class="container col-12 col-md-10">
                     <div class='row'>
-                        <div class="col-12 col-md-9">
+                        <div v-if="!deleted" div class="col-12 col-md-9">
                             <CommentsItem
                                 :id=currentComment.id
                                 :content=currentComment.content
                                 :username=currentComment.username
+                                :user_id="currentComment.user_id"
                                 :date_post=currentComment.date_post
                                 :slug=currentComment.slug
                                  />
                         </div>
-                        <div class="card-footer">
-                            <button v-if="validUser" @click="showUpdate" type= "button" class="btn btn-primary">Modifier</button>
-                            <button v-if="validUser" @click="suppressComment" type= "button" class="btn btn-primary">Supprimer</button>
+                        <div v-if="validUser && !deleted" class="card-footer">
+                            <button @click="showUpdate" type= "button" class="btn btn-primary">Modifier</button>
+                            <button @click="suppressComment" type= "button" class="btn btn-primary">Supprimer</button>
+                        </div>
+                        
+                        <div>
+                            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                            <router-view />
                         </div>
                         
                         <div v-if="updateIsAsked" class="form container">
@@ -44,6 +50,21 @@
             </div>
         </div>
         
+        <div v-if="!isLoggedIn">
+            <Identification />
+        </div>
+        
+        <div> 
+            <div v-if="!isLoggedIn">
+                <Identification />
+            </div>
+            <div v-else class="deconnect">
+                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout">Déconnexion</button>
+            </div>
+            <div id="account">
+                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
+            </div>
+        </div>
     
         <div>
             <Footer />
@@ -53,23 +74,35 @@
 
 <script>
 import Footer from "../components/Footer"
+import Identification from "../components/Identification"
 import CommentsItem from "../components/CommentsItem"
 import CommentsDataServices from "../services/CommentsDataServices"
-import { mapState } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
     
 export default {
     name: "CommentDetails",
     components: {
-        Footer, CommentsItem
+        Footer, CommentsItem, Identification
     },
     data () {
         return { 
-            currentComment: [],
+            message: "",
+            deleted: null,
+            currentComment: {
+                id: 0,
+                content: "",
+                username: "",
+                user_id: 0,
+                date_post: "",
+                slug:""
+            },
             validUser: false,
-            updateIsAsked: false
+            updateIsAsked: false,
         }
     },
     computed: {
+      ...mapGetters(['isLoggedIn']),
+        ...mapGetters(['isUserAdmin']),
         ...mapState({ token: "token"}),
         ...mapState({ userId: "userId"}),
         ...mapState({ isAdmin: "isAdmin"})
@@ -80,13 +113,11 @@ export default {
             CommentsDataServices.getOne(this.$route.params.id, this.$route.params.slug, { Authorization }) 
                 .then(response => {
                     this.currentComment = JSON.parse(JSON.stringify(response.data.data[0]));
-                    if (this.currentComment.user_id !== this.userId) {
-                            this.validUser = false;  
-                    } else if (this.isAdmin == 1) {
-                        this.validUser = true;
+                    if (this.currentComment.user_id == this.userId || this.isAdmin === 1) {
+                        this.validUser = true;  
                     } else {
-                        this.validUser = true;
-                    }
+                        this.validUser = false;
+                    }               
                 })
                 .catch(error => console.log(error));
         },
@@ -105,7 +136,8 @@ export default {
                 .then(response => {
                     console.log(response.data);
                     this.updateAsked = false;
-                    this.$router.push({ path: '/articles/' + this.slug + '/#comments'});
+                    this.message = "Votre commentaire a bien été modifié";
+                    this.updateIsAsked = false;
                 })
             .catch(error => console.log(error));
         },
@@ -114,10 +146,15 @@ export default {
             CommentsDataServices.delete(this.$route.params.id, this.$route.params.slug, { Authorization })
                 .then(response => {
                     console.log(response.data);
-                    this.$router.push({ path: '/articles/' + this.slug + '/#comments'});
+                    this.message = "Votre commentaire a bien été supprimé";
+                    this.deleted = true;
                 })
                 .catch(error => console.log(error));
         },
+        logout() {
+            this.$store.commit("logout");
+            this.$router.push({ path: "/" });
+        }
     },    
     beforeMount() {
         this.getOneComment(this.$route.params.id, this.$route.params.slug);
