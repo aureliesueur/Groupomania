@@ -25,16 +25,22 @@
             <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
             <router-view />
         </div>
+        
+        <Footer />
     </div>
 </template>
 
 <script>
-    
+ 
+import Footer from "../components/Footer"
 import CommentsDataServices from "../services/CommentsDataServices"
 import { mapState } from 'vuex'
     
 export default {
     name: 'CommentForm',
+    components: {
+        Footer
+    },
     data () {
         return {
             comment: {

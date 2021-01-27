@@ -15,7 +15,7 @@
                 </ul>
             </div>
         </nav>
-        <router-view />
+        <router-view />    
     </div>
 </template>
 
@@ -30,23 +30,6 @@
   text-align: center;
   color: #2c3e50;
 }
-
-.deconnect {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-}
-    
-.info {
-    position: absolute;
-    right: 20px;
-    top: 60px;
-    color: #FFF;
-    margin-right: -20px;
-    &__btn {
-        width: 140px;
-    }
-} 
     
 button, .card__btnDetails {
     background: #324392!important;
@@ -60,13 +43,10 @@ button, .card__btnDetails {
     border: 2px solid #cc2810!important;
     color: black!important;
 }
-
-.auth__btn, .deconnect__btn {
-    font-size: 0.9em!important;
-}
     
 h1 {
     font-size: 2em!important;
+    margin-top: 150px!important;
     margin-bottom: 30px!important;
 }
     
@@ -76,5 +56,11 @@ h2 {
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px!important;
+}
+    
+.navbar {
+    position: fixed!important;
+    width: 100%;
+    z-index: 2;
 }
 </style>

@@ -16,8 +16,8 @@
                                 :slug="currentComment.slug" />
                         </div>
                         <div v-if="validUser && !deleted" class="card-footer">
-                            <button @click="showUpdate" type= "button" class="btn btn-primary">Modifier</button>
-                            <button @click="suppressComment" type= "button" class="btn btn-primary">Supprimer</button>
+                            <button @click="showUpdate" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'edit']" /></button>
+                            <button @click="suppressComment" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'trash-alt']" /></button>
                         </div>
                         
                         <div>
@@ -50,25 +50,12 @@
             </div>
         </div>
         
-        <div v-if="!isLoggedIn">
-            <Identification />
-        </div>
-        
-        <div> 
-            <div v-if="!isLoggedIn">
-                <Identification />
-            </div>
-            <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
-            </div>
-            <div id="account">
-                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-            </div>
-        </div>
+        <Identification
+            :logout="logout"
+            :isUserAdmin="isUserAdmin"
+            :isLoggedIn="isLoggedIn" />
     
-        <div>
-            <Footer />
-        </div>
+        <Footer />
     </div>
 </template>
 

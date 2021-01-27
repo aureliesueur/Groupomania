@@ -17,7 +17,7 @@
                 <p class="card-text card__text ">{{ content }}</p>
             </div>
             <div class="card-footer">
-                <a class="btn btn-secondary" :href="slug + '/comments/' + cryptoslug">Détails</a> 
+                <a class="btn btn-secondary" :href="slug + '/comments/' + cryptoslug"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a> 
             </div>
         </div> 
     </div>

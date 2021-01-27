@@ -8,19 +8,12 @@
 
         <CallToLogin v-if="!isLoggedIn" />
         
-        <div> 
-            <div v-if="!isLoggedIn">
-                <Identification />
-            </div>
-            <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
-            </div>
-            <p v-if="isUserAdmin" id="adminConnect">ADMINISTRATEUR CONNECTE</p>
-        </div>
+        <Identification
+            :logout="logout"
+            :isUserAdmin="isUserAdmin"
+            :isLoggedIn="isLoggedIn" />
 
-        <div>
-            <Footer />
-        </div>
+        <Footer />
     </div>
 </template>
 

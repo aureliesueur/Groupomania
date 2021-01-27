@@ -27,7 +27,7 @@
                            class="form-control"
                            placeholder="Bidibul75">
                 </div>
-                <button class="btn btn-success" type="submit" @click="loginSubmit">Connectez-vous</button>
+                <button class="btn btn-success auth__btn" type="submit" @click="loginSubmit">Connectez-vous</button>
             </form>
         </div>
         <div v-else>
@@ -36,9 +36,7 @@
             <router-link to="/gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
         </div>
 
-        <div>
-            <Footer />
-        </div>
+        <Footer />
     </div>
 </template>
 

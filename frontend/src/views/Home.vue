@@ -1,72 +1,72 @@
 <!--PAGE D'ACCUEIL PRESENTANT LES ACCES AUX DEUX PLATEFORMES-->
 <template>
-    <div class="container jumbotron text-center intro">
-        <section v-if="isLoggedIn" class="row text-center">
-            <h1>Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
-            <div class="card col-12 col-sm-5 intro__articles">
-                <h2 class="card__title">Partagez vos articles préférés</h2>
-                <span class="card__icon"><i class="fas fa-newspaper"></i></span>
-                <router-link to="/articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
-            </div>
-            <div class="card col-12 col-sm-5 intro__gifs">
-                <h2 class="card__title">Partagez vos vidéos préférées</h2>
-                <span class="card__icon"><i class="fas fa-file-video"></i></span>
-                <router-link to="/gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
-            </div>
-            <router-view />
-        </section>
-        
-        <section v-else class="row">
-            <h1>Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
-            <div class="card col-12 col-sm-5 intro__articles">
-                <h2 class="card__title">Partagez vos articles préférés</h2>
-                <span class="card__icon"><i class="fas fa-newspaper"></i></span>
-                <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Articles</button>
-            </div>
-            <div class="card col-12 col-sm-5">
-                <h2 class="card__title">Partagez vos vidéos préférées</h2>
-                <span class="card__icon"><i class="fas fa-file-video"></i></span>
-                <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Vidéos</button>
-            </div>
-        </section>
-        
-        <CallToLogin v-if="loginCalled" />
-        
-        <div> 
-            <div v-if="!isLoggedIn">
-                <Identification />
-            </div>
-            <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
+    <div>
+        <div>
+            <section v-if="isLoggedIn" class="container jumbotron text-center intro">
+                <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
+                <div class='row intro__box text-center'>
+                    <div class="card col-12 col-sm-5 intro__articles">
+                        <h2 class="card__title">Partagez vos articles préférés</h2>
+                        <span class="card__icon"><i class="fas fa-newspaper"></i></span>
+                        <router-link to="/articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
+                    </div>
+                    <div class="card col-12 col-sm-5 intro__gifs">
+                        <h2 class="card__title">Partagez vos vidéos préférées</h2>
+                        <span class="card__icon"><i class="fas fa-file-video"></i></span>
+                        <router-link to="/gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
+                    </div>
+                    <router-view />
+                </div>
+            </section>
+
+            <section v-else class="container jumbotron text-center intro">
+                <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
+                <div class='row intro__box text-center'>
+                    <div class="card col-12 col-sm-5 intro__articles">
+                        <h2 class="card__title">Partagez vos articles préférés</h2>
+                        <span class="card__icon"><i class="fas fa-newspaper"></i></span>
+                        <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Articles</button>
+                    </div>
+                    <div class="card col-12 col-sm-5">
+                        <h2 class="card__title">Partagez vos vidéos préférées</h2>
+                        <span class="card__icon"><i class="fas fa-file-video"></i></span>
+                        <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Vidéos</button>
+                    </div>
+                    </div>
+            </section>
+
+            <CallToLogin v-if="loginCalled" />
+
+            <div> 
+                <Identification
+                :logout="logout"
+                :isUserAdmin="isUserAdmin"
+                :isLoggedIn="isLoggedIn"
+                 />
                 <div class="info">
-                    <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-                    <button v-else class="btn btn-primary auth__btn info__btn" @click="showAccount"><font-awesome-icon :icon="['fas', 'user']" /> Votre compte</button>
+                    <button v-if="isLoggedIn && !isUserAdmin" class="btn btn-primary auth__btn info__btn" @click="showAccount"><font-awesome-icon :icon="['fas', 'user']" /> Votre compte</button>
                 </div>
             </div>
-            
-        </div>
-        
-        <div v-if="accountAsked" class="account">
-            <span class="card__icon"><font-awesome-icon :icon="['fas', 'user']" /></span>
-            <h3>Détails de votre compte</h3>
-            <p>Pseudo : {{ username }}</p>
-            <p>Email: {{ email }}</p>
-            <p>Prénom: {{ first_name }}</p>
-            <p>Nom: {{  last_name }}</p>
-            <button class="btn account__btn" @click="confirmDelete" >Supprimer votre compte</button>
-            <button class="btn account__btn" @click="hideAccount">Retour</button>
-        </div>
-        
-        <div v-if="confirmation" class="confirm">
-            <p>Etes-vous sûr de vouloir supprimer votre compte ? Toute suppression est définitive.</p>
-            <button type= "button" class="btn confirm__btn" @click="suppressUser">Supprimer</button>
-            <button type= "button" class="btn confirm__btn" @click="refreshPage">Annuler</button>
-        </div>
-        
-        <div>
-            <Footer />
-        </div>
-    </div> 
+
+            <div v-if="accountAsked" class="account">
+                <span class="card__icon"><font-awesome-icon :icon="['fas', 'user']" /></span>
+                <h3>Détails de votre compte</h3>
+                <p>Pseudo : {{ username }}</p>
+                <p>Email: {{ email }}</p>
+                <p>Prénom: {{ first_name }}</p>
+                <p>Nom: {{  last_name }}</p>
+                <button class="btn account__btn" @click="confirmDelete" >Supprimer votre compte</button>
+                <button class="btn account__btn" @click="hideAccount">Retour</button>
+            </div>
+
+            <div v-if="confirmation" class="confirm">
+                <p>Etes-vous sûr de vouloir supprimer votre compte ? Toute suppression est définitive.</p>
+                <button type= "button" class="btn confirm__btn" @click="suppressUser">Supprimer</button>
+                <button type= "button" class="btn confirm__btn" @click="refreshPage">Annuler</button>
+            </div>
+        </div> 
+        <Footer />
+    </div>
 </template>
 
 
@@ -157,6 +157,16 @@ export default {
 <style lang="scss">
  
 .intro {
+    margin-bottom: 0!important;
+    &__box {
+        margin-top: 80px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    &__title {
+        margin-top: 150px;
+    }
     &__articles {
         margin-right: 20px!important;
     }
@@ -177,6 +187,20 @@ export default {
         margin-bottom: 10px!important;
     }
 }
+
+.info {
+    position: fixed;
+    right: 20px;
+    top: 70px;
+    z-index: 4;
+    color: #FFF;
+    margin-right: -20px;
+    width: 200px;
+    &__btn {
+        font-size: 0.9em!important;
+    }
+} 
+ 
     
 .account {
     background: #324392;
@@ -187,10 +211,12 @@ export default {
     z-index: 4;
     color: #FFF;
     position: absolute;
-    top: 10%;
-    right: 10%;
+    right: 20px;
+    top: 20px;
+    width: 400px;
     &__btn {
-        width: 70%;
+        font-size: 0.9em!important;
+        margin-right: 10px;
     }
 }
     

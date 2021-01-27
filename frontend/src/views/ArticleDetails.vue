@@ -18,6 +18,7 @@
                                 :username="currentArticle[0].username"
                                 :date_post="currentArticle[0].date_post" />
                             <ul id="commentsList">
+                                <h3>Derniers commentaires postés</h3>
                                 <li v-for="comment in comments" :key="comment.id">
                                     <CommentsItem
                                         :id="comment.id"
@@ -34,19 +35,19 @@
                 </div>
                 
                 <div v-if="validUser || isAdmin" class="col-12 col-md-2">
-                    <button type= "button" class="btn btn-primary" @click="showUpdate">Modifier</button><br/>
+                    <button type= "button" class="btn btn-primary" @click="showUpdate"><font-awesome-icon :icon="['fas', 'edit']" /> Modifier</button><br/>
                     <p>{{ messageUpdate }}</p>
-                    <button type= "button" class="btn btn-primary btn-suppress" @click="confirmDelete">Supprimer</button>
+                    <button type= "button" class="btn btn-primary btn-suppress" @click="confirmDelete"><font-awesome-icon :icon="['fas', 'trash-alt']" /> Supprimer</button>
                     <div v-if="confirmation">
                         <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
                         <button type= "button" class="btn btn-primary" @click="refreshPage">Annuler</button>
                     </div>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'arrow-left']" />Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'arrow-left']" /> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
                 <div v-else>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'arrow-left']" /> Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><font-awesome-icon :icon="['far', 'arrow-left']" /> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
             </div>
@@ -107,25 +108,12 @@
             </div>
         </div>
         
-        <div v-if="!isLoggedIn">
-            <Identification />
-        </div>
-        
-        <div> 
-            <div v-if="!isLoggedIn">
-                <Identification />
-            </div>
-            <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
-            </div>
-            <div id="account">
-                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-            </div>
-        </div>
+        <Identification
+            :logout="logout"
+            :isUserAdmin="isUserAdmin"
+            :isLoggedIn="isLoggedIn" />
 
-        <div>
-            <Footer />
-        </div>
+        <Footer />
     </div>
 </template>
 

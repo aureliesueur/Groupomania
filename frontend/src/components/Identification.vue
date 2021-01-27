@@ -1,17 +1,39 @@
 <!--Component d'identification présent sur toutes les pages-->
 <template>
     <div class="auth">
-        <router-link to="/auth/signup" class="auth__signup"><button  type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'user']" /> Inscription</button></router-link><br/>
-        <router-link to="/auth/login" class="auth__login"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Connexion</button></router-link>
-        <router-view />
+        <div v-if="!isLoggedIn">
+            <router-link to="/auth/signup" class="auth__signup"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'user-plus']" /> Inscription</button></router-link><br/>
+            <router-link to="/auth/login" class="auth__login"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Connexion</button></router-link>
+            <router-view />
+        </div>
+        <div v-else class="deconnect">
+            <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
+            <div class="admin">
+                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
-    
+
 export default {
-  name: 'Identification',
-  props: {
+    name: 'Identification',
+    props: {
+        logout: {
+            type: Function,
+            required: true
+        },
+        isUserAdmin: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        isLoggedIn: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
     }
 }
 </script>
@@ -20,9 +42,34 @@ export default {
 <style scoped lang="scss">
     
 .auth {
-    position: absolute;
-    right: 30px;
+    position: fixed;
+    right: 0px;
     top: 10px;
-    font-size: 0.9em!important;
-}    
+    z-index: 4;
+    width: 200px;
+    &__btn {
+        font-size: 0.9em!important;
+    }
+} 
+    
+.deconnect {
+    position: fixed;
+    right: 0px;
+    top: 20px;
+    z-index: 4;
+    width: 200px;
+    &__btn {
+        font-size: 0.9em!important;
+    }
+}
+    
+.admin {
+    position: fixed;
+    right: 10px;
+    top: 70px;
+    z-index: 4;
+    color: #FFF;    
+}
+    
+    
 </style>

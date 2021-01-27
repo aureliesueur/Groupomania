@@ -1,8 +1,8 @@
 <template>
     <div class="call">
         <h2>Pour profiter des fonctionnalités de cette plate-forme, merci de vous identifier ou de créer un compte !</h2>
-        <router-link to="/auth/signup" class="call__signup"><button  type= "button" class="btn btn-primary">Inscription</button></router-link>
-        <router-link to="/auth/login"><button type= "button" class="btn btn-primary">Connexion</button></router-link>
+        <router-link to="/auth/signup" class="call__signup"><button  type= "button" class="btn btn-primary auth__btn">Inscription</button></router-link>
+        <router-link to="/auth/login"><button type= "button" class="btn btn-primary auth__btn">Connexion</button></router-link>
         <router-view />
     </div>
 </template>

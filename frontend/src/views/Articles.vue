@@ -4,7 +4,7 @@
         <h1>Plateforme de partage d'articles</h1>
 
         <div>
-            <h2>Liste de tous les articles postés</h2>
+            <h2>Derniers articles postés</h2>
             <div class="container">
                 <div class='row'>
                     <ul class="col-12 col-md-10">
@@ -24,7 +24,7 @@
                     </ul>
                     
                     <div class="col-12 col-md-2">
-                        <router-link to="/articles/add"><button  type= "button" class="btn btn-primary">Poster un nouvel article</button></router-link>
+                        <router-link to="/articles/add"><button  type= "button" class="btn btn-primary btn-add"><font-awesome-icon :icon="['fas', 'plus-square']" /> Poster un nouvel article</button></router-link>
                     </div> 
                 </div>
             </div>
@@ -32,22 +32,16 @@
         </div>
         
         <CallToLogin v-if="!isLoggedIn" />
+         
+        <Identification
+            :logout="logout"
+            :isUserAdmin="isUserAdmin"
+            :isLoggedIn="isLoggedIn"
+              />
         
-        <div> 
-            <div v-if="!isLoggedIn">
-                <Identification />
-            </div>
-            <div v-else class="deconnect">
-                <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
-            </div>
-            <div class="info">
-                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
-            </div>
-        </div>
         
-        <div>
-            <Footer />
-        </div>
+        <Footer />
+        
     </div>
 </template>
 
@@ -69,7 +63,7 @@ export default {
         return {
             articles:[],
             activeArticle: null,
-            message: "Il n'y a aucun article posté sur la plateforme à ce jour.",
+            message: "Il n'y a aucun article posté sur la plateforme à ce jour."
         }
     },
    computed: {
@@ -108,6 +102,11 @@ a {
     height: 50px;
     margin-top: 40px!important;
 }
+    
+.btn-add {
+    margin-left: -200px;
+}
+
     
 </style>
 

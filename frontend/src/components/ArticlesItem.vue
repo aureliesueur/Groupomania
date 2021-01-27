@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="this.$route.name == 'articles-list'" class="card text-center">
-            <div class="card-body">
+            <div class="card-body card__body">
                 <h3 class="card-title card__title">{{ title }}</h3>
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
@@ -107,12 +107,17 @@ export default {
             }
         }
     }
+    &__btnDetails {
+        margin-top: 0px!important;
+    }
     &__body {
         margin: auto!important;
+        padding-bottom: 0px!important;
         width: 80%!important;
     }
     &__title {
         color: #cc2810;
+        margin-bottom: 10px!important;
     }
     &__subtitle {
         font-style: italic;

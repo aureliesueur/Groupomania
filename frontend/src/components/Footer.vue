@@ -51,12 +51,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+    
 .footer {
     background: #222;
     color: #aaa;
     padding: 20px 20px 20px 40px;
-    margin-top: 60px;
     & h3 {
         color: #c0190e;
         font-size: 1.2em;
@@ -75,7 +74,6 @@ export default {
 }
 
 .social {
-    //overflow: hidden;
     margin: 20px 0 10px;
     display: flex;
     flex-direction: row;

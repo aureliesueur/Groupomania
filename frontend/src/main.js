@@ -13,6 +13,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
@@ -22,8 +23,9 @@ import { faFileVideo } from '@fortawesome/free-solid-svg-icons'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye)
+library.add(faUser, faUserPlus, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye, faPlusSquare)
 
 //Configuration de Vee-Validate
 extend("required", {

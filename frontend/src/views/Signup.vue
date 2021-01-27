@@ -83,7 +83,7 @@
                         </ValidationProvider>
                     </div>
                     
-                    <button class="btn btn-success" @click="showErrors">Créer votre compte</button>
+                    <button class="btn btn-success auth__btn" @click="showErrors">Créer votre compte</button>
                     <p>{{ message }}</p>
                 </div>  
             </form>
@@ -93,9 +93,7 @@
             <h3>Votre compte a bien été créé, nous sommes ravis de vous compter parmi nous !</h3>
         </div>
            
-        <div>
-            <Footer />
-        </div>
+        <Footer />
     </div>
 </template>
 
