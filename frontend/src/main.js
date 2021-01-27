@@ -24,8 +24,11 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsDown } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faUser, faUserPlus, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye, faPlusSquare)
+
+library.add(faUser, faUserPlus, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye, faPlusSquare, faThumbsUp, faThumbsDown)
 
 //Configuration de Vee-Validate
 extend("required", {

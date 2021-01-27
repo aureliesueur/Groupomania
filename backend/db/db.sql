@@ -8,6 +8,7 @@ SET NAMES utf8;
 /*Reset rapide en cas d'erreur*/
 DROP TABLE IF EXISTS Users;
 DROP TABLE IF EXISTS Articles;
+DROP TABLE IF EXISTS Thumbs;
 DROP TABLE IF EXISTS Comments;
 
 /*Création de la table des utilisateurs, avec id, pseudo, mail, password, nom et prénom */
@@ -38,6 +39,18 @@ CREATE TABLE Articles (
 ) ENGINE = InnoDB ;
 
 
+/*Création de la table des likes et dislikes donnés par les users sur les articles */
+CREATE TABLE Thumbs (
+    id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    user_id SMALLINT UNSIGNED NOT NULL,
+    article_id SMALLINT UNSIGNED NOT NULL,
+    thumb TINYINT DEFAULT 0,
+    liked TINYINT UNSIGNED DEFAULT 0,
+    disliked TINYINT UNSIGNED DEFAULT 0,
+    PRIMARY KEY (id)
+) ENGINE = InnoDB ;
+
+
 /*Création de la table des commentaires, avec id, titre et description, article et auteur associés */
 CREATE TABLE Comments (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -49,6 +62,7 @@ CREATE TABLE Comments (
     deleted BOOLEAN NOT NULL DEFAULT false,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB ;
+
 
 INSERT INTO Users VALUES 
     (1, 'Bambi', 'aureliesueur@wanadoo.fr', 'bambi01as', 'Aurélie', 'Sueur', 0),
@@ -64,7 +78,14 @@ INSERT INTO Articles VALUES
     (2, 'L''actu', 'L-actu', 'Undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum. Undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum. Undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum. Undique militaribus copiis ad eximendam periculo civitatem amplam et oportunam studio properabat ingenti, quo cognito abscessere latrones nulla re amplius memorabili gesta, dispersique ut solent avia montium petiere celsorum.', 'Medias', 'https://www.actusmediasandco.com/', 4, '2020-12-17', false),
     (3, 'Atout prendre', 'Atout-prendre', 'Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas sit ingeni. Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas sit ingeni. Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas sit ingeni. Ac ne quis a nobis hoc ita dici forte miretur, quod alia quaedam in hoc facultas sit ingeni.', 'Culture', 'https://www.culture.gouv.fr/Aides-demarches/Crise-sanitaire-les-aides-de-l-Etat-aux-professionnels-de-la-culture/Aides-et-soutiens-aux-professionnels-de-la-culture-secteur-par-secteur', 3, '2020-11-23', false),
     (4, 'La vie d''avant', 'La-vie-d-avant', 'Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti. Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti. Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti. Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.', 'Politique', 'https://www.reseaurural.fr/territoire-leader', 3, '2020-11-09', false);
-        
+      
+      
+INSERT INTO Thumbs VALUES 
+    (1, 7, 3, 1, 1, 0),
+    (2, 4, 2, -1, 0, 1),
+    (3, 3, 4, 1, 1, 0),
+    (4, 7, 1, -1, 0, 1);
+
 INSERT INTO Comments VALUES 
     (1, '2cf05', 'Formidable ! Absolument génial, à lire !!', 2, 1, '2021-01-01', false),
     (2, 'ymim2', 'Nul, A EVITER !!', 1, 2, '2021-01-02', false),
@@ -76,6 +97,10 @@ INSERT INTO Comments VALUES
     
     
 ALTER TABLE Articles ADD CONSTRAINT fk_article_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE Thumbs ADD CONSTRAINT fk_thumb_article FOREIGN KEY (article_id) REFERENCES Articles(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE Thumbs ADD CONSTRAINT fk_thumb_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Comments ADD CONSTRAINT fk_comment_article FOREIGN KEY (article_id) REFERENCES Articles(id) ON DELETE CASCADE ON UPDATE CASCADE;
 

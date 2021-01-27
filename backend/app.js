@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const articleRoutes = require("./routers/article");
 const userRoutes = require("./routers/user");
 const commentRoutes = require("./routers/comment");
+const thumbRoutes = require("./routers/thumb");
 
 //Importation pour accéder au path du server
 const path = require("path");
@@ -51,6 +52,7 @@ app.use(bodyParser.json());
 app.use("/articles", articleRoutes);
 app.use("/auth", userRoutes);
 app.use('/articles/:slug/comments', commentRoutes);
+app.use('/articles/:slug/', thumbRoutes);
 
 //Exportation de l'appli vers server.js 
 module.exports = app;

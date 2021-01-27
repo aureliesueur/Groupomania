@@ -24,7 +24,7 @@
                     </ul>
                     
                     <div class="col-12 col-md-2">
-                        <router-link to="/articles/add"><button  type= "button" class="btn btn-primary btn-add"><font-awesome-icon :icon="['fas', 'plus-square']" /> Poster un nouvel article</button></router-link>
+                        <router-link to="/articles/add"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
                     </div> 
                 </div>
             </div>

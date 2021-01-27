@@ -13,6 +13,10 @@
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
+                <div>
+                    <span><i class="far fa-thumbs-up"></i></span>
+                    <span><i class="far fa-thumbs-down"></i></span>
+                </div>
                 <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
             </div>
             <div class="card-body card__body ">
