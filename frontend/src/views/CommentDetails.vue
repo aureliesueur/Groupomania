@@ -7,13 +7,13 @@
                     <div class='row'>
                         <div v-if="!deleted" div class="col-12 col-md-9">
                             <CommentsItem
-                                :id=currentComment.id
-                                :content=currentComment.content
-                                :username=currentComment.username
+                                :id="currentComment.id"
+                                :cryptoslug="currentComment.cryptoslug"
+                                :content="currentComment.content"
+                                :username="currentComment.username"
                                 :user_id="currentComment.user_id"
-                                :date_post=currentComment.date_post
-                                :slug=currentComment.slug
-                                 />
+                                :date_post="currentComment.date_post"
+                                :slug="currentComment.slug" />
                         </div>
                         <div v-if="validUser && !deleted" class="card-footer">
                             <button @click="showUpdate" type= "button" class="btn btn-primary">Modifier</button>
@@ -90,6 +90,7 @@ export default {
             deleted: null,
             currentComment: {
                 id: 0,
+                cryptoslug: "",
                 content: "",
                 username: "",
                 user_id: 0,
@@ -108,9 +109,9 @@ export default {
         ...mapState({ isAdmin: "isAdmin"})
      },
     methods: {
-       getOneComment(id, slug, Authorization) {
+       getOneComment(cryptoslug, slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
-            CommentsDataServices.getOne(this.$route.params.id, this.$route.params.slug, { Authorization }) 
+            CommentsDataServices.getOne(this.$route.params.cryptoslug, this.$route.params.slug, { Authorization }) 
                 .then(response => {
                     this.currentComment = JSON.parse(JSON.stringify(response.data.data[0]));
                     if (this.currentComment.user_id == this.userId || this.isAdmin === 1) {
@@ -124,7 +125,7 @@ export default {
         showUpdate() {
             this.updateIsAsked = true;
         },
-        updateComment(id, slug, data, Authorization) {
+        updateComment(cryptoslug, slug, data, Authorization) {
             data = {
                 content: this.currentComment.content,
                 user_id: this.userId,
@@ -132,7 +133,7 @@ export default {
             };
             console.log(data);
             Authorization = `Bearer ${this.token}`;
-            CommentsDataServices.update(this.$route.params.id, this.$route.params.slug, data, { Authorization }) 
+            CommentsDataServices.update(this.$route.params.cryptoslug, this.$route.params.slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.updateAsked = false;
@@ -141,9 +142,9 @@ export default {
                 })
             .catch(error => console.log(error));
         },
-        suppressComment(id, slug, Authorization) {
+        suppressComment(cryptoslug, slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
-            CommentsDataServices.delete(this.$route.params.id, this.$route.params.slug, { Authorization })
+            CommentsDataServices.delete(this.$route.params.cryptoslug, this.$route.params.slug, { Authorization })
                 .then(response => {
                     console.log(response.data);
                     this.message = "Votre commentaire a bien été supprimé";
@@ -157,7 +158,7 @@ export default {
         }
     },    
     beforeMount() {
-        this.getOneComment(this.$route.params.id, this.$route.params.slug);
+        this.getOneComment(this.$route.params.cryptoslug, this.$route.params.slug);
     }
 }
 </script>

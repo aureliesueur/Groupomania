@@ -41,7 +41,8 @@ CREATE TABLE Articles (
 /*Création de la table des commentaires, avec id, titre et description, article et auteur associés */
 CREATE TABLE Comments (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    content VARCHAR(200) NOT NULL,
+    cryptoslug VARCHAR(50) UNIQUE NOT NULL,
+    content VARCHAR(200) UNIQUE NOT NULL,
     user_id SMALLINT UNSIGNED NOT NULL,
     article_id SMALLINT UNSIGNED NOT NULL,
     date_post DATE NOT NULL,
@@ -65,12 +66,13 @@ INSERT INTO Articles VALUES
     (4, 'La vie d''avant', 'La-vie-d-avant', 'Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti. Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti. Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti. Nihil morati post haec militares avidi saepe turbarum adorti sunt Montium primum, qui divertebat in proximo, levi corpore senem atque morbosum, et hirsutis resticulis cruribus eius innexis divaricaturn sine spiramento ullo ad usque praetorium traxere praefecti.', 'Politique', 'https://www.reseaurural.fr/territoire-leader', 3, '2020-11-09', false);
         
 INSERT INTO Comments VALUES 
-    (1, 'Formidable ! Absolument génial, à lire !!', 2, 1, '2021-01-01', false),
-    (2, 'Nul, A EVITER !!', 1, 2, '2021-01-02', false),
-    (3, 'Pas mal. Mais manque de matière... Et est admodum mirum videre plebem innumeram mentibus ardore quodam infuso cum dimicationum curulium eventu pendentem.', 2, 3, '2021-01-01', false),
-    (4, 'Intéressant. Un point de vue original !', 1, 3, '2021-01-03', false),
-    (5, 'Bof. Vu et revu cent fois... Haec similiaque memorabile nihil vel serium agi Romae permittunt. ergo redeundum ad textum.', 4, 4, '2020-12-21', false),
-    (6, 'Passionnant, bravo ! A accrocher sur son frigo et à relire tous les jours...', 1, 4, '2020-12-18', false);
+    (1, '2cf05', 'Formidable ! Absolument génial, à lire !!', 2, 1, '2021-01-01', false),
+    (2, 'ymim2', 'Nul, A EVITER !!', 1, 2, '2021-01-02', false),
+    (3, '8an46', 'Pas mal. Mais manque de matière... Et est admodum mirum videre plebem innumeram mentibus ardore quodam infuso cum dimicationum curulium eventu pendentem.', 2, 3, '2021-01-01', false),
+    (4, 'd94db', 'Intéressant. Un point de vue original !', 1, 3, '2021-01-03', false),
+    (5, 'eo97j','Bof. Vu et revu cent fois... Haec similiaque memorabile nihil vel serium agi Romae permittunt. ergo redeundum ad textum.', 4, 4, '2020-12-21', false),
+    (6, 'ri8j6','Passionnant, bravo ! A accrocher sur son frigo et à relire tous les jours...', 1, 4, '2020-12-18', false),
+    (7, 'ls31i','J''ai pris du plaisir à lire cet article bien documenté.', 7, 4, '2021-01-18', false);
     
     
 ALTER TABLE Articles ADD CONSTRAINT fk_article_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;

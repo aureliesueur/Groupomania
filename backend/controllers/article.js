@@ -69,7 +69,7 @@ exports.createArticle = (req, res, next) => {
             let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.user.userId, req.body.date_post, req.params.slug];
             db.query(sql, values, function(err, data, fields) {
                 if (err) {
-                    return res.status(400).json({err});//MARCHE MAIS ENREGISTRE L'ANCIEN SLUG !!!!! CONFUSION ENTRE SLUGS !!!
+                    return res.status(400).json({err});
                 }
                 console.log(data);
                 res.json({status: 201, data, message: "Article modifié avec succès !"})

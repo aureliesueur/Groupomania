@@ -14,16 +14,16 @@ const commentCtrl = require("../controllers/comment");
 router.post("/", auth, /*articleCtrl.validate("createComment"),*/ commentCtrl.createComment); 
 
 //Requête PUT pour modifier un commentaire déjà posté
-router.put("/:id", auth, /*articleCtrl.validate("modifyArticle"), */commentCtrl.modifyComment); 
+router.put("/:cryptoslug", auth, /*articleCtrl.validate("modifyArticle"), */commentCtrl.modifyComment); 
 
 //Requête DELETE pour supprimer un commentaire qu'on a posté
-router.delete("/:id", auth, commentCtrl.deleteComment); 
+router.delete("/:cryptoslug", auth, commentCtrl.deleteComment); 
 
 //Requête GET pour afficher tous les commentaires postés sur un article
 router.get("/", auth, commentCtrl.getAllComments); 
 
 //Requête GET pour afficher un commentaire en particulier
-router.get("/:id", auth, commentCtrl.getOneComment); 
+router.get("/:cryptoslug", auth, commentCtrl.getOneComment); 
 
 //Exportation du router
 module.exports = router;

@@ -54,7 +54,7 @@ const routes = [
         component: CommentForm
     },
     {
-        path: '/articles/:slug/comments/:id',
+        path: '/articles/:slug/comments/:cryptoslug',
         name: 'one-comment-details',
         component: CommentDetails
     }

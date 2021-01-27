@@ -4,6 +4,7 @@ var mysql = require("mysql");
 //Constructeur
 const Comment = function(comment) {
     this.id = comment.id;
+    this.cryptoslug = comment.cryptoslug;
     this.content = comment.content;
     this.user_id = comment.user_id;
     this.article_id = comment.article_id;

@@ -16,12 +16,12 @@
                                 :subject="currentArticle[0].subject"
                                 :lien_web="currentArticle[0].lien_web"
                                 :username="currentArticle[0].username"
-                                :date_post="currentArticle[0].date_post"                                                  
-                                />
+                                :date_post="currentArticle[0].date_post" />
                             <ul id="commentsList">
                                 <li v-for="comment in comments" :key="comment.id">
                                     <CommentsItem
                                         :id="comment.id"
+                                        :cryptoslug="comment.cryptoslug"
                                         :user_id="comment.user_id"
                                         :content="comment.content"
                                         :username="comment.username"

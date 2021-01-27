@@ -17,7 +17,7 @@
                 <p class="card-text card__text ">{{ content }}</p>
             </div>
             <div class="card-footer">
-                <a class="btn btn-secondary" :href="slug + '/comments/' + id">Détails</a> 
+                <a class="btn btn-secondary" :href="slug + '/comments/' + cryptoslug">Détails</a> 
             </div>
         </div> 
     </div>
@@ -33,6 +33,10 @@ export default {
 	props: {
         id: {
             type: Number,
+            required: true
+        },
+        cryptoslug: {
+            type: String,
             required: true
         },
         user_id: {
