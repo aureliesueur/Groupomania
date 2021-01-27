@@ -1,7 +1,7 @@
 <template>
    <div>
-        <div class="jumbotron container">
-            <h1>{{ message }}</h1>
+        <div class="jumbotron container comment">
+            <p class="comment__msg">{{ message }}</p>
             <div class="row">
                 <div class="container col-12 col-md-10">
                     <div class='row'>
@@ -15,20 +15,22 @@
                                 :date_post="currentComment.date_post"
                                 :slug="currentComment.slug" />
                         </div>
-                        <div v-if="validUser && !deleted" class="card-footer">
-                            <button @click="showUpdate" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'edit']" /></button>
-                            <button @click="suppressComment" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'trash-alt']" /></button>
-                        </div>
-                        
                         <div>
-                            <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
-                            <router-view />
+                            <div v-if="validUser && !deleted" class="comment__btns">
+                                <button @click="showUpdate" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'edit']" /></button>
+                                <button @click="suppressComment" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'trash-alt']" /></button>
+                            </div>
+
+                            <div>
+                                <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                                <router-view />
+                            </div>
                         </div>
                         
                         <div v-if="updateIsAsked" class="form container">
-                            <h2>Entrez votre nouveau commentaire :</h2>
+                            <h2 class="form__title">Entrez votre nouveau commentaire :</h2>
                             <div class="row">
-                                <div class="col-12 col-md-9 text-center form__box ">
+                                <div class="col-12 col-md-9 text-center form__box">
                                     <div class="form-group">
                                         <label for="content"></label>
                                         <textarea
@@ -150,6 +152,42 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+    
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
+    
+.comment {
+    &__btns {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+    &__msg {
+        margin-top: 120px;
+        margin-bottom: 20px;
+        font-size: 1.2em!important;
+        color:$color-secondary;
+    }
+}
+    
+    .form {
+        position: absolute;
+        top: 10%;
+        width: 50%;
+        z-index: 2;
+        background: #DDD;
+        padding: 20px;
+        margin: auto;
+        border: 1px solid $color-secondary;
+        &__box {
+           margin: auto;
+        }
+        &__title {
+            margin-bottom: 15px!important;
+        }
+    }
     
 </style>

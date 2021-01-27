@@ -129,6 +129,10 @@ export default {
 
 <style scoped lang="scss">
 
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
+    
 #description {
     height: 150px!important;
 }
@@ -141,7 +145,7 @@ export default {
     margin-left: 8%!important;
     background-color: #DDD;
     border-radius: 20px;
-    border: 2px solid #cc2810;
+    border: 2px solid $color-primary;
     padding: 20px;
     &__box {
         margin: auto;

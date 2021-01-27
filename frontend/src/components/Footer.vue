@@ -51,13 +51,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+   
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
     
 .footer {
     background: #222;
     color: #aaa;
     padding: 20px 20px 20px 40px;
     & h3 {
-        color: #c0190e;
+        color: $color-primary;
         font-size: 1.2em;
         letter-spacing: 1px;
         margin: 30px 0 20px;

@@ -4,7 +4,7 @@
             <div class="card-header card__header">
                 <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <div class="card-body">
+            <div class="card-body card__body">
                 <p class="card-text card__text ">{{ content }}</p>
             </div>
         </div>
@@ -12,12 +12,10 @@
         <div v-else class="card text-center">   
             <div class="card-header card__header">
                 <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
+                <a class="btn btn-primary card__btnDetails" :href="slug + '/comments/' + cryptoslug"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a>
             </div>
-            <div class="card-body">
+            <div class="card-body card__body">
                 <p class="card-text card__text ">{{ content }}</p>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-secondary" :href="slug + '/comments/' + cryptoslug"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a> 
             </div>
         </div> 
     </div>
@@ -67,19 +65,35 @@ export default {
 
 
 <style scoped lang="scss">
+    
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
 
 .card {
     font-size: 0.8em!important;
     &__header {
-        color: #cc2810!important; 
+        color: $color-primary!important; 
         font-style: italic;
         text-align: left;
         height: 40px!important;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & p {
+            padding-top: 15px;
+        }
     }
     &__body {
         margin: auto!important;
         margin: 0!important;
-    }   
+    }  
+    &__btnDetails {
+        margin-top: 0px!important;
+        padding: 5px;
+        height: 30px;
+        font-size: 0.9em;
+    }
 }
 
 </style>

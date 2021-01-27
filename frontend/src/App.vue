@@ -23,6 +23,12 @@
 </script>
 
 <style lang="scss">
+    
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
+$color-tertiary: #6f757b;
+    
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,15 +38,19 @@
 }
     
 button, .card__btnDetails {
-    background: #324392!important;
+    background: $color-secondary!important;
     border: 2px solid black!important;
     color: #FFF!important;
+}
+
+button:hover {
+    box-shadow: 2px 2px 4px $color-tertiary;
 }
 
 .auth__btn, .deconnect__btn, .card__btnWeb, .account__btn, .confirm__btn {
     margin-bottom: 10px!important;
     background-color: #FFF!important;
-    border: 2px solid #cc2810!important;
+    border: 2px solid $color-primary!important;
     color: black!important;
 }
     
@@ -52,7 +62,7 @@ h1 {
     
 h2 {
     font-size: 1.5em!important;
-    color: #cc2810;
+    color: $color-primary;
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px!important;

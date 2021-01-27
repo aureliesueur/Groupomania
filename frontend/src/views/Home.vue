@@ -156,6 +156,11 @@ export default {
 
 <style lang="scss">
  
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
+$color-tertiary: #6f757b;
+    
 .intro {
     margin-bottom: 0!important;
     &__box {
@@ -203,10 +208,10 @@ export default {
  
     
 .account {
-    background: #324392;
+    background: $color-secondary;
     border: 2px solid #FFF;
     border-radius: 10px;
-    box-shadow: 3px 3px 5px #6f757b;
+    box-shadow: 3px 3px 5px $color-tertiary;
     padding: 20px;
     z-index: 4;
     color: #FFF;
@@ -221,10 +226,10 @@ export default {
 }
     
 .confirm {
-    background: #324392;
+    background: $color-secondary;
     border: 2px solid #FFF;
     border-radius: 10px;
-    box-shadow: 3px 3px 5px #6f757b;
+    box-shadow: 3px 3px 5px $color-tertiary;
     padding: 20px;
     z-index: 6;
     color: #FFF;

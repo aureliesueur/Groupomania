@@ -41,6 +41,10 @@ export default {
 
 <style scoped lang="scss">
     
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392; 
+    
 .auth {
     position: fixed;
     right: 0px;

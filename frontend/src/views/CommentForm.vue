@@ -83,14 +83,15 @@ export default {
 
 <style scoped lang="scss">
  
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
+    
 .form {
     position: absolute;
     top: 20%;
     left: 15%;
     max-width: 60%;
-    /*background-color: #DDD;
-    border-radius: 20px;
-    border: 2px solid #cc2810;*/
     margin: auto;
     padding: 20px;
     &__box {

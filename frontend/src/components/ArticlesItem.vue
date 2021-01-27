@@ -83,16 +83,20 @@ export default {
 
 
 <style scoped lang="scss">
+  
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
     
 .card {
-    border: 2px solid #324392!important;
+    border: 2px solid $color-secondary!important;
     padding: 10px!important;
     margin: auto;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 5px 5px 2px #CCC;
     &__header {
-        color: #324392;
+        color: $color-secondary;
         font-style: italic;
         text-align: right;
         display: flex;
@@ -100,10 +104,10 @@ export default {
         height: 50px!important;
         & a {
             margin: 0px!important;
-            color: #324392!important;
+            color: $color-secondary!important;
             &:hover {
                text-decoration: none;
-               color: #cc2810!important; 
+               color: $color-primary!important; 
             }
         }
     }
@@ -116,7 +120,7 @@ export default {
         width: 80%!important;
     }
     &__title {
-        color: #cc2810;
+        color: $color-primary;
         margin-bottom: 10px!important;
     }
     &__subtitle {
