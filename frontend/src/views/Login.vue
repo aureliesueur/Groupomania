@@ -1,10 +1,9 @@
 <!--PAGE DE CONNEXSION D'UN USER PRESENT DANS LA BDD : LOGIN-->
 
 <template>
-    <div>
-        <h1>Merci de vous identifier pour pouvoir profiter de toutes les fonctionnalités de la plateforme Groupomania</h1>
+    <div class="jumbotron">
         <div v-if="!submitted" class="jumbotron container">
-            <h2>Entrez vos identifiants de connexion</h2>
+            <h1>Entrez vos identifiants de connexion</h1>
             <form class="row">
                 <div class="form-group col-9 col-md-6 text-center">
                     <label for="email">Votre email</label>
@@ -94,6 +93,10 @@ form {
     justify-content: center;
     margin: auto;
     max-width: 60%!important;
+}
+    
+h1 {
+    color: $color-primary;
 }
 </style>
 

@@ -16,7 +16,11 @@
                                 :subject="currentArticle[0].subject"
                                 :lien_web="currentArticle[0].lien_web"
                                 :username="currentArticle[0].username"
-                                :date_post="currentArticle[0].date_post" />
+                                :date_post="currentArticle[0].date_post"
+                                :sendLike="sendLike"
+                                :sendDislike="sendDislike"
+                                :liked="liked"
+                                :disliked="disliked" />
                             <ul id="commentsList">
                                 <h3>Derniers commentaires postés</h3>
                                 <li v-for="comment in comments" :key="comment.id">
@@ -125,6 +129,7 @@ import ArticlesItem from "../components/ArticlesItem"
 import CommentsItem from "../components/CommentsItem"
 import ArticlesDataServices from "../services/ArticlesDataServices"
 import CommentsDataServices from "../services/CommentsDataServices"
+import ThumbsDataServices from "../services/ThumbsDataServices"
 import { mapGetters, mapState } from 'vuex'
     
 export default {
@@ -140,7 +145,9 @@ export default {
             validUser: false,
             askForUpdate: false,
             confirmation: false,
-            messageUpdate: ""
+            messageUpdate: "",
+            liked: false,
+            disliked: true
         }
     },
     computed: {
@@ -217,6 +224,36 @@ export default {
                     this.comments = JSON.parse(JSON.stringify(response.data.data));
                 })
                 .catch(error => console.log(error));
+        },
+        sendLike(slug, data) { //Authorization) {
+            data = {
+                user_id: this.userId,
+                //article_id: localStorage.getItem("articleId"),
+                thumb: 1, 
+            };
+           // Authorization = `Bearer ${this.token}`;
+            slug = this.$route.params.slug;
+            ThumbsDataServices.postThumb(slug, data) //, { Authorization }) 
+                .then(response => {
+                    console.log(response.data);
+                    this.liked = true;
+                })
+                .catch(error => console.log(error));
+        },
+        sendDislike(slug, data) { //Authorization) {
+            data = {
+                user_id: this.userId,
+                //article_id: localStorage.getItem("articleId"),
+                thumb: -1, 
+            };
+           // Authorization = `Bearer ${this.token}`;
+            slug = this.$route.params.slug;
+            ThumbsDataServices.postThumb(slug, data) //, { Authorization }) 
+                .then(response => {
+                    console.log(response.data);
+                    this.disliked = true;
+                })
+                .catch(error => console.log(error));
         }
     },    
     beforeMount() {
@@ -224,6 +261,8 @@ export default {
         this.getAllComments(this.$route.params.slug);
         this.askForUpdate = false;
         this.validUser = false;
+        this.liked = false;
+        this.disliked = false;
     }
 }
     

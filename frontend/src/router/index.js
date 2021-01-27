@@ -57,8 +57,7 @@ const routes = [
         path: '/articles/:slug/comments/:cryptoslug',
         name: 'one-comment-details',
         component: CommentDetails
-    }
-    
+    }   
 ]
 
 const router = new VueRouter({

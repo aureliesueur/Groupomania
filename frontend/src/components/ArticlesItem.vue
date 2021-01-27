@@ -13,9 +13,17 @@
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
-                <div>
-                    <span><i class="far fa-thumbs-up"></i></span>
-                    <span><i class="far fa-thumbs-down"></i></span>
+                <div v-if="liked" class="thumbs">
+                    <span @click="sendLike" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
+                    <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
+                </div>
+                <div v-else-if="disliked" class="thumbs">
+                    <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
+                    <span @click="sendDislike" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
+                </div>
+                <div v-else class="thumbs">
+                    <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
+                    <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
                 </div>
                 <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
             </div>
@@ -70,7 +78,24 @@ export default {
 		date_post: {
 			type: String,
 			required: true
-		}
+		},
+        sendLike: {
+			type: Function,
+			required: true
+		},
+        sendDislike: {
+			type: Function,
+			required: true
+		},
+        liked: {
+			type: Boolean,
+			required: true
+		},
+        disliked: {
+			type: Boolean,
+			required: true
+		},
+        
 	},
     data() {
         return {
@@ -145,7 +170,19 @@ $color-secondary: #324392;
         margin-top: 10px!important;
         max-width: 30%;
     }
-   
+}
+
+.thumbs {
+    font-size: 1.5em;
+    &__up {
+        margin-right: 10px;
+    }
+    &__up:hover, &__down:hover {
+        color: $color-primary;
+    }
+    &__red {
+       color: $color-primary;
+    }
 }
 
 </style>
