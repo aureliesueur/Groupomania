@@ -240,5 +240,25 @@ $color-tertiary: #6f757b;
         margin-right: 20px;
     }
 }
+    
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    .info {
+        right: 70px!important;
+        top: 70px;
+    }
+    .btn, .btn-primary {
+        font-size: 0.8em!important;
+    }
+    .account {
+        width: 90%;
+    }
+    .intro {
+        &__articles {
+            margin-right: 0px!important;
+            margin-bottom: 20px!important;
+        }
+    }
+}
 
 </style>

@@ -35,7 +35,8 @@
                     </div>
 
                     <div class="col-md-2">
-                        <img src="/images/icon.png" width="100" alt="Site logo" class="footer__logo"/>
+                        <img src="/images/icon.png" width="100" alt="Site logo" class="footer__logo img-narrow"/>
+                        <img src="/images/icon-left-font.png" width="250" alt="Site logo" class=" footer__logo navbar-brand img-large" />
                     </div>
                 </div>
             </div>
@@ -73,7 +74,9 @@ $color-secondary: #324392;
         }
     }
     &__logo {
-        margin-top: 30px;
+        display:block;
+        margin: auto!important;
+        margin-top: 30px!important;
     }
 }
 
@@ -95,7 +98,21 @@ $color-secondary: #324392;
             opacity: 1;
         }
     }
-}    
+}  
+    
+.img-large {
+    display: none!important;
+}
+    
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    .img-large {
+        display: block!important;
+    }
+    .img-narrow {
+        display: none!important;
+    }
+}
 
 </style>
 

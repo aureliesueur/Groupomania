@@ -75,5 +75,15 @@ $color-secondary: #324392;
     color: #FFF;    
 }
     
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    .auth, .deconnect {
+        right: 50px;
+        top: 20px;
+    }
+    .btn, .btn-primary {
+        font-size: 0.8em!important;
+    }
+}
     
 </style>

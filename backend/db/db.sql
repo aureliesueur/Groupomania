@@ -69,9 +69,9 @@ INSERT INTO Users VALUES
     (2, 'Chipolata', 'pauline.amartin@free.fr', 'figaro22', 'Pauline', 'Amartin', 0),
     (3, 'Pussicat', 'francedesmarais@gmail.com', 'bidibul65', 'France', 'Desmarais', 0),
     (4, 'Barbu55', 'guillaume.voisin@orange.fr', 'mouflon00', 'Guillaume', 'Voisin', 0),
-    (7, 'Mistinguett', 'marie.dubois@orange.fr', '$2b$10$elPxLDcqWWScBwmUatU1LebXfsLnuqQP0G8GWfYdJP.JVXObDCIYm', 'Marie', 'Dubois', 0),
-    (12, 'Admin', 'jane.goodall@free.fr', '$2b$10$1e0ddcgQYxfMT8dIEOEwKed7VXb35OKieDT0//sXoloue/dcWKSHS', 'Jane', 'Goodall', 1),
-    (14, 'papounet', 'olivier.sueur@free.fr', '$2b$10$r1kbPph2iT1sN6ZEWI8fyeO7dWF0hH0rdcGYXFLoFmBGUJTgLsWJe', 'Olivier', 'Sueur', 0);
+    (5, 'Admin', 'jane.goodall@free.fr', '$2b$10$1e0ddcgQYxfMT8dIEOEwKed7VXb35OKieDT0//sXoloue/dcWKSHS', 'Jane', 'Goodall', 1),
+    (6, 'papounet', 'olivier.sueur@free.fr', '$2b$10$r1kbPph2iT1sN6ZEWI8fyeO7dWF0hH0rdcGYXFLoFmBGUJTgLsWJe', 'Olivier', 'Sueur', 0),
+    (7, 'Mistinguett', 'marie.dubois@orange.fr', '$2b$10$elPxLDcqWWScBwmUatU1LebXfsLnuqQP0G8GWfYdJP.JVXObDCIYm', 'Marie', 'Dubois', 0);
     
 INSERT INTO Articles VALUES 
     (1, 'Nos coups de coeur', 'Nos-coups-de-coeur', 'Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis. Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis. Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis. Haec ubi latius fama vulgasset missaeque relationes adsiduae Gallum Caesarem permovissent, quoniam magister equitum longius ea tempestate distinebatur, iussus comes orientis Nebridius contractis.', 'Société', 'https://www.zankyou.fr/p/mariage-paris-lieux-reception-originaux-7934', 2, '2020-12-21', false),
@@ -84,7 +84,11 @@ INSERT INTO Thumbs VALUES
     (1, 7, 3, 1, 1, 0),
     (2, 4, 2, -1, 0, 1),
     (3, 3, 4, 1, 1, 0),
-    (4, 7, 1, -1, 0, 1);
+    (4, 7, 1, -1, 0, 1),
+    (5, 2, 1, 1, 1, 0),
+    (6, 1, 2, -1, 0, 1),
+    (7, 5, 3, 1, 1, 0),
+    (8, 5, 4, -1, 0, 1);
 
 INSERT INTO Comments VALUES 
     (1, '2cf05', 'Formidable ! Absolument génial, à lire !!', 2, 1, '2021-01-01', false),
@@ -93,7 +97,9 @@ INSERT INTO Comments VALUES
     (4, 'd94db', 'Intéressant. Un point de vue original !', 1, 3, '2021-01-03', false),
     (5, 'eo97j','Bof. Vu et revu cent fois... Haec similiaque memorabile nihil vel serium agi Romae permittunt. ergo redeundum ad textum.', 4, 4, '2020-12-21', false),
     (6, 'ri8j6','Passionnant, bravo ! A accrocher sur son frigo et à relire tous les jours...', 1, 4, '2020-12-18', false),
-    (7, 'ls31i','J''ai pris du plaisir à lire cet article bien documenté.', 7, 4, '2021-01-18', false);
+    (7, 'ls31i','J''ai pris du plaisir à lire cet article bien documenté.', 7, 4, '2021-01-18', false),
+    (8, '89nh9', 'Article très décevant, surtout que je suis un spécialiste de ce domaine...', 7, 1, '2021-01-21', false),
+    (9, 'gye54', 'Merci de nous faire partager votre passion et vos compétences, c''est passionnant...', 5, 2, '2021-01-11', false);
     
     
 ALTER TABLE Articles ADD CONSTRAINT fk_article_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;
