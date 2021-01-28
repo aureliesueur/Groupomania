@@ -13,7 +13,29 @@
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
-                <div v-if="liked" class="thumbs">
+                
+                <div v-if="liked || disliked" >
+                    <div v-if="liked" class="thumbs">
+                    <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
+                    <span class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
+                    </div>
+                    <div v-else class="thumbs">
+                        <span class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
+                        <span @click="deleteThumb" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="thumbs">
+                        <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
+                        <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                <!--<div v-if="liked" class="thumbs">
                     <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
                     <span class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
                 </div>
@@ -24,7 +46,10 @@
                 <div v-else class="thumbs">
                     <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
                     <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
-                </div>
+                </div>-->
+                
+                
+                
                 <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
                 <div class="totalThumbs">
                     <p>{{ totalLikes }} <i class="far fa-thumbs-up"></i></p>

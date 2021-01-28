@@ -271,7 +271,7 @@ export default {
                         this.totalLikes -= 1;
                     } else if (this.disliked) {
                         this.disliked = false;
-                        this.totaDisLikes -= 1;
+                        this.totalDislikes -= 1;
                     }
                 })
                 .catch(error => console.log(error));
