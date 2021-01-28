@@ -8,53 +8,36 @@
             </div>
             <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + slug"><font-awesome-icon :icon="['fas', 'info-circle']" /> En savoir plus</a>
         </div>
-        
-        
         <div v-else class="card text-center">
             <div class="card-header card__header">
-                <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
-                
-                <div v-if="liked || disliked" >
-                    <div v-if="liked" class="thumbs">
-                    <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
-                    <span class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
-                    </div>
-                    <div v-else class="thumbs">
-                        <span class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
-                        <span @click="deleteThumb" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
-                    </div>
-                </div>
-                <div v-else>
-                    <div class="thumbs">
-                        <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
-                        <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
-                    </div>
-                </div>
-                
-                
-                
-                
-                
-                <!--<div v-if="liked" class="thumbs">
-                    <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
-                    <span class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
-                </div>
-                <div v-else-if="disliked" class="thumbs">
-                    <span class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
-                    <span @click="deleteThumb" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
-                </div>
-                <div v-else class="thumbs">
-                    <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
-                    <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
-                </div>-->
-                
-                
-                
-                <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
-                <div class="totalThumbs">
-                    <p>{{ totalLikes }} <i class="far fa-thumbs-up"></i></p>
-                    <p>{{ totalDislikes }} <i class="far fa-thumbs-down"></i></p>
-                </div>
+                <ul class="list-group">
+                    <li class="list-group-item card__comments">
+                        <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
+                        <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
+                    </li>
+                    <li class="list-group-item card__thumbs">
+                        <div v-if="liked || disliked" >
+                            <div v-if="liked" class="thumbs">
+                            <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
+                            <span class="thumbs__down disabled"><i class="far fa-thumbs-down"></i></span>
+                            </div>
+                            <div v-else class="thumbs">
+                                <span class="thumbs__up disabled"><i class="far fa-thumbs-up"></i></span>
+                                <span @click="deleteThumb" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <div class="thumbs">
+                                <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
+                                <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
+                            </div>
+                        </div>
+                        <div class="card__stats">
+                            <p>{{ totalLikes }} <i class="far fa-thumbs-up"></i></p>
+                            <p>{{ totalDislikes }} <i class="far fa-thumbs-down"></i></p>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="card-body card__body ">
                 <h3 class="card-title card__title">{{ title }}</h3>
@@ -156,6 +139,7 @@ export default {
 //Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
+$color-bkg: #f1f1f2;
     
 .card {
     border: 2px solid $color-secondary!important;
@@ -168,9 +152,7 @@ $color-secondary: #324392;
         color: $color-secondary;
         font-style: italic;
         text-align: right;
-        display: flex;
-        justify-content: space-between;
-        height: 50px!important;
+        padding: 0px;
         & a {
             margin: 0px!important;
             color: $color-secondary!important;
@@ -179,6 +161,15 @@ $color-secondary: #324392;
                color: $color-primary!important; 
             }
         }
+        & li {
+            height: 40px!important;
+            background: $color-bkg;
+        }
+    }
+    &__comments, &__thumbs, &__stats {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
     &__btnDetails {
         margin-top: 0px!important;
@@ -214,6 +205,8 @@ $color-secondary: #324392;
 
 .thumbs {
     font-size: 1.5em;
+    margin-top: -8px!important;
+
     &__up {
         margin-right: 10px;
     }
@@ -222,6 +215,13 @@ $color-secondary: #324392;
     }
     &__red {
        color: $color-primary;
+    }
+}
+    
+.disabled {
+    color: lighten($color-secondary, 40%);
+    &:hover {
+        color: lighten($color-secondary, 40%);
     }
 }
 

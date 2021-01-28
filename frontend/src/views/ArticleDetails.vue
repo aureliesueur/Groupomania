@@ -293,6 +293,27 @@ export default {
                     }
                 })
                 .catch(error => console.log(error));
+        },
+        getUserThumb(slug, Authorization) {
+            Authorization = `Bearer ${this.token}`;
+            ThumbsDataServices.getOneThumb(slug, { Authorization }) 
+                .then(response => {
+                    var result = response.data.data[0];
+                    console.log(result.disliked);
+                    if (result === undefined) {
+                        this.liked = false;
+                        this.disliked = false;
+                    } else {
+                        if (result.liked === 1) {
+                            this.liked = true;
+                            this.disliked = false;
+                        } else if (result.disliked === 1) {
+                            this.disliked = true;
+                            this.liked = false;
+                        }
+                    }
+                 })
+                .catch(error => console.log(error));
         }
     },    
     beforeMount() {
@@ -302,7 +323,8 @@ export default {
         this.validUser = false;
         this.liked = false;
         this.disliked = false;
-        this.getTotalThumbs(this.$route.params.slug)
+        this.getTotalThumbs(this.$route.params.slug);
+        this.getUserThumb(this.$route.params.slug);
     }
 }
     

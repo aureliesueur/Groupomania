@@ -4,6 +4,9 @@ class ThumbsDataServices {
     getAllThumbs(slug, headers) {
         return http.get(`/articles/${slug}/thumbs`, { headers });
     }
+    getOneThumb(slug, headers) {
+        return http.get(`/articles/${slug}/thumbs/user`, { headers });
+    }
     postThumb(slug, data, headers) {
         return http.post(`/articles/${slug}/thumbs`, data, { headers });
     }

@@ -18,6 +18,8 @@ router.delete("/thumbs", auth, thumbCtrl.deleteThumb);
 //Requête GET pour afficher tous likes et dislikes d'un article
 router.get("/thumbs", auth, thumbCtrl.getAllThumbs); 
 
+//Requête GET pour afficher le likes ou le dislike d'un user sur un article
+router.get("/thumbs/user", auth, thumbCtrl.getUserThumb); 
 
 //Exportation du router
 module.exports = router;
