@@ -1,15 +1,15 @@
 import http from "../http-common";
 
 class ThumbsDataServices {
-    /*getAll(slug) { //, headers) {
-        return http.get(`/articles/${slug}/thumbs`); //, { headers });
-    }*/
-    postThumb(slug, data) { //, headers) {
-        return http.post(`/articles/${slug}/`, data); //, { headers });
+    getAllThumbs(slug, headers) {
+        return http.get(`/articles/${slug}/thumbs`, { headers });
     }
-    /*delete(cryptoslug, slug, headers) {
-        return http.delete(`/articles/${slug}/comments/${cryptoslug}`, { headers });
-    }*/
+    postThumb(slug, data, headers) {
+        return http.post(`/articles/${slug}/thumbs`, data, { headers });
+    }
+    delete(slug, headers) {
+        return http.delete(`/articles/${slug}/thumbs`, { headers });
+    }
 }
 
 

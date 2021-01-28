@@ -19,8 +19,11 @@
                                 :date_post="currentArticle[0].date_post"
                                 :sendLike="sendLike"
                                 :sendDislike="sendDislike"
+                                :deleteThumb="deleteThumb"
                                 :liked="liked"
-                                :disliked="disliked" />
+                                :disliked="disliked"
+                                :totalLikes="totalLikes"
+                                :totalDislikes="totalDislikes" />
                             <ul id="commentsList">
                                 <h3>Derniers commentaires postés</h3>
                                 <li v-for="comment in comments" :key="comment.id">
@@ -47,11 +50,11 @@
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
                         <button type= "button" class="btn btn-primary" @click="refreshPage">Annuler</button>
                     </div>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'arrow-left']" /> Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
                 <div v-else>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><font-awesome-icon :icon="['far', 'arrow-left']" /> Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
             </div>
@@ -147,7 +150,10 @@ export default {
             confirmation: false,
             messageUpdate: "",
             liked: false,
-            disliked: true
+            disliked: true,
+            thumbs: [],
+            totalLikes: 0,
+            totalDislikes: 0
         }
     },
     computed: {
@@ -183,7 +189,7 @@ export default {
             return (this.confirmation = true);
         },
         refreshPage() {
-          this.getOneArticle(this.$route.params.id);
+          this.getOneArticle(this.$route.params.slug);
           this.confirmation = false;
         },
         updateArticle(slug, data, Authorization) {
@@ -225,33 +231,66 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
-        sendLike(slug, data) { //Authorization) {
+        sendLike(slug, data, Authorization) {
             data = {
                 user_id: this.userId,
-                //article_id: localStorage.getItem("articleId"),
                 thumb: 1, 
             };
-           // Authorization = `Bearer ${this.token}`;
+           Authorization = `Bearer ${this.token}`;
             slug = this.$route.params.slug;
-            ThumbsDataServices.postThumb(slug, data) //, { Authorization }) 
+            ThumbsDataServices.postThumb(slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.liked = true;
+                    this.totalLikes += 1;
                 })
                 .catch(error => console.log(error));
         },
-        sendDislike(slug, data) { //Authorization) {
+        sendDislike(slug, data, Authorization) {
             data = {
                 user_id: this.userId,
-                //article_id: localStorage.getItem("articleId"),
                 thumb: -1, 
             };
-           // Authorization = `Bearer ${this.token}`;
+            Authorization = `Bearer ${this.token}`;
             slug = this.$route.params.slug;
-            ThumbsDataServices.postThumb(slug, data) //, { Authorization }) 
+            ThumbsDataServices.postThumb(slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.disliked = true;
+                    this.totalDislikes += 1;
+                })
+                .catch(error => console.log(error));
+        },
+        deleteThumb(Authorization) {
+            Authorization = `Bearer ${this.token}`;
+            ThumbsDataServices.delete(this.$route.params.slug, { Authorization })
+                .then(response => {
+                    console.log(response.data);
+                    if (this.liked) {
+                        this.liked = false;
+                        this.totalLikes -= 1;
+                    } else if (this.disliked) {
+                        this.disliked = false;
+                        this.totaDisLikes -= 1;
+                    }
+                })
+                .catch(error => console.log(error));
+        },
+        getTotalThumbs(slug, Authorization) {
+            Authorization = `Bearer ${this.token}`;
+            ThumbsDataServices.getAllThumbs(slug, { Authorization }) 
+                .then(response => {
+                    console.log(response.data.data[0]);
+                    var result = JSON.parse(JSON.stringify(response.data.data[0]));
+                    if (result.sumOfLikes == null) {
+                        this.totalLikes = 0;
+                    } else if (result.sumOfDislikes == null) {
+                        this.totalDislikes = 0;
+                    } else {
+                        this.thumbs = JSON.parse(JSON.stringify(response.data.data[0]));
+                        this.totalLikes = this.thumbs.sumOfLikes;
+                        this.totalDislikes = this.thumbs.sumOfDislikes;
+                    }
                 })
                 .catch(error => console.log(error));
         }
@@ -263,6 +302,7 @@ export default {
         this.validUser = false;
         this.liked = false;
         this.disliked = false;
+        this.getTotalThumbs(this.$route.params.slug)
     }
 }
     

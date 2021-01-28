@@ -14,18 +14,22 @@
             <div class="card-header card__header">
                 <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
                 <div v-if="liked" class="thumbs">
-                    <span @click="sendLike" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
-                    <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
+                    <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
+                    <span class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
                 </div>
                 <div v-else-if="disliked" class="thumbs">
-                    <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
-                    <span @click="sendDislike" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
+                    <span class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
+                    <span @click="deleteThumb" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
                 </div>
                 <div v-else class="thumbs">
                     <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
                     <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
                 </div>
                 <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
+                <div class="totalThumbs">
+                    <p>{{ totalLikes }} <i class="far fa-thumbs-up"></i></p>
+                    <p>{{ totalDislikes }} <i class="far fa-thumbs-down"></i></p>
+                </div>
             </div>
             <div class="card-body card__body ">
                 <h3 class="card-title card__title">{{ title }}</h3>
@@ -87,6 +91,10 @@ export default {
 			type: Function,
 			required: true
 		},
+        deleteThumb: {
+			type: Function,
+			required: true
+		},
         liked: {
 			type: Boolean,
 			required: true
@@ -95,7 +103,14 @@ export default {
 			type: Boolean,
 			required: true
 		},
-        
+        totalLikes: {
+			type: Number,
+			required: true
+		},
+        totalDislikes: {
+			type: Number,
+			required: true
+		}  
 	},
     data() {
         return {
