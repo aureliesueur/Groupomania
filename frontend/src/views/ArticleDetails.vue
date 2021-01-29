@@ -153,7 +153,8 @@ export default {
             disliked: true,
             thumbs: [],
             totalLikes: 0,
-            totalDislikes: 0
+            totalDislikes: 0,
+            alreadyCommented: false
         }
     },
     computed: {
@@ -228,6 +229,13 @@ export default {
             CommentsDataServices.getAll(slug, { Authorization: `Bearer ${this.token}`})
                 .then(response => {
                     this.comments = JSON.parse(JSON.stringify(response.data.data));
+                    console.log(response.data.data);
+                    this.comments.forEach(comment => {
+                        if (comment.user_id === this.userId) {
+                            this.alreadyCommented = true;
+                            localStorage.setItem("alreadyCommented", this.currentArticle[0].slug);
+                        }
+                    });
                 })
                 .catch(error => console.log(error));
         },

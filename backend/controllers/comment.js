@@ -40,7 +40,7 @@ var cryptoRandomString = require('crypto-random-string');
 
 
 //Fontion qui gère la logique métier de la route POST (ajout d'un nouveau comment)
-exports.createComment = (req, res, next) => {
+/*exports.createComment = (req, res, next) => {
     let sql = `INSERT INTO Comments(cryptoslug, content, user_id, article_id, date_post) VALUES (?)`;
     let newSlug = cryptoRandomString({length: 5});;
     let values = [newSlug, req.body.content, req.body.user_id, req.body.article_id, req.body.date_post];
@@ -49,6 +49,32 @@ exports.createComment = (req, res, next) => {
             return res.status(400).json({err});
         }
         res.json({status: 201, data, message: "Nouveau commentaire posté avec succès !"})
+    });
+};*/
+
+//Fontion qui gère la logique métier de la route POST (ajout d'un nouveau comment)
+exports.createComment = (req, res, next) => {
+    let sql = `SELECT Comments.id FROM Comments INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Comments.deleted = false AND Articles.slug = ? AND Comments.user_id = ?`;
+    let values = [req.params.slug, req.user.userId];
+    db.query(sql, values, function(err, data) {
+        if (err) {
+            return res.status(400).json({err});
+        }
+        var result = data[0];
+        console.log(result);
+        if (result !== null) {
+            throw "Vous avez déjà posté un commentaire sur cet article !";
+        } else {
+            let sql = `INSERT INTO Comments(cryptoslug, content, user_id, article_id, date_post) VALUES (?)`;
+            let newSlug = cryptoRandomString({length: 5});;
+            let values = [newSlug, req.body.content, req.body.user_id, req.body.article_id, req.body.date_post];
+            db.query(sql, [values], function(err, data, fields) {
+                if (err) {
+                    return res.status(400).json({err});
+                }
+                res.json({status: 201, data, message: "Nouveau commentaire posté avec succès !"})
+            });
+        }
     });
 };
 

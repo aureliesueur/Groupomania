@@ -18,6 +18,10 @@
                                 name="content" />
                         </div>
                         <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
+                        <div v-if="forbidden">
+                            <p>Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
+                            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,7 +56,8 @@ export default {
                 date_post: "",
             },
             submitted: false, 
-            message:""
+            message:"",
+            forbidden: false
         }
     },
     computed: {
@@ -61,21 +66,26 @@ export default {
     },
     methods: {
         postComment(slug, data, Authorization) {
-        data = {
-            content: this.comment.content,
-            user_id: this.userId,
-            article_id: localStorage.getItem("articleId"),
-            date_post: new Date().toLocaleDateString('fr-CA'), 
-        };
-        Authorization = `Bearer ${this.token}`;
-        slug = this.$route.params.slug;
-        CommentsDataServices.create(slug, data, { Authorization }) 
-            .then(response => {
-                console.log(response.data);
-                this.submitted = true;
-                this.message = "Votre commentaire a bien été posté !"
-            })
-            .catch(error => console.log(error));
+            let alreadyCommented = localStorage.getItem("alreadyCommented");
+            if (alreadyCommented == this.$route.params.slug) {
+                this.forbidden = true;
+            } else {
+                data = {
+                    content: this.comment.content,
+                    user_id: this.userId,
+                    article_id: localStorage.getItem("articleId"),
+                    date_post: new Date().toLocaleDateString('fr-CA'), 
+                };
+                Authorization = `Bearer ${this.token}`;
+                slug = this.$route.params.slug;
+                CommentsDataServices.create(slug, data, { Authorization }) 
+                    .then(response => {
+                        console.log(response.data);
+                        this.submitted = true;
+                        this.message = "Votre commentaire a bien été posté !"
+                    })
+                    .catch(error => console.log(error));
+            }
         }
     }
 }

@@ -86,6 +86,7 @@ export default {
                 date_post: "",
                 slug:""
             },
+            alreadyCommented: false,
             validUser: false,
             updateIsAsked: false,
         }
