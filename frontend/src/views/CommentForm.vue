@@ -67,7 +67,7 @@ export default {
     methods: {
         postComment(slug, data, Authorization) {
             let alreadyCommented = localStorage.getItem("alreadyCommented");
-            if (alreadyCommented == this.$route.params.slug) {
+            if (alreadyCommented && alreadyCommented == this.$route.params.slug) {
                 this.forbidden = true;
             } else {
                 data = {

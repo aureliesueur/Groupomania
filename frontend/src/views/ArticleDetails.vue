@@ -172,7 +172,6 @@ export default {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
                     console.log(this.currentArticle[0].id);
                     localStorage.setItem("articleId", this.currentArticle[0].id);
-                    //localStorage.setItem("articleSlug", this.currentArticle[0].slug);
                         if (this.currentArticle[0].user_id !== this.userId) {
                             this.validUser = false;  
                         } else if (this.isAdmin == 1) {
@@ -224,6 +223,7 @@ export default {
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });
+            localStorage.clear();
         },
         getAllComments(slug) {
             CommentsDataServices.getAll(slug, { Authorization: `Bearer ${this.token}`})

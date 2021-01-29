@@ -62,9 +62,7 @@ exports.createComment = (req, res, next) => {
         }
         var result = data[0];
         console.log(result);
-        if (result !== null) {
-            throw "Vous avez déjà posté un commentaire sur cet article !";
-        } else {
+        if (result === null || result === undefined) {
             let sql = `INSERT INTO Comments(cryptoslug, content, user_id, article_id, date_post) VALUES (?)`;
             let newSlug = cryptoRandomString({length: 5});;
             let values = [newSlug, req.body.content, req.body.user_id, req.body.article_id, req.body.date_post];
@@ -74,6 +72,8 @@ exports.createComment = (req, res, next) => {
                 }
                 res.json({status: 201, data, message: "Nouveau commentaire posté avec succès !"})
             });
+        } else {
+            return res.status(400).json({error: "Vous avez déjà posté un commentaire sur cet article !"});
         }
     });
 };

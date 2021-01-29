@@ -108,6 +108,7 @@ export default {
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });
+            localStorage.clear();
         },
         showAccount() {
             this.accountAsked = true
