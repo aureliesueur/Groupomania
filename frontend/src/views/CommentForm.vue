@@ -1,31 +1,33 @@
 <template>
     <div>
-        <div v-if="!submitted" class="container text-center form">
-            <h2>Pour ajouter un commentaire, remplissez le champ suivant :</h2>
-            <div class="row">
-                <div class="col-12 col-md-9 text-center form__box ">
-                    <div class="form-group">
-                        <label for="content"></label>
-                        <textarea
-                            type="textarea" 
-                            rows="5"
-                            cols="30"
-                            class="form-control"
-                            required
-                            v-model="comment.content"
-                            placeholder="Formidable !"
-                            name="content" />
+        <div class="container jumbotron text-center">
+            <div v-if="!submitted" class=" formComment">
+                <h2>Pour ajouter un commentaire, remplissez le champ suivant :</h2>
+                <div class="row">
+                    <div class="col-12 col-md-9 text-center formComment__box ">
+                        <div class="form-group">
+                            <label for="content"></label>
+                            <textarea
+                                type="textarea" 
+                                rows="5"
+                                cols="30"
+                                class="form-control"
+                                required
+                                v-model="comment.content"
+                                placeholder="Formidable !"
+                                name="content" />
+                        </div>
+                        <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
                     </div>
-                    <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
                 </div>
             </div>
+            <div v-if="submitted" >
+                <p>{{ message }}</p>
+                <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                <router-view />
+            </div>
         </div>
-        <div v-if="submitted">
-            <p>{{ message }}</p>
-            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
-            <router-view />
-        </div>
-        
+
         <Footer />
     </div>
 </template>
@@ -86,13 +88,14 @@ export default {
 //Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
+ 
+.jumbotron {
+    padding-top: 200px!important;
+    padding-bottom: 100px!important;
+}
     
-.form {
-    position: absolute;
-    top: 20%;
-    left: 15%;
-    max-width: 60%;
-    margin: auto;
+.formComment {
+    margin: auto!important;
     padding: 20px;
     &__box {
         margin: auto;

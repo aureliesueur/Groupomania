@@ -9,6 +9,7 @@ const User = function(user) {
     this.password = user.password;
     this.first_name = user.first_name;
     this.last_name = user.last_name;
+    this.is_admin = user.is_admin;
 };
 
 //Exportation du modèle de données

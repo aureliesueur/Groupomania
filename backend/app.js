@@ -40,7 +40,7 @@ app.use(cors);
 /*SECURITE : lancement des middlewares et plugins de sécurité*/
 app.use(helmet());
 app.use(hpp());
-app.use("/api/auth", limiter);
+app.use("/auth", limiter);
 app.use(toobusy);
 app.use(session);
 

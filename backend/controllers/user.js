@@ -13,7 +13,7 @@ const jwt = require("jsonwebtoken");
 const {body} = require('express-validator');
 
 //Fonction de validation des inputs pour les requêtes post user
-exports.validate = (method) => {
+/*exports.validate = (method) => {
   switch (method) {
     case 'signup': {
      return [ 
@@ -31,7 +31,7 @@ exports.validate = (method) => {
        ] 
     }       
   }
-}
+}*/
 
 //Fonction qui gère la logique métier de la route POST (inscription d'un nouvel user)
 exports.signup = (req, res, next) => {

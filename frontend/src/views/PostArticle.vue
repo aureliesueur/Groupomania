@@ -2,10 +2,10 @@
 <template>
     <div class="jumbotron"> 
         <h1 v-if="!submitted">Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
-        <div v-if="!submitted" class="container text-center form form">
+        <div v-if="!submitted" class="container text-center form formArticle">
             <h2>Pour poster un nouvel article, merci de remplir les champs suivants :</h2>
             <div class="row">
-                <div class="form__box col-12 col-md-9">
+                <div class="formArticle__box col-12 col-md-9">
                     <div class="form-group">
                         <label for="title">Titre</label>
                         <input 
@@ -137,7 +137,7 @@ $color-secondary: #324392;
     height: 150px!important;
 }
 
-.form {
+.formArticle {
     position: absolute;
     top: 20%;
     z-index: 2;

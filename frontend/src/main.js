@@ -3,8 +3,7 @@ import App from './App.vue'
 import router from './router'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-import { ValidationProvider, extend } from "vee-validate"
-import { required, email } from "vee-validate/dist/rules"
+
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -30,6 +29,9 @@ import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 
 library.add(faUser, faUserPlus, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye, faPlusSquare, faThumbsUp, faThumbsDown, faWindowClose)
+
+import { ValidationProvider, extend } from "vee-validate"
+import { required, email } from "vee-validate/dist/rules"
 
 //Configuration de Vee-Validate
 extend("required", {
