@@ -128,6 +128,10 @@ h2 {
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {
+    h1 {
+        font-size: 1.4em!important;
+        margin-top: 120px!important;
+    }
     .img-narrow {
         display: block!important;
     }

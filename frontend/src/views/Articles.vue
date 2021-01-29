@@ -18,7 +18,7 @@
                             :lien_web="article.lien_web"
                             :username="article.username"
                             :date_post="article.date_post"
-                            class="col-9"
+                            class="col-12 col-sm-9"
                             />
                         </li>
                     </ul>
@@ -97,6 +97,8 @@ export default {
     
 ul, li {
     list-style: none;
+    width: 100%;
+    margin: auto!important;
 }
 
 a {
@@ -106,6 +108,26 @@ a {
     
 .btn-add {
     margin-left: -200px;
+}
+    
+   
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    h1 {
+        margin-bottom: 0px!important;
+    }
+    .btn-add {
+        margin: 10px 0 40px 0;
+        font-size: 1em!important;
+        
+    }
+    .card {
+        line-height: 20px;
+        &__body {
+            padding-left: 0!important;
+            padding-right: 0!important;
+        }
+    }
 }
 
     

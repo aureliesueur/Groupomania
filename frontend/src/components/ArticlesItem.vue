@@ -6,7 +6,7 @@
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__btnDetails col-4 col-md-3" :href="'/articles/' + slug"><font-awesome-icon :icon="['fas', 'info-circle']" /> En savoir plus</a>
+            <a class="btn btn-secondary card__btnDetails" :href="'/articles/' + slug"><font-awesome-icon :icon="['fas', 'info-circle']" /> En savoir plus</a>
         </div>
         <div v-else class="card text-center">
             <div class="card-header card__header">
@@ -15,26 +15,22 @@
                         <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
                         <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
                     </li>
-                    <li class="list-group-item card__thumbs">
+                    <li class="list-group-item">
                         <div v-if="liked || disliked" >
-                            <div v-if="liked" class="thumbs">
-                            <span @click="deleteThumb" class="thumbs__up thumbs__red"><i class="far fa-thumbs-up"></i></span>
-                            <span class="thumbs__down disabled"><i class="far fa-thumbs-down"></i></span>
+                            <div v-if="liked">
+                                <span class="card__stats">{{ totalLikes }} </span><span @click="deleteThumb" class="thumbs thumbs__up thumbs__red"><i class="far fa-thumbs-up thumbs"></i></span>
+                                <span class="thumbs__down thumbs disabled"><i class="far fa-thumbs-down thumbs"></i></span><span class="card__stats"> {{ totalDislikes }}</span>
                             </div>
-                            <div v-else class="thumbs">
-                                <span class="thumbs__up disabled"><i class="far fa-thumbs-up"></i></span>
-                                <span @click="deleteThumb" class="thumbs__down thumbs__red"><i class="far fa-thumbs-down"></i></span>
+                            <div v-else>
+                                <span class="card__stats">{{ totalLikes }} </span><span class="thumbs thumbs__up disabled"><i class="far fa-thumbs-up thumbs"></i></span>
+                                <span @click="deleteThumb" class="thumbs thumbs__down thumbs__red"><i class="far fa-thumbs-down thumbs"></i></span><span class="card__stats"> {{ totalDislikes }}</span>
                             </div>
                         </div>
                         <div v-else>
-                            <div class="thumbs">
-                                <span @click="sendLike" class="thumbs__up"><i class="far fa-thumbs-up"></i></span>
-                                <span @click="sendDislike" class="thumbs__down"><i class="far fa-thumbs-down"></i></span>
+                            <div>
+                                <span class="card__stats">{{ totalLikes }} </span><span @click="sendLike" class="thumbs thumbs__up"><i class="far fa-thumbs-up thumbs"></i></span>
+                                <span @click="sendDislike" class="thumbs thumbs__down"><i class="far fa-thumbs-down thumbs"></i></span><span class="card__stats"> {{ totalDislikes }}</span>
                             </div>
-                        </div>
-                        <div class="card__stats">
-                            <p>{{ totalLikes }} <i class="far fa-thumbs-up"></i></p>
-                            <p>{{ totalDislikes }} <i class="far fa-thumbs-down"></i></p>
                         </div>
                     </li>
                 </ul>
@@ -143,8 +139,9 @@ $color-bkg: #f1f1f2;
     
 .card {
     border: 2px solid $color-secondary!important;
-    padding: 10px!important;
+    padding: 0 0 10px 0!important;
     margin: auto;
+    width: 100%!important;
     margin-bottom: 20px;
     border-radius: 10px;
     box-shadow: 5px 5px 2px #CCC;
@@ -166,7 +163,7 @@ $color-bkg: #f1f1f2;
             background: $color-bkg;
         }
     }
-    &__comments, &__thumbs, &__stats {
+    &__comments {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -204,9 +201,8 @@ $color-bkg: #f1f1f2;
 }
 
 .thumbs {
-    font-size: 1.5em;
-    margin-top: -8px!important;
-
+    font-size: 1.2em!important;
+    margin-bottom: 10px!important;
     &__up {
         margin-right: 10px;
     }
@@ -215,6 +211,7 @@ $color-bkg: #f1f1f2;
     }
     &__red {
        color: $color-primary;
+        font-size: 1.3em!important;
     }
 }
     
@@ -222,6 +219,19 @@ $color-bkg: #f1f1f2;
     color: lighten($color-secondary, 40%);
     &:hover {
         color: lighten($color-secondary, 40%);
+    }
+}
+    
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    .card {
+        &__btnDetails {
+            height: 40px!important;
+        }
+        &__comments {
+            font-size: 0.7em;
+        }
+    
     }
 }
 

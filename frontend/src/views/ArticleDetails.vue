@@ -371,6 +371,13 @@ $color-secondary: #324392;
 .btn-suppress {
     margin-bottom: 30px;
 }
+    
+@media screen and (max-width : 768px) {  
+    h1 {
+        margin-bottom: 20px!important;
+    }
+   
+}
 </style>
 
 
