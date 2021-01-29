@@ -97,6 +97,7 @@ h2 {
 .navbar {
     position: fixed!important;
     width: 100%;
+    padding-right: 30%!important;
     z-index: 2;
 }
     
@@ -131,6 +132,9 @@ h2 {
     h1 {
         font-size: 1.4em!important;
         margin-top: 120px!important;
+    }
+    .navbar {
+        padding-right: 2%!important;
     }
     .img-narrow {
         display: block!important;

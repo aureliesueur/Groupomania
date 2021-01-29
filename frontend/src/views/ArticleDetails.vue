@@ -2,7 +2,10 @@
 <template>
     <div>
         <div class="jumbotron container">
-            <h1>{{ title }}</h1>
+            <div id="header">
+                <router-link to="/articles"><button type= "button" class="btn btn-primary" id="arrow-only"><i class="fas fa-arrow-left"></i></button></router-link>
+                <h1>{{ title }}</h1>
+            </div>
             <div class="row">
                 <div v-if="currentArticle[0]" class="container col-12 col-md-10">
                     <div class='row'>
@@ -25,7 +28,7 @@
                                 :totalLikes="totalLikes"
                                 :totalDislikes="totalDislikes" />
                             <ul id="commentsList">
-                                <h3>Derniers commentaires postés</h3>
+                                <h3 id="comments-title">Derniers commentaires postés</h3>
                                 <li v-for="comment in comments" :key="comment.id">
                                     <CommentsItem
                                         :id="comment.id"
@@ -41,7 +44,7 @@
                     </div>
                 </div>
                 
-                <div v-if="validUser || isAdmin" class="col-12 col-md-2">
+                <div v-if="validUser || isAdmin" class="col-12 col-md-2 action">
                     <button type= "button" class="btn btn-primary" @click="showUpdate"><font-awesome-icon :icon="['fas', 'edit']" /> Modifier</button><br/>
                     <p>{{ messageUpdate }}</p>
                     <button type= "button" class="btn btn-primary btn-suppress" @click="confirmDelete"><font-awesome-icon :icon="['fas', 'trash-alt']" /> Supprimer</button>
@@ -54,7 +57,7 @@
                     <router-view />
                 </div>
                 <div v-else>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary btn-action"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
             </div>
@@ -372,11 +375,37 @@ $color-secondary: #324392;
     margin-bottom: 30px;
 }
     
+#arrow-only {
+    display: none;
+}
+        
 @media screen and (max-width : 768px) {  
     h1 {
         margin-bottom: 20px!important;
+        margin-top: 40px!important;
     }
-   
+    #header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 110px!important;
+    }
+    .action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .btn-suppress {
+        margin-bottom: 0!important;
+    }
+    #comments-title {
+        font-size: 1.1em;
+    }
+    #arrow-only {
+        display: block;
+    } 
 }
 </style>
 

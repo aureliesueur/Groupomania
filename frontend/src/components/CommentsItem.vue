@@ -12,7 +12,8 @@
         <div v-else class="card text-center">   
             <div class="card-header card__header">
                 <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
-                <a class="btn btn-primary card__btnDetails" :href="slug + '/comments/' + cryptoslug"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a>
+                <a class="btn btn-primary card__btnDetails" id="icon-text" :href="slug + '/comments/' + cryptoslug"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a>
+                <a class="btn btn-primary card__btnDetails" id="icon-only" :href="slug + '/comments/' + cryptoslug"><font-awesome-icon :icon="['fas', 'info-circle']" /></a>
             </div>
             <div class="card-body card__body">
                 <p class="card-text card__text ">{{ content }}</p>
@@ -93,6 +94,19 @@ $color-secondary: #324392;
         padding: 5px;
         height: 30px;
         font-size: 0.9em;
+    }
+}
+    
+#icon-only {
+    display: none;
+}
+    
+@media screen and (max-width : 768px) {  
+    #icon-only {
+        display: block;
+    } 
+    #icon-text {
+        display: none;
     }
 }
 

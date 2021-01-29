@@ -9,7 +9,7 @@
         <div v-else class="deconnect">
             <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
             <div class="admin">
-                <p v-if="isUserAdmin">ADMINISTRATEUR CONNECTE</p>
+                <p v-if="isUserAdmin">ADMINISTRATEUR<br/>CONNECTE</p>
             </div>
         </div>
     </div>
@@ -69,7 +69,7 @@ $color-secondary: #324392;
     
 .admin {
     position: fixed;
-    right: 10px;
+    right: 30px;
     top: 70px;
     z-index: 4;
     color: #FFF;    
@@ -83,6 +83,10 @@ $color-secondary: #324392;
     }
     .btn, .btn-primary {
         font-size: 0.8em!important;
+    }
+    .admin {
+        width: 150px!important;
+        right: 80px;
     }
 }
     

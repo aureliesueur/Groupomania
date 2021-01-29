@@ -143,7 +143,7 @@ $color-bkg: #f1f1f2;
     margin: auto;
     width: 100%!important;
     margin-bottom: 20px;
-    border-radius: 10px;
+    border-radius: 10px!important;
     box-shadow: 5px 5px 2px #CCC;
     &__header {
         color: $color-secondary;
