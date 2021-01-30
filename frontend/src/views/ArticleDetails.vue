@@ -46,28 +46,28 @@
                 
                 <div v-if="validUser || isAdmin" class="col-12 col-md-2 action">
                     <button type= "button" class="btn btn-primary" @click="showUpdate"><font-awesome-icon :icon="['fas', 'edit']" /> Modifier</button><br/>
-                    <p>{{ messageUpdate }}</p>
+                    <p class="text">{{ messageUpdate }}</p>
                     <button type= "button" class="btn btn-primary btn-suppress" @click="confirmDelete"><font-awesome-icon :icon="['fas', 'trash-alt']" /> Supprimer</button>
-                    <div v-if="confirmation">
-                        <p>Etes-vous sûr de vouloir supprimer ce post ?</p>
+                    <div v-if="confirmation" class="confirmation">
+                        <p class="text">Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
-                        <button type= "button" class="btn btn-primary" @click="refreshPage">Annuler</button>
+                        <button type= "button" class="btn btn-primary cancel-btn" @click="refreshPage">Annuler</button>
                     </div>
                     <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
-                <div v-else>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary btn-action"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                <div v-else class="action">
+                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
             </div>
         </div>
         
         <div v-if="askForUpdate">
-            <div class="container text-center form">
+            <form class="container text-center formUpdate">
                 <h2 >Pour modifier cet article, merci de remplir les champs suivants :</h2>
                 <div class="row">
-                    <div class="col-12 col-md-9 text-center form__box ">
+                    <div class="col-12 col-md-9 text-center formUpdate__box ">
                         <div class="form-group">
                             <label for="title">Titre</label>
                             <input 
@@ -115,7 +115,7 @@
                         <button class="btn btn-success" @click="updateArticle">Enregistrer vos modifications</button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
         
         <Identification
@@ -356,7 +356,7 @@ $color-secondary: #324392;
    padding:0 30px;     
 }
     
-.form {
+.formUpdate {
     position: absolute;
     top: 20%;
     left: 15%;
@@ -395,6 +395,7 @@ $color-secondary: #324392;
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: auto;
         margin-top: 20px;
     }
     .btn-suppress {
@@ -406,6 +407,29 @@ $color-secondary: #324392;
     #arrow-only {
         display: block;
     } 
+    .formUpdate {
+        left: 5%;
+        max-width: 90%;
+        top: 140%;
+        &__box {
+            margin: auto;
+        }
+    }
+    .cancel-btn {
+        margin-left: 20px!important;
+    }
+    .confirmation {
+        background: #FFF;
+        border: 1px solid $color-primary;
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 50%;
+    }
+    .text {
+        color: $color-primary;
+        font-style: italic;
+    }
 }
 </style>
 

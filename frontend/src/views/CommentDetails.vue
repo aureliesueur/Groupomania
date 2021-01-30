@@ -15,7 +15,7 @@
                                 :date_post="currentComment.date_post"
                                 :slug="currentComment.slug" />
                         </div>
-                        <div>
+                        <div class="comment__btnBox">
                             <div v-if="validUser && !deleted" class="comment__btns">
                                 <button @click="showUpdate" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'edit']" /></button>
                                 <button @click="suppressComment" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'trash-alt']" /></button>
@@ -27,10 +27,10 @@
                             </div>
                         </div>
                         
-                        <div v-if="updateIsAsked" class="form container">
-                            <h2 class="form__title">Entrez votre nouveau commentaire :</h2>
+                        <div v-if="updateIsAsked" class="formUpComment container">
+                            <h2 class="formUpComment__title">Entrez votre nouveau commentaire :</h2>
                             <div class="row">
-                                <div class="col-12 col-md-9 text-center form__box">
+                                <div class="col-12 col-md-9 text-center formUpComment__box">
                                     <div class="form-group">
                                         <label for="content"></label>
                                         <textarea
@@ -167,6 +167,10 @@ $color-secondary: #324392;
         margin-top: 10px;
         margin-bottom: 20px;
     }
+    &__btnBox {
+        margin: auto!important;
+        margin-top: 20px!important;
+    }
     &__msg {
         margin-top: 120px;
         margin-bottom: 20px;
@@ -175,21 +179,25 @@ $color-secondary: #324392;
     }
 }
     
-    .form {
-        position: absolute;
-        top: 10%;
-        width: 50%;
-        z-index: 2;
-        background: #DDD;
-        padding: 20px;
-        margin: auto;
-        border: 1px solid $color-secondary;
-        &__box {
-           margin: auto;
-        }
-        &__title {
-            margin-bottom: 15px!important;
-        }
+.formUpComment {
+    position: absolute;
+    top: 10%;
+    width: 50%;
+    z-index: 2;
+    background: #DDD;
+    padding: 20px;
+    margin: auto;
+    border: 1px solid $color-secondary;
+    &__box {
+       margin: auto;
     }
+    &__title {
+        margin-bottom: 15px!important;
+    }
+}
+    
+h1 {
+    margin-bottom: 0px!important;
+}
     
 </style>

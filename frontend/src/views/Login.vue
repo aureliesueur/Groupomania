@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <div v-if="!submitted" class="jumbotron container">
             <h1>Entrez vos identifiants de connexion</h1>
-            <form class="row">
+            <form class="row formLogin">
                 <div class="form-group col-12 col-md-6 text-center">
                     <label for="email">Votre email</label>
                     <input 
@@ -89,7 +89,7 @@ export default {
 $color-primary: #cc2810;
 $color-secondary: #324392;
     
-form {
+.formLogin {
     justify-content: center;
     margin: auto;
     max-width: 60%!important;
@@ -102,7 +102,11 @@ h1 {
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  
-    
+    .formLogin {
+    justify-content: center;
+    margin: auto;
+    max-width: 80%!important;
+}
  }
     
 </style>

@@ -38,4 +38,13 @@ export default {
     }
 }
     
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    .call {
+        top: 30%;
+        max-width: 95%;
+        margin-left: 2%;
+    }
+}
+    
 </style>

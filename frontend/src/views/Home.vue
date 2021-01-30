@@ -241,9 +241,18 @@ $color-tertiary: #6f757b;
         margin-right: 20px;
     }
 }
+ 
+    
+//Média query pour adapter la page au smartphone
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+}
+    
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  
+    .intro__box {
+        margin-top: 50px;
+    }
     .info {
         right: 70px!important;
         top: 70px;
@@ -255,10 +264,17 @@ $color-tertiary: #6f757b;
         width: 90%;
     }
     .intro {
+        padding-bottom: 50px!important;
+        &__gifs, &__articles {
+            min-height: 150px!important;
+            margin-bottom: 40px!important;
+        }
         &__articles {
             margin-right: 0px!important;
-            margin-bottom: 20px!important;
         }
+    }
+    .card__icon {
+        margin-bottom: 10px;
     }
 }
 

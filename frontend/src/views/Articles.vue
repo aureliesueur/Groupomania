@@ -18,7 +18,7 @@
                             :lien_web="article.lien_web"
                             :username="article.username"
                             :date_post="article.date_post"
-                            class="col-12 col-sm-9"
+                            class="col-12 col-sm-9"          
                             />
                         </li>
                     </ul>

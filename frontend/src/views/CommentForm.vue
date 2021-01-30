@@ -17,10 +17,13 @@
                                 placeholder="Formidable !"
                                 name="content" />
                         </div>
-                        <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
-                        <div v-if="forbidden">
-                            <p>Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
-                            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                        <div class="action">
+                            <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
+                            <router-link to="/articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
+                            <div v-if="forbidden">
+                                <p>Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
+                                <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -109,6 +112,16 @@ $color-secondary: #324392;
     padding: 20px;
     &__box {
         margin: auto;
+    }
+}
+    
+@media screen and (max-width : 768px) {      
+    .action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        margin-top: 20px;
     }
 }
     

@@ -74,6 +74,19 @@ $color-secondary: #324392;
     z-index: 4;
     color: #FFF;    
 }
+ 
+    
+//Média query pour adapter la page au smartphone
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+    .auth, .deconnect {
+        right: 80px;
+        top: 20px;
+    }
+    .admin {
+        width: 150px!important;
+        right: 100px;
+    }
+}
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  

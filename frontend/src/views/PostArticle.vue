@@ -151,6 +151,15 @@ $color-secondary: #324392;
         margin: auto;
     }
 }
+    
+   
+//Média query pour adapter la page au smartphone
+@media screen and (max-width : 768px) {  
+    .formArticle {
+        max-width: 90%!important;
+        margin-left: 2%!important;
+    }
+}
 </style>
 
 

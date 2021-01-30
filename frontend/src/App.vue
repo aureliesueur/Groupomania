@@ -98,14 +98,14 @@ h2 {
     position: fixed!important;
     width: 100%;
     padding-right: 30%!important;
-    z-index: 2;
+    z-index: 3;
 }
     
 .menu {
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 3;
+    z-index: 5;
     background: $color-secondary;
     border-radius: 5px;
     padding: 20px;
@@ -125,6 +125,12 @@ h2 {
   
 .img-narrow {
     display: none!important;
+}
+   
+    
+//Média query pour adapter la page au smartphone
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+  
 }
     
 //Média query pour adapter la page au smartphone

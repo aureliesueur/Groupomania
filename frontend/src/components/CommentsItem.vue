@@ -104,6 +104,8 @@ $color-secondary: #324392;
 @media screen and (max-width : 768px) {  
     #icon-only {
         display: block;
+        width: 25px!important;
+        height: 25px!important;
     } 
     #icon-text {
         display: none;
