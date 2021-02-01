@@ -1,12 +1,11 @@
 <template>
     <div>
         <div class="container jumbotron text-center">
-            <div v-if="!submitted" class=" formComment">
-                <h2>Pour ajouter un commentaire, remplissez le champ suivant :</h2>
+            <div v-if="!submitted" class="formComment">
+                <h1>Pour ajouter un commentaire, remplissez le champ suivant :</h1>
                 <div class="row">
-                    <div class="col-12 col-md-9 text-center formComment__box ">
+                    <div role="form" class="col-12 col-md-9 text-center formComment__box ">
                         <div class="form-group">
-                            <label for="content"></label>
                             <textarea
                                 type="textarea" 
                                 rows="5"
@@ -18,11 +17,11 @@
                                 name="content" />
                         </div>
                         <div class="action">
-                            <button class="btn btn-success btn-post" @click="postComment">Poster ce commentaire</button>
-                            <router-link to="/articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
+                            <button class="btn btn-success btn-post" @click="postComment" aria-label="Poster le commentaire">Poster ce commentaire</button>
+                            <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
                             <div v-if="forbidden" class="confirmation">
                                 <p class="text">Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
-                                <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                                <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                             </div>
                         </div>
                     </div>
@@ -30,7 +29,7 @@
             </div>
             <div v-if="submitted" >
                 <p>{{ message }}</p>
-                <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                 <router-view />
             </div>
         </div>
@@ -105,6 +104,14 @@ $color-secondary: #324392;
 .jumbotron {
     padding-top: 200px!important;
     padding-bottom: 100px!important;
+}
+ 
+.formComment h1 {
+    font-size: 1.5em!important;
+    color: $color-primary;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px!important;
 }
     
 .formComment {

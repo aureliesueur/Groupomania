@@ -1,7 +1,7 @@
 <template>
    <div>
         <div class="jumbotron container comment">
-            <p class="comment__msg">{{ message }}</p>
+            <h1 class="comment__msg">{{ message }}</h1>
             <div class="row">
                 <div class="container col-12 col-md-10">
                     <div class='row'>
@@ -22,13 +22,13 @@
                             </div>
 
                             <div>
-                                <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                                <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                                 <router-view />
                             </div>
                         </div>
                         
                         <div v-if="updateIsAsked" class="formUpComment container">
-                            <h2 class="formUpComment__title">Entrez votre nouveau commentaire :</h2>
+                            <h2 class="formUpComment__title">Mettez à jour votre commentaire :</h2>
                             <div class="row">
                                 <div class="col-12 col-md-9 text-center formUpComment__box">
                                     <div class="form-group">
@@ -43,7 +43,7 @@
                                             placeholder="content"
                                             name="content" />
                                     </div>
-                                    <button class="btn btn-success" @click="updateComment">Poster ce commentaire</button>
+                                    <button class="btn btn-success" @click="updateComment">Valider</button>
                                 </div>
                             </div>
                         </div>
@@ -173,7 +173,7 @@ $color-secondary: #324392;
     }
     &__msg {
         margin-top: 120px;
-        margin-bottom: 20px;
+        margin-bottom: 40px!important;
         font-size: 1.2em!important;
         color:$color-secondary;
     }

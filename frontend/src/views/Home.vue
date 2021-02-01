@@ -8,12 +8,12 @@
                     <div class="card col-12 col-sm-5 intro__articles">
                         <h2 class="card__title">Partagez vos articles préférés</h2>
                         <span class="card__icon"><i class="fas fa-newspaper"></i></span>
-                        <router-link to="/articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
+                        <router-link to="/articles" aria-label="Lien vers la plateforme d'articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
                     </div>
                     <div class="card col-12 col-sm-5 intro__gifs">
                         <h2 class="card__title">Partagez vos vidéos préférées</h2>
                         <span class="card__icon"><i class="fas fa-file-video"></i></span>
-                        <router-link to="/gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
+                        <router-link to="/gifs" aria-label="Lien vers la plateforme Gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
                     </div>
                     <router-view />
                 </div>

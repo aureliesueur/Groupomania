@@ -36,14 +36,16 @@
                 </ul>
             </div>
             <div class="card-body card__body ">
-                <h3 class="card-title card__title">{{ title }}</h3>
+                <h2 class="card-title card__title">{{ title }}</h2>
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
                 <p class="card-text card__description">{{ description }}</p>
             </div>
-            <div card__links>
-                <a :href="lien_web" target="_blank" class="btn btn-primary card__btnWeb" >Lien vers l'article</a>
-                <iframe  :src="lien_web" width="200px" height="200px" sandbox class="card__iframe"></iframe>
+            <div v-if="presenceOfLinks === true" card__links >
+                <a :href="lien_web" target="_blank" class="btn btn-primary card__btnWeb" aria-label="Lien vers le site web">Lien vers l'article</a>
+                <iframe :src="lien_web" width="200px" height="200px" title="Aperçu du site web" aria-label="Aperçu du site web" sandbox class="card__iframe"></iframe>
+            </div>
+            <div v-else card__links >
             </div>
         </div>
     </div>
@@ -77,7 +79,6 @@ export default {
 		},
         lien_web: {
 			type: String,
-            //default : ""
 		},
 		username: {
 			type: String,
@@ -87,6 +88,10 @@ export default {
 			type: String,
 			required: true
 		},
+        presenceOfLinks: {
+            type: Boolean,
+            required: true
+        },
         sendLike: {
 			type: Function,
 			required: true
@@ -139,7 +144,7 @@ $color-bkg: #f1f1f2;
     
 .card {
     border: 2px solid $color-secondary!important;
-    padding: 0 0 10px 0!important;
+    padding: 0 0 30px 0!important;
     margin: auto;
     width: 100%!important;
     margin-bottom: 20px;
@@ -190,9 +195,6 @@ $color-bkg: #f1f1f2;
     &__links iframe, a {
         display: block;
         margin: auto;
-    }
-    &__links iframe {
-        margin-bottom: 20px!important;
     }
     &__btnWeb {
         margin-top: 10px!important;

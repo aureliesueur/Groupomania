@@ -2,13 +2,13 @@
 <template>
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
-            <img src="/images/icon-left-font.png" width="400" alt="Site logo" class="navbar-brand img-large" />
+            <img src="/images/icon-left-font.png" width="400" aria-label="Logo Groupomania" alt="Logo Groupomania" class="navbar-brand img-large" />
             <img src="/images/icon.png" width="100" alt="Site logo" class="navbar-brand img-narrow"/>
             <div class="collapse navbar-collapse" id="navCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active "><router-link to="/" class="nav-link " >Accueil</router-link></li>   
-                    <li class="nav-item "><router-link to="/articles" class="nav-link ">Partagez vos articles</router-link></li>
-                    <li class="nav-item "><router-link to="/gifs" class="nav-link navbar__link" >Partagez vos Gifs</router-link></li>
+                    <li class="nav-item active "><router-link to="/" class="nav-link" aria-label="Lien vers la page accueil" >Accueil</router-link></li>   
+                    <li class="nav-item "><router-link to="/articles" class="nav-link " aria-label="Lien vers la plateforme articles">Partagez vos articles</router-link></li>
+                    <li class="nav-item "><router-link to="/gifs" class="nav-link navbar__link" aria-label="Lien vers la plateforme Gifs">Partagez vos Gifs</router-link></li>
                 </ul>
             </div>
             <button @click="toggleNav" type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,9 +22,9 @@
         <nav v-if="toggleOn" >
             <div class="menu">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><router-link to="/" class="nav-link" >Accueil</router-link></li>   
-                    <li class="nav-item"><router-link to="/articles" class="nav-link">Partagez vos articles</router-link></li>
-                    <li class="nav-item"><router-link to="/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>
+                    <li class="nav-item active"><router-link to="/" class="nav-link" aria-label="Lien vers la page accueil">Accueil</router-link></li>   
+                    <li class="nav-item"><router-link to="/articles" class="nav-link" aria-label="Lien vers la plateforme articles">Partagez vos articles</router-link></li>
+                    <li class="nav-item"><router-link to="/gifs" class="nav-link" aria-label="Lien vers la plateforme Gifs">Partagez vos Gifs</router-link></li>
                     <li class="nav-item menu__close" @click="toggleNav"><i class="far fa-window-close"></i></li>
                 </ul>
             </div>
@@ -101,6 +101,33 @@ h2 {
     width: 100%;
     padding-right: 30%!important;
     z-index: 3;
+}
+    
+.nav-link {
+    color: #FFF!important;
+    position: relative;
+    &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%) scaleX(0);
+        transform-origin: 50% 50%;
+        width: 100%;
+        height: 2px;
+        background-color: rgba(255,255,255,0.8);
+        transition: transform 250ms;
+    }
+    &:hover {
+        font-weight: bold!important;
+        &::after {
+          transform: translateX(-50%) scaleX(1);
+        }
+    }
+}
+    
+.active {
+    font-weight: bold!important;
 }
     
 .navbar-toggler {

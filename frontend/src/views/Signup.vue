@@ -5,7 +5,7 @@
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
-            <div class="formSignup row">
+            <div role="form" class="formSignup row">
                 <div class="formSignup__box col-12 col-md-7">
                     <div class="form-group ">
                         <label for="username">Votre pseudo</label>
@@ -89,9 +89,9 @@
                 </div>
             </div>
         </div>
-        <div v-else>
-            <h3>Votre compte a bien été créé, nous sommes ravis de vous compter parmi nous !</h3>
-        </div>
+        <!--<div v-else>
+            <h2>Votre compte a bien été créé, nous sommes ravis de vous compter parmi nous !</h2>
+        </div>-->
 
         <div>
             <Footer />
@@ -171,6 +171,10 @@ export default {
 $color-primary: #cc2810;
 $color-secondary: #324392;    
  
+.formSignup__box {
+    margin: auto!important;
+}
+    
 .error {
     font-weight: bold;
     color: $color-primary;
@@ -180,14 +184,7 @@ $color-secondary: #324392;
     margin-top: 20px!important;
     margin-bottom: 40px!important;
 }
-    
-    
-//Média query pour adapter la page à la tablette
-@media screen and (min-width : 768px) and (max-width : 1024px) { 
-     .formSignup__box {
-        margin: auto!important;
-    }
-}
+
     
 </style>
 

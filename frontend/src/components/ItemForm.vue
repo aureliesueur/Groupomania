@@ -2,7 +2,7 @@
     <div class="container text-center form">
         <h2>{{ message }}</h2>
         <div class="row">
-            <div class="col-12 col-md-9 text-center form__box ">
+            <div role="form" class="col-12 col-md-9 text-center form__box ">
                 <div class="form-group">
                     <label for="title">Titre</label>
                     <input 

@@ -41,7 +41,7 @@ exports.validate = (method) => {
 //Fontion qui gère la logique métier de la route POST (ajout d'un nouvel article)
 exports.createArticle = (req, res, next) => {
     let sql = `INSERT INTO Articles(title, slug, description, subject, lien_web, user_id, date_post) VALUES (?)`;
-    let newSlug = slugify(req.body.slug);
+    let newSlug = (slugify(req.body.slug, { lower: true }) + new Date().toLocaleDateString('fr-CA'));
     let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.body.user_id, req.body.date_post];
     db.query(sql, [values], function(err, data, fields) {
         if (err) {

@@ -26,14 +26,14 @@
                            class="form-control"
                            placeholder="Bidibul75">
                 </div>
-                <button class="btn btn-success auth__btn" type="submit" @click="loginSubmit">Connectez-vous</button>
+                <button class="btn btn-success auth__btn" type="submit" @click="loginSubmit">Valider</button>
             </form>
         </div>
-        <div v-else>
-            <h3>Bienvenue, nous sommes ravis de vous retrouver !</h3>
-            <router-link to="/articles"><button class="btn btn-primary">Revenir au Forum Groupomania Articles</button></router-link>
-            <router-link to="/gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
-        </div>
+       <!--<div v-else>
+            <h2>Bienvenue, nous sommes ravis de vous retrouver !</h2>
+            <router-link to="/articles" aria-label="Lien vers la plateforme d'articles"><button class="btn btn-primary">Revenir au Forum Groupomania Articles</button></router-link>
+            <router-link to="/gifs" aria-label="Lien vers la plateforme de Gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
+        </div>-->
 
         <Footer />
     </div>

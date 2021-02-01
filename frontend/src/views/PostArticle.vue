@@ -2,29 +2,30 @@
 <template>
     <div class="jumbotron"> 
         <h1 v-if="!submitted">Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
-        <div v-if="!submitted" class="container text-center form formArticle">
+        <div role="form" v-if="!submitted" class="container text-center form formArticle">
             <h2>Pour poster un nouvel article, merci de remplir les champs suivants :</h2>
             <div class="row">
                 <div class="formArticle__box col-12 col-md-9">
                     <div class="form-group">
                         <label for="title">Titre</label>
                         <input 
-                               type="text" 
-                               class="form-control"
-                               required
-                               v-model="article.title"
-                               name="title" />
+                           type="text" 
+                           class="form-control"
+                           required
+                           v-model="article.title"
+                           name="title"
+                           aria-required="true" />
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea 
-                                type="textarea" 
-                                rows="5"
-                                cols="30"
-                                class="form-control"
-                                v-model="article.description"
-                                name="description"
-                                id="description"/>
+                            type="textarea" 
+                            rows="5"
+                            cols="30"
+                            class="form-control"
+                            v-model="article.description"
+                            name="description"
+                            id="description"/>
                     </div>
                     <div class="form-group">
                         <select name="subject" v-model="article.subject">
@@ -45,22 +46,22 @@
                     <div class="form-group">
                         <label for="lien-web">Lien web de l'article</label>
                         <input 
-                               type="text" 
-                               class="form-control"
-                               v-model="article.lien_web"
-                               name="lien-web" />
+                           type="text" 
+                           class="form-control"
+                           v-model="article.lien_web"
+                           name="lien-web" />
                     </div>
                     <div class="post-btns">
-                        <button class="btn btn-success" @click="saveArticle">Envoyer votre post</button>
-                        <router-link to="/articles" class="btn-return"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                        <button class="btn btn-success" @click="saveArticle">Valider ce post</button>
+                        <router-link to="/articles" class="btn-return" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                         <router-view />
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else>
-            <h3>Votre article a bien été envoyé !</h3>
-            <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+        <div v-else id="afterMessage">
+            <h3>Votre article a bien été posté sur la plateforme !</h3>
+            <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
             <router-view />
         </div>
         
@@ -145,7 +146,7 @@ $color-secondary: #324392;
     top: 20%;
     z-index: 2;
     max-width: 60%!important;
-    margin-left: 8%!important;
+    margin-left: 15%!important;
     background-color: #DDD;
     border-radius: 20px;
     border: 2px solid $color-primary;
@@ -155,9 +156,14 @@ $color-secondary: #324392;
     }
 }
 
-    .btn-return {
-        margin-left: 10px;
-    }
+.btn-return {
+    margin-left: 10px;
+}
+    
+#afterMessage {
+    padding-top: 200px;
+    padding-bottom: 150px;
+}
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

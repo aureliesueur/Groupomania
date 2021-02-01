@@ -3,7 +3,7 @@
     <div>
         <div class="jumbotron container">
             <div id="header">
-                <router-link to="/articles"><button type= "button" class="btn btn-primary" id="arrow-only"><i class="fas fa-arrow-left"></i></button></router-link>
+                <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary" id="arrow-only" aria-label="Lien vers la page d'accueil"><i class="fas fa-arrow-left"></i></button></router-link>
                 <h1>{{ title }}</h1>
             </div>
             <div class="row article-box">
@@ -20,6 +20,7 @@
                                 :lien_web="currentArticle[0].lien_web"
                                 :username="currentArticle[0].username"
                                 :date_post="currentArticle[0].date_post"
+                                :presenceOfLinks="presenceOfLinks"
                                 :sendLike="sendLike"
                                 :sendDislike="sendDislike"
                                 :deleteThumb="deleteThumb"
@@ -27,8 +28,8 @@
                                 :disliked="disliked"
                                 :totalLikes="totalLikes"
                                 :totalDislikes="totalDislikes" />
+                            <h3 id="comments-title">Derniers commentaires postés</h3>
                             <ul id="commentsList">
-                                <h3 id="comments-title">Derniers commentaires postés</h3>
                                 <li v-for="comment in comments" :key="comment.id">
                                     <CommentsItem
                                         :id="comment.id"
@@ -53,11 +54,11 @@
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
                         <button type= "button" class="btn btn-primary cancel-btn" @click="refreshPage">Annuler</button>
                     </div>
-                    <router-link to="/articles" class="valid__return"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                    <router-link to="/articles" class="valid__return" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
                 <div v-else class="action invalid">
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                    <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
             </div>
@@ -112,7 +113,7 @@
                                    v-model="currentArticle[0].lien_web"
                                    name="lien-web" />
                         </div>
-                        <button class="btn btn-success" @click="updateArticle">Enregistrer vos modifications</button>
+                        <button class="btn btn-success" @click="updateArticle" aria-label="Valider">Enregistrer vos modifications</button>
                     </div>
                 </div>
             </form>
@@ -157,7 +158,8 @@ export default {
             thumbs: [],
             totalLikes: 0,
             totalDislikes: 0,
-            alreadyCommented: false
+            alreadyCommented: false,
+            presenceOfLinks: true
         }
     },
     computed: {
@@ -174,6 +176,9 @@ export default {
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
                     console.log(this.currentArticle[0].id);
+                    if (this.currentArticle[0].lien_web === null || this.currentArticle[0].lien_web === undefined || this.currentArticle[0].lien_web === "") {
+                        this.presenceOfLinks = false;
+                    }
                     localStorage.setItem("articleId", this.currentArticle[0].id);
                         if (this.currentArticle[0].user_id !== this.userId) {
                             this.validUser = false;  
@@ -484,7 +489,7 @@ h1 {
     .formUpdate {
         left: 5%;
         max-width: 90%;
-        top: 140%;
+        top: 100%;
         &__box {
             margin: auto;
         }
