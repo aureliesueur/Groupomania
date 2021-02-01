@@ -5,8 +5,6 @@
 const Article = require("../models/Article"); 
 //Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");
-//Importation du package fs, qui permet entre autres de supprimer des fichiers
-//const fs = require("fs");
 //Importation du middleware de vérification des inputs par express-validator 
 const {body} = require('express-validator');
 //Importation du package qui permet de créer et de vérifier les tokens d'authentification 

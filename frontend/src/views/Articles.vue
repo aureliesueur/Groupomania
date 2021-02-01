@@ -1,47 +1,47 @@
 <!--PAGE D'ACCUEIL DU FORUM ARTICLES PRESENTANT LA LISTE COMPLETE DES ARTICLES-->
 <template>
-    <div class="jumbotron">
-        <h1>Plateforme de partage d'articles</h1>
+    <div>
+        <div class="jumbotron articles">
+            <h1>Plateforme de partage d'articles</h1>
+            <div>
+                <h2>Derniers articles postés</h2>
+                <div class="container">
+                    <div class='row'>
+                        <ul class="col-12 col-md-10">
+                            <li v-for="article in articles" :key="article.title">
+                                <ArticlesItem 
+                                :id="article.id"
+                                :title="article.title"
+                                :slug="article.slug"
+                                :description="article.description"
+                                :subject="article.subject"
+                                :lien_web="article.lien_web"
+                                :username="article.username"
+                                :date_post="article.date_post"
+                                class="col-12 col-sm-9"          
+                                />
+                            </li>
+                        </ul>
 
-        <div>
-            <h2>Derniers articles postés</h2>
-            <div class="container">
-                <div class='row'>
-                    <ul class="col-12 col-md-10">
-                        <li v-for="article in articles" :key="article.title">
-                            <ArticlesItem 
-                            :id="article.id"
-                            :title="article.title"
-                            :slug="article.slug"
-                            :description="article.description"
-                            :subject="article.subject"
-                            :lien_web="article.lien_web"
-                            :username="article.username"
-                            :date_post="article.date_post"
-                            class="col-12 col-sm-9"          
-                            />
-                        </li>
-                    </ul>
-                    
-                    <div class="col-12 col-md-2">
-                        <router-link to="/articles/add" aria-label="Poster l'article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
-                    </div> 
+                        <div class="col-12 col-md-2">
+                            <router-link to="/articles/add" aria-label="Poster l'article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
+                        </div> 
+                    </div>
                 </div>
+                <p v-if="articles.length == 0">{{ message }}</p>
             </div>
-            <p v-if="articles.length == 0">{{ message }}</p>
-        </div>
-        
-        <CallToLogin v-if="!isLoggedIn" />
-         
-        <Identification
-            :logout="logout"
-            :isUserAdmin="isUserAdmin"
-            :isLoggedIn="isLoggedIn"
-              />
-        
-        
+
+            <CallToLogin v-if="!isLoggedIn" />
+
+            <Identification
+                :logout="logout"
+                :isUserAdmin="isUserAdmin"
+                :isLoggedIn="isLoggedIn"
+                  />
+
+        </div> 
         <Footer />
-        
+
     </div>
 </template>
 
@@ -94,6 +94,30 @@ export default {
 </script>
 
 <style lang="scss">   
+ 
+//Déclaration variables SASS
+$color-primary: #cc2810;
+$color-secondary: #324392;
+    
+    
+.articles {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 0!important;
+    background: url("/images/network3.jpg") fixed no-repeat!important;
+    background-size: cover!important;
+    &__box {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin-left: -200px;
+        & img {
+            margin-top: 40px;
+            border: 1px solid $color-primary;
+        }
+    }
+ }
     
 ul, li {
     list-style: none;
@@ -107,9 +131,18 @@ a {
 }
     
 .btn-add {
-    margin-left: -200px;
+    width: 200px!important;
+    margin-left: -200px!important;
 }
     
+
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+    .btn-add {
+        width: 200px!important;
+        margin-left: -150px!important;
+    }
+}
    
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  
@@ -117,7 +150,7 @@ a {
         margin-bottom: 0px!important;
     }
     .btn-add {
-        margin: 10px 0 40px 0;
+        margin: 10px auto!important;
         font-size: 1em!important;
         
     }

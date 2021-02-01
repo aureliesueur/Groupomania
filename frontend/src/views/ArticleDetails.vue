@@ -1,15 +1,15 @@
 <!--PAGE D'AFFICHAGE DES DETAILS D'UN ARTICLE-->
 <template>
     <div>
-        <div class="jumbotron container">
+        <div class="jumbotron container articlePage">
             <div id="header">
                 <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary" id="arrow-only" aria-label="Lien vers la page d'accueil"><i class="fas fa-arrow-left"></i></button></router-link>
                 <h1>{{ title }}</h1>
             </div>
-            <div class="row article-box">
+            <div class="row articlePage__box">
                 <div v-if="currentArticle[0]" class="container col-12 col-md-10">
                     <div class='row'>
-                        <div class="article__box col-12 col-lg-9">
+                        <div class="col-12 col-lg-11">
                             <ArticlesItem 
                                 :key="currentArticle[0].title"
                                 :id="currentArticle[0].id"
@@ -62,68 +62,68 @@
                     <router-view />
                 </div>
             </div>
-        </div>
+       
         
-        <div v-if="askForUpdate">
-            <form class="container text-center formUpdate">
-                <h2 >Pour modifier cet article, merci de remplir les champs suivants :</h2>
-                <div class="row">
-                    <div class="col-12 col-md-9 text-center formUpdate__box ">
-                        <div class="form-group">
-                            <label for="title">Titre</label>
-                            <input 
-                                   type="text" 
-                                   class="form-control"
-                                   required
-                                   v-model="currentArticle[0].title"
-                                   name="title" />
+            <div v-if="askForUpdate">
+                <form class="container text-center formUpdate">
+                    <h2 >Pour modifier cet article, merci de remplir les champs suivants :</h2>
+                    <div class="row">
+                        <div class="col-12 col-md-9 text-center formUpdate__box ">
+                            <div class="form-group">
+                                <label for="title">Titre</label>
+                                <input 
+                                       type="text" 
+                                       class="form-control"
+                                       required
+                                       v-model="currentArticle[0].title"
+                                       name="title" />
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea 
+                                        type="textarea" 
+                                        rows="5"
+                                        cols="30"
+                                        class="form-control"
+                                        v-model="currentArticle[0].description"
+                                        name="description"
+                                        id="description"/>
+                            </div>
+                            <div class="form-group">
+                                <select name="subject" v-model="currentArticle[0].subject">
+                                    <option value="">--Choisissez un sujet--</option>
+                                    <option value="Economie">Economie</option>
+                                    <option value="Politique">Politique</option>
+                                    <option value="Média">Média</option>
+                                    <option value="Societé">Société</option>
+                                    <option value="Psychologie">Psychologie</option>
+                                    <option value="Climat">Climat</option>
+                                    <option value="Sport">Sport</option>
+                                    <option value="Culture">Culture</option>
+                                    <option value="Santé">Santé</option>
+                                    <option value="Autre">Autre</option>
+                                </select>
+                                <span> Sujet de l'article : </span>
+                            </div>
+                            <div class="form-group">
+                                <label for="lien-web">Lien web de l'article</label>
+                                <input 
+                                       type="text" 
+                                       class="form-control"
+                                       v-model="currentArticle[0].lien_web"
+                                       name="lien-web" />
+                            </div>
+                            <button class="btn btn-success" @click="updateArticle" aria-label="Valider">Enregistrer vos modifications</button>
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea 
-                                    type="textarea" 
-                                    rows="5"
-                                    cols="30"
-                                    class="form-control"
-                                    v-model="currentArticle[0].description"
-                                    name="description"
-                                    id="description"/>
-                        </div>
-                        <div class="form-group">
-                            <select name="subject" v-model="currentArticle[0].subject">
-                                <option value="">--Choisissez un sujet--</option>
-                                <option value="Economie">Economie</option>
-                                <option value="Politique">Politique</option>
-                                <option value="Média">Média</option>
-                                <option value="Societé">Société</option>
-                                <option value="Psychologie">Psychologie</option>
-                                <option value="Climat">Climat</option>
-                                <option value="Sport">Sport</option>
-                                <option value="Culture">Culture</option>
-                                <option value="Santé">Santé</option>
-                                <option value="Autre">Autre</option>
-                            </select>
-                            <span> Sujet de l'article : </span>
-                        </div>
-                        <div class="form-group">
-                            <label for="lien-web">Lien web de l'article</label>
-                            <input 
-                                   type="text" 
-                                   class="form-control"
-                                   v-model="currentArticle[0].lien_web"
-                                   name="lien-web" />
-                        </div>
-                        <button class="btn btn-success" @click="updateArticle" aria-label="Valider">Enregistrer vos modifications</button>
                     </div>
-                </div>
-            </form>
-        </div>
-        
-        <Identification
-            :logout="logout"
-            :isUserAdmin="isUserAdmin"
-            :isLoggedIn="isLoggedIn" />
+                </form>
+            </div>
 
+            <Identification
+                :logout="logout"
+                :isUserAdmin="isUserAdmin"
+                :isLoggedIn="isLoggedIn" />
+        </div>
         <Footer />
     </div>
 </template>
@@ -357,8 +357,18 @@ h1 {
     margin-bottom: 40px!important;
 }
     
-.article__box {
-    margin: auto;
+.articlePage {
+    background: url("/images/network3.jpg") fixed no-repeat!important;
+    background-size: cover!important;
+    margin-bottom: 0!important;
+    padding-bottom: 30px!important;
+    width: 100%;
+    &__box {
+        margin: auto;
+        display: flex!important;
+        flex-direction: row!important;
+        justify-content: center!important;
+    }
 }
   
 #commentsList {
@@ -391,6 +401,7 @@ h1 {
 .cancel-btn {
         margin-left: 20px!important;
 }
+    
 .confirmation {
     background: #FFF;
     border: 1px solid $color-primary;

@@ -11,10 +11,10 @@ const commentCtrl = require("../controllers/comment");
 
 
 //Requête POST pour poster un nouveau commentaire sur un article
-router.post("/", auth, /*articleCtrl.validate("createComment"),*/ commentCtrl.createComment); 
+router.post("/", auth, commentCtrl.validate("createComment"), commentCtrl.createComment); 
 
 //Requête PUT pour modifier un commentaire déjà posté
-router.put("/:cryptoslug", auth, /*articleCtrl.validate("modifyArticle"), */commentCtrl.modifyComment); 
+router.put("/:cryptoslug", auth, commentCtrl.validate("modifyComment"), commentCtrl.modifyComment); 
 
 //Requête DELETE pour supprimer un commentaire qu'on a posté
 router.delete("/:cryptoslug", auth, commentCtrl.deleteComment); 

@@ -19,7 +19,10 @@ const cors = require("./services/cors");
 const helmet = require("helmet");                     
 //Package hpp (to protect your system from HTTP parameter pollution attacks)
 const hpp = require("hpp");
-const limiter = require("./services/limiter");
+//Middleware express-rate-limit pour limiter le nombre de requêtes et de tentatives de connexion
+const rateLimit = require("./services/limiter");
+//const reqLimiter = require("./services/limiter");
+
 //Middleware toobusy.js pour empêcher le Denial of Service (DoS) en monitorant le event loop
 const toobusy = require("./services/toobusy");
 
@@ -40,15 +43,15 @@ app.use(cors);
 /*SECURITE : lancement des middlewares et plugins de sécurité*/
 app.use(helmet());
 app.use(hpp());
-app.use("/auth", limiter);
+app.use("/auth", rateLimit.authLimiter);
+app.use("/articles", rateLimit.reqLimiter);
 app.use(toobusy);
 app.use(session);
 
 //Mise à un format exploitable du body des requêtes
 app.use(bodyParser.json());
 
-//Définit les route des trois routeurs "Article"/"User"/"Comment" ainsi que pour les images téléchargées
-//app.use("/images", express.static(path.join(__dirname, "images")));
+//Définit les route des trois routeurs "Article"/"User"/"Comment" 
 app.use("/articles", articleRoutes);
 app.use("/auth", userRoutes);
 app.use('/articles/:slug/comments', commentRoutes);

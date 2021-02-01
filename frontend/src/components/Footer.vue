@@ -62,6 +62,9 @@ $color-footerbkg: #101010;
     background: $color-footerbkg;
     color: #aaa;
     padding: 20px 20px 20px 40px;
+    min-width: 100%!important;
+    margin-top: 0!important;
+    margin-bottom: 0!important;
     & h2 {
         color: lighten($color-primary, 10%);
         font-size: 1.2em;

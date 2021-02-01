@@ -1,9 +1,11 @@
 <!--PAGE D'ACCUEIL PRESENTANT LES ACCES AUX DEUX PLATEFORMES-->
 <template>
     <div>
-        <div>
+        <div class="introPage">
             <section v-if="isLoggedIn" class="container jumbotron text-center intro">
-                <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
+                <div>
+                    <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social de votre entreprise !</h1>
+                </div>
                 <div class='row intro__box text-center'>
                     <div class="card col-12 col-sm-5 intro__articles">
                         <h2 class="card__title">Partagez vos articles préférés</h2>
@@ -20,7 +22,7 @@
             </section>
 
             <section v-else class="container jumbotron text-center intro">
-                <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social interne de votre entreprise !</h1>
+                <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social de votre entreprise !</h1>
                 <div class='row intro__box text-center'>
                     <div class="card col-12 col-sm-5 intro__articles">
                         <h2 class="card__title">Partagez vos articles préférés</h2>
@@ -162,8 +164,25 @@ $color-primary: #cc2810;
 $color-secondary: #324392;
 $color-tertiary: #6f757b;
     
+.introPage {
+    background: url("/images/network7.jpg") no-repeat!important;
+    background-size: cover!important;
+    transparency: 0.6;
+    z-index: 0;
+}
 .intro {
     margin-bottom: 0!important;
+    padding-top: 90px!important;
+    background: none!important;
+    z-index: 3;
+    //background: url("/images/network7.jpg") no-repeat!important;
+   //background-size: cover!important;
+    padding-bottom: 100px!important;
+    &__title {
+        background: rgba(250, 250, 250, 0.6);
+        padding: 10px;
+        color: #000;
+    }
     &__box {
         margin-top: 80px;
         display: flex;

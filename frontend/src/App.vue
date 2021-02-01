@@ -86,6 +86,8 @@ h1 {
     font-size: 2em!important;
     margin-top: 150px!important;
     margin-bottom: 30px!important;
+    font-weight: bold;
+    color: #OOO;
 }
     
 h2 {
@@ -106,6 +108,7 @@ h2 {
 .nav-link {
     color: #FFF!important;
     position: relative;
+    line-height: 20px;
     &::after {
         content: '';
         position: absolute;

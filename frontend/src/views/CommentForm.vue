@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="container jumbotron text-center">
+        <div class="container jumbotron text-center comment">
+            <img src="/images/network11.jpg" width="250" alt="Groupe échangeant des commentaires" aria-label="Groupe échangeant des commentaires" class="comment__img" />
             <div v-if="!submitted" class="formComment">
                 <h1>Pour ajouter un commentaire, remplissez le champ suivant :</h1>
                 <div class="row">
@@ -101,12 +102,17 @@ export default {
 $color-primary: #cc2810;
 $color-secondary: #324392;
  
-.jumbotron {
-    padding-top: 200px!important;
-    padding-bottom: 100px!important;
+.comment {
+    padding-top: 180px!important;
+    padding-bottom: 120px!important;
+    margin-bottom: 0!important;
+    &__img {
+        margin-bottom: 0px;
+    }
 }
  
 .formComment h1 {
+    margin-top: 20px!important;
     font-size: 1.5em!important;
     color: $color-primary;
     font-weight: bold;

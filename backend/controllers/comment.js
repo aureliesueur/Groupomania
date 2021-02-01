@@ -5,22 +5,19 @@
 const Comment = require("../models/Comment"); 
 //Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");
-//Importation du package fs, qui permet entre autres de supprimer des fichiers
-//const fs = require("fs");
 //Importation du middleware de vérification des inputs par express-validator 
-//const {body} = require('express-validator');
+const {body} = require('express-validator');
 //Importation du plugin qui permet de créer un slug à partir du titre de l'article
 var slugify = require("slugify");
 //Importation du plugin qui permet de créer un slug aléatoire pour chaque comment
 var cryptoRandomString = require('crypto-random-string');
 
 //Fonction de validation des inputs pour les requêtes post et put
-/*exports.validate = (method) => {
+exports.validate = (method) => {
   switch (method) {
     case 'createComment': {
      return [ 
         body('content').exists().isAlpha(),
-        body('note').optional().isInt(),
         body('user_id').exists().isInt(),
         body('article_id').exists().isInt(),
         body('date_post').exists().isDate(),
@@ -29,14 +26,13 @@ var cryptoRandomString = require('crypto-random-string');
     case 'modifyComment': {
      return [ 
         body('content').exists().isAlpha(),
-        body('note').optional().isInt(),
         body('user_id').exists().isInt(),
         body('article_id').exists().isInt(),
         body('date_post').exists().isDate(),
        ]   
     }  
   }
-}*/
+}
 
 
 //Fontion qui gère la logique métier de la route POST (ajout d'un nouveau comment)
