@@ -91,7 +91,6 @@ $color-secondary: #324392;
         font-size: 1.8em;
         padding: 0;
         opacity: 0.7;
-        //overflow: hidden;
         border-radius: 50%;
         transition: all 0.3s ease-in-out;
         &:hover {
@@ -104,6 +103,21 @@ $color-secondary: #324392;
     display: none!important;
 }
     
+.img-narrow {
+    display: block!important;
+}
+   
+    
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+    .footer__logo {
+        padding-right: 20px!important;
+    }
+    .img-narrow {
+        display: block!important;
+    }
+}
+
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  
     .img-large {

@@ -18,10 +18,10 @@
                                 name="content" />
                         </div>
                         <div class="action">
-                            <button class="btn btn-success" @click="postComment">Poster ce commentaire</button>
+                            <button class="btn btn-success btn-post" @click="postComment">Poster ce commentaire</button>
                             <router-link to="/articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
-                            <div v-if="forbidden">
-                                <p>Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
+                            <div v-if="forbidden" class="confirmation">
+                                <p class="text">Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
                                 <router-link to="/articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                             </div>
                         </div>
@@ -111,10 +111,41 @@ $color-secondary: #324392;
     margin: auto!important;
     padding: 20px;
     &__box {
-        margin: auto;
+        margin: auto!important;
+    }
+}
+
+.btn-post {
+    margin-right: 20px!important;
+}
+    
+.confirmation {
+        background: #FFF;
+        border: 1px solid $color-primary;
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 0%;
+        margin-left: 8%!important;
+        width: 80%;
+}
+    
+.text {
+    color: $color-primary;
+    font-style: italic;
+}
+
+
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+    .confirmation {
+        bottom: 0%;
     }
 }
     
+    
+    
+//Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {      
     .action {
         display: flex;

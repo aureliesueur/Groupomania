@@ -106,8 +106,17 @@ h1 {
     justify-content: center;
     margin: auto;
     max-width: 80%!important;
-}
+    }
  }
+    
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+     .formLogin {
+    justify-content: center;
+    margin: auto;
+    max-width: 80%!important;
+    }
+}
     
 </style>
 

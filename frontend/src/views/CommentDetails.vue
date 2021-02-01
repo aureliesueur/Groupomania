@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="container col-12 col-md-10">
                     <div class='row'>
-                        <div v-if="!deleted" div class="col-12 col-md-9">
+                        <div v-if="!deleted" div class="col-12 col-md-9 comment__box">
                             <CommentsItem
                                 :id="currentComment.id"
                                 :cryptoslug="currentComment.cryptoslug"
@@ -198,6 +198,13 @@ $color-secondary: #324392;
     
 h1 {
     margin-bottom: 0px!important;
+}
+    
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+    .comment__box {
+        margin: auto!important;
+    }
 }
     
 </style>

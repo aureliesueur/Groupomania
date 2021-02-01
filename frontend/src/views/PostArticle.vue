@@ -50,8 +50,11 @@
                                v-model="article.lien_web"
                                name="lien-web" />
                     </div>
-
-                    <button class="btn btn-success" @click="saveArticle">Envoyer votre post</button>
+                    <div class="post-btns">
+                        <button class="btn btn-success" @click="saveArticle">Envoyer votre post</button>
+                        <router-link to="/articles" class="btn-return"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                        <router-view />
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,8 +154,19 @@ $color-secondary: #324392;
         margin: auto;
     }
 }
+
+    .btn-return {
+        margin-left: 10px;
+    }
     
-   
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+     .formArticle {
+        max-width: 90%!important;
+        margin-left: 2%!important;
+    }
+}
+    
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  
     .formArticle {

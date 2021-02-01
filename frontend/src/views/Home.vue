@@ -80,7 +80,7 @@ import { mapGetters, mapState } from 'vuex'
 export default {
 	name: "Home",
 	components: {
-		Footer, Identification, CallToLogin
+		Footer, CallToLogin, Identification 
 	},
 	data() {
 		return {
@@ -245,6 +245,12 @@ $color-tertiary: #6f757b;
     
 //Média query pour adapter la page au smartphone
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
+    .info {
+        right: 60px!important;
+    }
+    .card {
+        padding-bottom: 30px!important;
+    }
 }
     
     
@@ -256,6 +262,9 @@ $color-tertiary: #6f757b;
     .info {
         right: 70px!important;
         top: 70px;
+    }
+     h2 {
+        padding-bottom: 10px!important;
     }
     .btn, .btn-primary {
         font-size: 0.8em!important;
@@ -275,6 +284,14 @@ $color-tertiary: #6f757b;
     }
     .card__icon {
         margin-bottom: 10px;
+    }
+}
+    
+//Média query pour régler un détail de mise en page
+@media screen and (min-width : 572px) and (max-width : 768px) {
+    h2 {
+        font-size: 1.2em!important;
+        padding-bottom: 10px!important;
     }
 }
 

@@ -6,10 +6,10 @@
                 <router-link to="/articles"><button type= "button" class="btn btn-primary" id="arrow-only"><i class="fas fa-arrow-left"></i></button></router-link>
                 <h1>{{ title }}</h1>
             </div>
-            <div class="row">
+            <div class="row article-box">
                 <div v-if="currentArticle[0]" class="container col-12 col-md-10">
                     <div class='row'>
-                        <div class="article__box col-12 col-md-9">
+                        <div class="article__box col-12 col-lg-9">
                             <ArticlesItem 
                                 :key="currentArticle[0].title"
                                 :id="currentArticle[0].id"
@@ -44,19 +44,19 @@
                     </div>
                 </div>
                 
-                <div v-if="validUser || isAdmin" class="col-12 col-md-2 action">
-                    <button type= "button" class="btn btn-primary" @click="showUpdate"><font-awesome-icon :icon="['fas', 'edit']" /> Modifier</button><br/>
+                <div v-if="validUser || isAdmin" class="col-12 col-md-2 action valid">
+                    <button type= "button" class="btn btn-primary action__btn" @click="showUpdate"><font-awesome-icon :icon="['fas', 'edit']" /> Modifier</button><br/>
                     <p class="text">{{ messageUpdate }}</p>
-                    <button type= "button" class="btn btn-primary btn-suppress" @click="confirmDelete"><font-awesome-icon :icon="['fas', 'trash-alt']" /> Supprimer</button>
+                    <button type= "button" class="btn btn-primary btn-suppress action__btn" @click="confirmDelete"><font-awesome-icon :icon="['fas', 'trash-alt']" /> Supprimer</button>
                     <div v-if="confirmation" class="confirmation">
                         <p class="text">Etes-vous sûr de vouloir supprimer ce post ?</p>
                         <button type= "button" class="btn btn-primary" @click="deleteArticle">Supprimer</button>
                         <button type= "button" class="btn btn-primary cancel-btn" @click="refreshPage">Annuler</button>
                     </div>
-                    <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
+                    <router-link to="/articles" class="valid__return"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
-                <div v-else class="action">
+                <div v-else class="action invalid">
                     <router-link to="/articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                     <router-view />
                 </div>
@@ -347,6 +347,10 @@ export default {
 //Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
+ 
+h1 {
+    margin-bottom: 40px!important;
+}
     
 .article__box {
     margin: auto;
@@ -378,15 +382,85 @@ $color-secondary: #324392;
 #arrow-only {
     display: none;
 }
-        
+
+.cancel-btn {
+        margin-left: 20px!important;
+}
+.confirmation {
+    background: #FFF;
+    border: 1px solid $color-primary;
+    padding: 10px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 50%;
+}
+.text {
+    color: $color-primary;
+    font-style: italic;
+}
+    
+    
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+     h1 {
+        margin-bottom: 30px!important;
+        margin-top: 80px!important;
+    }
+    #header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 60px!important;
+    }
+    .article-box {
+        display: flex;
+        flex-direction: column;
+    }
+    #arrow-only {
+        display: block;
+    } 
+    .invalid {
+        margin: auto;
+        margin-top: 20px;
+    }
+    .valid__return {
+        display: none;
+    }
+    .action {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        margin-top: 20px;
+        &__btn {
+            width: 200px!important;
+        }
+    }
+    .formUpdate {
+        margin: auto!important;
+        max-width: 80%;
+        margin-left: -5%!important;
+        top: 80%;
+        &__box {
+            margin: auto;
+        }
+    }
+    .cancel-btn {
+        margin-left: 20px!important;
+    }
+    .confirmation {
+        width: 400px;
+    }
+}
+    
+//Média query pour adapter la page au smartphone   
 @media screen and (max-width : 768px) {  
     h1 {
-        margin-bottom: 20px!important;
+        margin-bottom: 30px!important;
         margin-top: 40px!important;
     }
     #header {
         display: flex;
-        flex-direction: row;
         justify-content: space-around;
         align-items: center;
         margin-top: 110px!important;

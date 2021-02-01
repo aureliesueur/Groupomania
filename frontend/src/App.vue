@@ -4,17 +4,19 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
             <img src="/images/icon-left-font.png" width="400" alt="Site logo" class="navbar-brand img-large" />
             <img src="/images/icon.png" width="100" alt="Site logo" class="navbar-brand img-narrow"/>
+            <div class="collapse navbar-collapse" id="navCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active "><router-link to="/" class="nav-link " >Accueil</router-link></li>   
+                    <li class="nav-item "><router-link to="/articles" class="nav-link ">Partagez vos articles</router-link></li>
+                    <li class="nav-item "><router-link to="/gifs" class="nav-link navbar__link" >Partagez vos Gifs</router-link></li>
+                </ul>
+            </div>
             <button @click="toggleNav" type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navCollapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><router-link to="/" class="nav-link" >Accueil</router-link></li>   
-                    <li class="nav-item"><router-link to="/articles" class="nav-link">Partagez vos articles</router-link></li>
-                    <li class="nav-item"><router-link to="/gifs" class="nav-link" >Partagez vos Gifs</router-link></li>
-                </ul>
-            </div>
+            
+        
         </nav>
             
         <nav v-if="toggleOn" >
@@ -32,7 +34,7 @@
 </template>
 
 <script>   
-    
+ 
  export default {
 	name: "App", 
     data() {
@@ -101,6 +103,12 @@ h2 {
     z-index: 3;
 }
     
+.navbar-toggler {
+    position: absolute;
+    right: 10px; 
+    top: 10px;
+}
+    
 .menu {
     position: absolute;
     left: 0;
@@ -130,7 +138,16 @@ h2 {
     
 //Média query pour adapter la page au smartphone
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
-  
+   .navbar-toggler {
+        right: 10px; 
+        top: 20px;
+    }
+    .img-narrow {
+        display: block!important;
+    }
+    .img-large {
+        display: none!important;
+    }
 }
     
 //Média query pour adapter la page au smartphone
@@ -138,9 +155,6 @@ h2 {
     h1 {
         font-size: 1.4em!important;
         margin-top: 120px!important;
-    }
-    .navbar {
-        padding-right: 2%!important;
     }
     .img-narrow {
         display: block!important;

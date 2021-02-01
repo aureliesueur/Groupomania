@@ -5,9 +5,9 @@
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
-            <div class="form row">
-                <div class="form__box col-12 col-md-7">
-                    <div class="form-group">
+            <div class="formSignup row">
+                <div class="formSignup__box col-12 col-md-7">
+                    <div class="form-group ">
                         <label for="username">Votre pseudo</label>
                         <ValidationProvider name="user.username" rules="required|minmax:3,10">
                             <div slot-scope="{ errors }">
@@ -179,6 +179,14 @@ $color-secondary: #324392;
 .btn-submit {
     margin-top: 20px!important;
     margin-bottom: 40px!important;
+}
+    
+    
+//Média query pour adapter la page à la tablette
+@media screen and (min-width : 768px) and (max-width : 1024px) { 
+     .formSignup__box {
+        margin: auto!important;
+    }
 }
     
 </style>

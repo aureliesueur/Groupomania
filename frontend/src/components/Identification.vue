@@ -76,15 +76,16 @@ $color-secondary: #324392;
 }
  
     
-//Média query pour adapter la page au smartphone
+//Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
     .auth, .deconnect {
-        right: 80px;
+        right: 40px;
         top: 20px;
     }
     .admin {
-        width: 150px!important;
-        right: 100px;
+        width: 130px!important;
+        right: 80px;
+        font-size: 0.8em;
     }
 }
     
@@ -100,6 +101,7 @@ $color-secondary: #324392;
     .admin {
         width: 150px!important;
         right: 80px;
+        font-size: 0.7em;
     }
 }
     
