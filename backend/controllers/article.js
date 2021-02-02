@@ -39,7 +39,7 @@ exports.validate = (method) => {
 //Fontion qui gère la logique métier de la route POST (ajout d'un nouvel article)
 exports.createArticle = (req, res, next) => {
     let sql = `INSERT INTO Articles(title, slug, description, subject, lien_web, user_id, date_post) VALUES (?)`;
-    let newSlug = (slugify(req.body.slug, { lower: true }) + new Date().toLocaleDateString('fr-CA'));
+    let newSlug = slugify(req.body.slug, { lower: true });
     let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.body.user_id, req.body.date_post];
     db.query(sql, [values], function(err, data, fields) {
         if (err) {
@@ -48,21 +48,20 @@ exports.createArticle = (req, res, next) => {
         res.json({status: 201, data, message: "Nouvel article posté avec succès !"})
     });
 };
-
  
-
  //Fontion qui gère la logique métier de la route PUT (modification d'un article posté par son auteur)
  exports.modifyArticle = (req, res, next) => {
      //Recherche dans la BDD de l'article à modifier
-    let sql = "SELECT * FROM Articles WHERE slug = ?";
-    db.query(sql, [req.params.slug], function(err, data) {
+    let sql = `SELECT * FROM Articles WHERE slug = ?`;
+    let value = [req.params.slug];
+    db.query(sql, [value], function(err, data) {
         if (err) {
             return res.status(400).json({err});
         }
         var articleToModify = data[0];
         //Comparaison de l'id du user courant avec l'id du user ayant posté l'article
         if (articleToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
-            let newSlug = slugify(req.body.slug);
+            let newSlug = slugify(req.body.slug, { lower: true });
             let sql = `UPDATE Articles SET title = ?, slug = ?, description = ?, subject = ?, lien_web  = ?, user_id = ?, date_post = ? WHERE slug = ?`;
             let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.user.userId, req.body.date_post, req.params.slug];
             db.query(sql, values, function(err, data, fields) {
@@ -77,6 +76,7 @@ exports.createArticle = (req, res, next) => {
         }
     });
  }
+
 
         
 //Fontion qui gère la logique métier de la route DELETE (suppression d'un article posté)

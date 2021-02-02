@@ -70,7 +70,7 @@ exports.getAllThumbs = (req, res, next) => {
             if (err) {
                 return res.status(400).json({err});
             } 
-            console.log(data);
+            //console.log(data);
             res.json({status: 200, data, message: "Likes/dislikes affichés avec succès !"})
           });
     });
@@ -91,7 +91,7 @@ exports.getUserThumb = (req, res, next) => {
             if (err) {
                 return res.status(400).json({err});
             } 
-            console.log(data);
+            //console.log(data);
             res.json({status: 200, data, message: "Like/dislike du user affiché avec succès !"})
           });
     });

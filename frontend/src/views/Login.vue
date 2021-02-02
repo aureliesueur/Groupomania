@@ -28,6 +28,7 @@
                 </div>
                 <button class="btn btn-success auth__btn" type="submit" @click="loginSubmit">Valider</button>
             </form>
+            <p id="message">{{ errorMessage }}</p>
         </div>
        <!--<div v-else>
             <h2>Bienvenue, nous sommes ravis de vous retrouver !</h2>
@@ -54,6 +55,7 @@ export default {
             email: "",
             password: "",
             submitted: false,
+            errorMessage: ""
         }
     },
     methods: {
@@ -76,7 +78,15 @@ export default {
                     this.submitted = true;
                     this.$router.push('/');
                 })
-                .catch(error => console.log(error));
+                .catch(error => {
+                    console.log(error);
+                    if (error.response.status === 401) {
+                        this.errorMessage = "Mot de passe incorrect !";
+                    }
+                    else if (error.response.status === 429) {
+                        this.errorMessage = "Vous avez dépassé le nombre maximal de tentatives, merci de réessayer ultérieurement.";
+                    }
+                })
         }
     }
 }
@@ -97,6 +107,13 @@ $color-secondary: #324392;
     
 h1 {
     color: $color-primary;
+}
+    
+#message {
+    display: inline block;
+    margin: auto;
+    color: $color-primary;
+    font-weight: bold;
 }
     
     

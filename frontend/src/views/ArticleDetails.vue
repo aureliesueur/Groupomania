@@ -28,7 +28,7 @@
                                 :disliked="disliked"
                                 :totalLikes="totalLikes"
                                 :totalDislikes="totalDislikes" />
-                            <h3 id="comments-title">Derniers commentaires postés</h3>
+                            <h3 id="comments-title">{{ messageComments }}</h3>
                             <ul id="commentsList">
                                 <li v-for="comment in comments" :key="comment.id">
                                     <CommentsItem
@@ -149,6 +149,7 @@ export default {
             title: "Cet article vous intéresse ? Découvrez-le en détails...",
             currentArticle: [],
             comments: [],
+            messageComments: "",
             validUser: false,
             askForUpdate: false,
             confirmation: false,
@@ -237,7 +238,12 @@ export default {
             CommentsDataServices.getAll(slug, { Authorization: `Bearer ${this.token}`})
                 .then(response => {
                     this.comments = JSON.parse(JSON.stringify(response.data.data));
-                    console.log(response.data.data);
+                    console.log(this.comments);
+                    if (this.comments.length !== 0) {
+                        this.messageComments = "Derniers commentaires postés"; 
+                    } else {
+                        this.messageComments = "Il n'y a aucun commentaire pour le moment.";
+                    }
                     this.comments.forEach(comment => {
                         if (comment.user_id === this.userId) {
                             this.alreadyCommented = true;
@@ -428,9 +434,9 @@ h1 {
         align-items: center;
         margin-top: 60px!important;
     }
-    .article-box {
-        display: flex;
-        flex-direction: column;
+    .articlePage__box {
+        display: flex!important;
+        flex-direction: column!important;
     }
     #arrow-only {
         display: block;
@@ -441,6 +447,9 @@ h1 {
     }
     .valid__return {
         display: none;
+    }
+    #comments-title {
+        font-size: 1.1em;
     }
     .action {
         display: flex;
@@ -456,7 +465,8 @@ h1 {
         margin: auto!important;
         max-width: 80%;
         margin-left: -5%!important;
-        top: 80%;
+        top: 50%;
+        z-index: 6;
         &__box {
             margin: auto;
         }

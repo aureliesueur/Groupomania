@@ -44,7 +44,7 @@ app.use(cors);
 app.use(helmet());
 app.use(hpp());
 app.use("/auth", rateLimit.authLimiter);
-app.use("/articles", rateLimit.reqLimiter);
+//app.use("/articles", rateLimit.reqLimiter);
 app.use(toobusy);
 app.use(session);
 
