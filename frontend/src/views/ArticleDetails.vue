@@ -211,8 +211,9 @@ export default {
                 user_id: this.userId,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
+            console.log(data);
             Authorization = `Bearer ${this.token}`;
-            ArticlesDataServices.update(this.currentArticle[0].slug, data, { Authorization }) 
+            ArticlesDataServices.update(this.$route.params.slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.messageUpdate = "Cet article a été modifié avec succès.";
