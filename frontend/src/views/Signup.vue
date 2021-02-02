@@ -83,8 +83,8 @@
                         </ValidationProvider>
                     </div>
 
-                    <button v-if="foundError===false" class="btn btn-success btn-submit" @click="showErrors">Créer votre compte</button> 
-                    <button v-else class="btn btn-success btn-submit" @click="createUser">Créer votre compte</button>
+                    <button v-if="foundError!==false" class="btn btn-success btn-submit" type="submit" value="Submit" @click="createUser">Créer votre compte</button> 
+                    <button v-else type="submit" value="Submit" class="btn btn-success btn-submit" @click="checkForm">Vérifier</button>
                     
                 </div>
             </div>
@@ -131,8 +131,7 @@ export default {
             'setToken',
             'setIsAdmin'
         ]),
-        createUser(e) { 
-            e.preventDefault()
+        createUser() { 
             var data = {
                 username: this.user.username,
                 email: this.user.email,
@@ -151,14 +150,14 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
-        showErrors() {
+        checkForm(e) {
             if (this.errors !== []) {
                 this.foundError = true;
-                this.submitted = false;
-                this.errors = [];
             } else {
-                this.createUser();
+                this.foundError = false;
+                return true;
             }
+            e.preventDefault();
         }
     }
 }
