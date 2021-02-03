@@ -4,31 +4,43 @@
     <div class="jumbotron">
         <div v-if="!submitted" class="jumbotron container">
             <h1>Entrez vos identifiants de connexion</h1>
-            <form class="row formLogin">
-                <div class="form-group col-12 col-md-6 text-center">
-                    <label for="email">Votre email</label>
-                    <input 
-                           id="email" 
-                           type="email" 
-                           v-model="email" 
-                           placeholder="pauline.martin@free.fr" 
-                           required 
-                           autofocus
-                           class="form-control">
-                </div>
-                <div class="form-group col-12 col-md-6 text-center">
-                    <label for="password">Votre mot de passe</label>
-                    <input 
-                           id="password" 
-                           type="password" 
-                           v-model="password" 
-                           required
-                           class="form-control"
-                           placeholder="Bidibul75">
-                </div>
-                <button class="btn btn-success auth__btn" type="submit" @click="loginSubmit">Valider</button>
-            </form>
-            <p id="message">{{ errorMessage }}</p>
+            <ValidationObserver v-slot="{ invalid, handleSubmit }">
+                <form class="row formLogin" @submit.prevent="handleSubmit(loginSubmit)">
+                    <div class="form-group col-12 col-md-6 text-center">
+                        <label for="email">Votre email</label>
+                        <ValidationProvider name="user.email" rules="required|email">
+                            <div slot-scope="{ errors }">
+                                <input 
+                                    id="email" 
+                                    type="email" 
+                                    v-model="email" 
+                                    placeholder="pauline.martin@free.fr" 
+                                    required 
+                                    autofocus
+                                    class="form-control">
+                                <p class="error">{{ errors[0] }}</p>
+                            </div>
+                        </ValidationProvider>
+                    </div>
+                    <div class="form-group col-12 col-md-6 text-center">
+                        <label for="password">Votre mot de passe</label>
+                        <ValidationProvider name="user.password" rules="required|minmax:3,10">
+                            <div slot-scope="{ errors }">
+                                <input 
+                                       id="password" 
+                                       type="password" 
+                                       v-model="password" 
+                                       required
+                                       class="form-control"
+                                       placeholder="Bidibul75">
+                                <p class="error">{{ errors[0] }}</p>
+                            </div>
+                        </ValidationProvider>
+                    </div>
+                    <button class="btn btn-success auth__btn" type="submit" v-bind:disabled="invalid">Valider</button>
+                </form>
+                <p id="message">{{ errorMessage }}</p>
+            </ValidationObserver>
         </div>
 
         <Footer />
@@ -39,11 +51,12 @@
 import Footer from "../components/Footer"
 import UsersDataServices from "../services/UsersDataServices"
 import { mapMutations } from 'vuex'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
     
 export default {
     name: 'Login',
     components: {
-        Footer
+        Footer, ValidationProvider, ValidationObserver
     },
     data () {
         return {
@@ -59,8 +72,7 @@ export default {
             'setToken',
             'setIsAdmin'
         ]),
-        loginSubmit(e) {
-            e.preventDefault()
+        loginSubmit() {
             var data = {
                 email: this.email,
                 password: this.password
@@ -112,6 +124,10 @@ h1 {
     font-weight: bold;
 }
     
+.error {
+    font-weight: bold;
+    color: $color-primary;
+}
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  
