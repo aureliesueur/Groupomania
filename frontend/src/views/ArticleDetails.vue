@@ -201,7 +201,7 @@ export default {
           this.getOneArticle(this.$route.params.slug);
           this.confirmation = false;
         },
-        updateArticle(id, data, Authorization) {
+        updateArticle(slug, data, Authorization) {
             data = {
                 title: this.currentArticle[0].title,
                 //slug: this.currentArticle[0].title,
@@ -213,7 +213,7 @@ export default {
             };
             console.log(data);
             Authorization = `Bearer ${this.token}`;
-            ArticlesDataServices.update(this.currentArticle[0].id, data, { Authorization }) 
+            ArticlesDataServices.update(this.$route.params.slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.messageUpdate = "Cet article a été modifié avec succès.";
