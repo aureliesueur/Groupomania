@@ -434,6 +434,11 @@ h1 {
     font-style: italic;
 }
     
+.invalid {
+    margin: auto;
+    margin-top: 20px;
+}
+    
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
@@ -454,10 +459,6 @@ h1 {
     #arrow-only {
         display: block;
     } 
-    .invalid {
-        margin: auto;
-        margin-top: 20px;
-    }
     .valid__return {
         display: none;
     }

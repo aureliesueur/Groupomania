@@ -25,7 +25,7 @@ export default {
     
 .call {
     position: absolute;
-    top: 40%;
+    top: 35%;
     z-index: 2;
     max-width: 50%;
     margin-left: 20%;
