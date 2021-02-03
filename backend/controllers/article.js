@@ -83,7 +83,7 @@ exports.createArticle = (req, res, next) => {
 
  
 //Fontion qui gère la logique métier de la route PUT (modification d'un comment posté par son auteur)
- exports.modifyArticle = (req, res, next) => {
+/* exports.modifyArticle = (req, res, next) => {
      //Recherche dans la BDD de l'article à modifier
     console.log(req.params.slug);
     let sql = "SELECT * FROM Articles WHERE slug = ?";
@@ -107,9 +107,9 @@ exports.createArticle = (req, res, next) => {
             throw "La modification de l'article n'est possible que par son auteur.";
         }
     });
-}; 
+}; */
 
- /*
+
 exports.modifyArticle = (req, res, next) => {
      //Recherche dans la BDD de l'article à modifier
     let sql = "SELECT * FROM Articles WHERE id = ?";
@@ -136,7 +136,7 @@ exports.modifyArticle = (req, res, next) => {
         }
     });
  }
- */
+ 
         
 //Fontion qui gère la logique métier de la route DELETE (suppression d'un article posté)
 exports.deleteArticle = (req, res, next) => {

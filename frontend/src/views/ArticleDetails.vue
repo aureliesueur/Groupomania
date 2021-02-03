@@ -65,7 +65,7 @@
        
         
             <div v-if="askForUpdate">
-                <form class="container text-center formUpdate">
+                <div role="form" class="container text-center formUpdate">
                     <h2 >Pour modifier cet article, merci de remplir les champs suivants :</h2>
                     <div class="row">
                         <div class="col-12 col-md-9 text-center formUpdate__box ">
@@ -116,7 +116,7 @@
                             <button class="btn btn-success" @click="updateArticle" aria-label="Valider">Enregistrer vos modifications</button>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
             <Identification
@@ -201,47 +201,26 @@ export default {
           this.getOneArticle(this.$route.params.slug);
           this.confirmation = false;
         },
-        updateArticle(slug, data, Authorization) {
+        updateArticle(id, data, Authorization) {
             data = {
                 title: this.currentArticle[0].title,
                 //slug: this.currentArticle[0].title,
                 description: this.currentArticle[0].description,
                 subject: this.currentArticle[0].subject,
                 lien_web: this.currentArticle[0].lien_web,
-                user_id: this.userId,
+                user_id: this.currentArticle[0].user_id,
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             console.log(data);
             Authorization = `Bearer ${this.token}`;
-            ArticlesDataServices.update(this.$route.params.slug, data, { Authorization }) 
+            ArticlesDataServices.update(this.currentArticle[0].id, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
                     this.messageUpdate = "Cet article a été modifié avec succès.";
                     this.askForUpdate = false;
                 })
             .catch(error => console.log(error));
-        },
-        
-        updateComment(cryptoslug, slug, data, Authorization) {
-            data = {
-                content: this.currentComment.content,
-                user_id: this.userId,
-                date_post: new Date().toLocaleDateString('fr-CA'), 
-            };
-            console.log(data);
-            Authorization = `Bearer ${this.token}`;
-            CommentsDataServices.update(this.$route.params.cryptoslug, this.$route.params.slug, data, { Authorization }) 
-                .then(response => {
-                    console.log(response.data);
-                    this.updateAsked = false;
-                    this.message = "Votre commentaire a bien été modifié";
-                    this.updateIsAsked = false;
-                })
-            .catch(error => console.log(error));
-        },
-      
-        
-        
+        }, 
         deleteArticle(slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
             ArticlesDataServices.delete(this.currentArticle[0].slug, { Authorization })

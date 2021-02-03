@@ -13,7 +13,7 @@ const articleCtrl = require("../controllers/article");
 router.post("/add", auth, /*articleCtrl.validate("createArticle"), */articleCtrl.createArticle); 
 
 //Requête PUT pour modifier un article déjà posté
-router.put("/:slug", auth, /*articleCtrl.validate("modifyArticle"), */articleCtrl.modifyArticle); 
+router.put("/:id", auth, /*articleCtrl.validate("modifyArticle"), */articleCtrl.modifyArticle); 
 
 //Requête DELETE pour supprimer un article qu'on a posté
 router.delete("/:slug", auth, articleCtrl.deleteArticle); 

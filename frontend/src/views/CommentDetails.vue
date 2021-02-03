@@ -126,7 +126,6 @@ export default {
             CommentsDataServices.update(this.$route.params.cryptoslug, this.$route.params.slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
-                    this.updateAsked = false;
                     this.message = "Votre commentaire a bien été modifié";
                     this.updateIsAsked = false;
                 })

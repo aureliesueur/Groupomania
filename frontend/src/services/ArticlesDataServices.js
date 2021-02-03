@@ -10,8 +10,8 @@ class ArticlesDataServices {
     create(data, headers) {
         return http.post('/articles/add', data, { headers });
     }
-    update(slug, data, headers) {
-        return http.put(`/articles/${slug}`, data, { headers });
+    update(id, data, headers) {
+        return http.put(`/articles/${id}`, data, { headers });
     }
     delete(slug, headers) {
         return http.delete(`/articles/${slug}`, { headers });
