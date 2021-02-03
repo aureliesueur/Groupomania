@@ -80,7 +80,7 @@ export default {
                     } else if (error.response.status === 429) {
                         this.errorMessage = "Vous avez dépassé le nombre maximal de tentatives, merci de réessayer ultérieurement.";
                     } else if (error.response.status === 404) {
-                        this.errorMessage = "Cet email ne correspond à aucun utilisateur connu.";
+                        this.errorMessage = "Cet email est invalide ou ne correspond à aucun utilisateur connu.";
                     }
                 })
         }
