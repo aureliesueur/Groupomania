@@ -5,7 +5,8 @@
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
-            <div role="form" class="formSignup row">
+            <ValidationObserver v-slot="{ invalid, handleSubmit }">
+            <form role="form" class="formSignup row" @submit.prevent="handleSubmit(createUser)">
                 <div class="formSignup__box col-12 col-md-7">
                     <div class="form-group ">
                         <label for="username">Votre pseudo</label>
@@ -83,15 +84,11 @@
                         </ValidationProvider>
                     </div>
 
-                    <button v-if="foundError!==false" class="btn btn-success btn-submit" type="submit" value="Submit" @click="createUser">Créer votre compte</button> 
-                    <button v-else type="submit" value="Submit" class="btn btn-success btn-submit" @click="checkForm">Vérifier</button>
-                    
+                    <button class="btn btn-success btn-submit" type="submit" value="Submit" v-bind:disabled="invalid">Créer votre compte</button>     
                 </div>
-            </div>
+            </form>
+            </ValidationObserver>
         </div>
-        <!--<div v-else>
-            <h2>Votre compte a bien été créé, nous sommes ravis de vous compter parmi nous !</h2>
-        </div>-->
 
         <div>
             <Footer />
@@ -104,12 +101,12 @@
 import Footer from "../components/Footer"
 import UsersDataServices from "../services/UsersDataServices"
 import { mapMutations } from 'vuex'
-import { ValidationProvider } from 'vee-validate'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
     
 export default {
     name: 'Signup',
     components: {
-        Footer, ValidationProvider
+        Footer, ValidationProvider, ValidationObserver
     },
     data () {
         return {

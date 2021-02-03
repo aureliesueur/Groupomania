@@ -32,6 +32,7 @@ library.add(faUser, faUserPlus, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, f
 
 import { ValidationProvider, extend } from "vee-validate"
 import { required, email } from "vee-validate/dist/rules"
+import { ValidationObserver } from "vee-validate"
 
 //Configuration de Vee-Validate
 extend("required", {
@@ -54,6 +55,7 @@ extend('minmax', {
 Vue.use(BootstrapVue)
 Vue.use(Vuex)
 Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('ValidationProvider', ValidationObserver)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 
