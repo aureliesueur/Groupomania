@@ -30,11 +30,6 @@
             </form>
             <p id="message">{{ errorMessage }}</p>
         </div>
-       <!--<div v-else>
-            <h2>Bienvenue, nous sommes ravis de vous retrouver !</h2>
-            <router-link to="/articles" aria-label="Lien vers la plateforme d'articles"><button class="btn btn-primary">Revenir au Forum Groupomania Articles</button></router-link>
-            <router-link to="/gifs" aria-label="Lien vers la plateforme de Gifs"><button class="btn btn-primary">Revenir au Forum Groupomania Vidéos</button></router-link>
-        </div>-->
 
         <Footer />
     </div>
@@ -82,9 +77,10 @@ export default {
                     console.log(error);
                     if (error.response.status === 401) {
                         this.errorMessage = "Mot de passe incorrect !";
-                    }
-                    else if (error.response.status === 429) {
+                    } else if (error.response.status === 429) {
                         this.errorMessage = "Vous avez dépassé le nombre maximal de tentatives, merci de réessayer ultérieurement.";
+                    } else if (error.response.status === 404) {
+                        this.errorMessage = "Cet email ne correspond à aucun utilisateur connu.";
                     }
                 })
         }

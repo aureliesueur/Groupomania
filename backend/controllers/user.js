@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 //Importation du package qui permet de créer et de vérifier les tokens d'authentification 
 const jwt = require("jsonwebtoken");
 //Importation du middleware de vérification des inputs par express-validator 
-const {body} = require('express-validator');
+//const {body} = require('express-validator');
 
 //Fonction de validation des inputs pour les requêtes post user
 /*exports.validate = (method) => {
@@ -82,10 +82,10 @@ exports.login = (req, res, next) => {
     //Recherche de l'utilisateur dans la DB via son email 
     let sql = `SELECT * FROM Users WHERE email = ?`;
     db.query(sql, [req.body.email], function(err, data, fields) {
-        if (err) {
+        if (data.length === 0) {
             return res.status(404).json({err: "Utilisateur non trouvé !"}); 
-        }
-       //Si on a trouvé le mail dans la DB, on compare le hash du nouveau mot de passe au hash de la DB
+        } 
+        //Si on a trouvé le mail dans la DB, on compare le hash du nouveau mot de passe au hash de la DB
         bcrypt.compare(req.body.password, data[0].password)
             .then(valid => {
                 if(!valid) {
@@ -103,7 +103,7 @@ exports.login = (req, res, next) => {
                     )
                 });
             })
-            .catch(error => res.status(500).json({error}));      
+            .catch(error => res.status(500).json({error}));  
     });
 };
     
