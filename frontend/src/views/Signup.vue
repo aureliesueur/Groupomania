@@ -57,7 +57,7 @@
                         </div>
                         <div class="form-group">
                             <label for="first-name">Votre prénom</label>
-                            <ValidationProvider name="user.first-name" rules="required|minmax:3,10">
+                            <ValidationProvider name="user.first-name" rules="required|minmax:3,15">
                                 <div slot-scope="{ errors }">
                                     <input 
                                        type="text" 
@@ -71,7 +71,7 @@
                         </div>
                         <div class="form-group">
                             <label for="last-name">Votre nom</label>
-                            <ValidationProvider name="user.last-name" rules="required|minmax:3,10">
+                            <ValidationProvider name="user.last-name" rules="required|minmax:3,15">
                                 <div slot-scope="{ errors }">
                                     <input 
                                        type="text" 

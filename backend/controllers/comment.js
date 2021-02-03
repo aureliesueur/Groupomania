@@ -8,7 +8,7 @@ var db = require("../services/mysql.config.js");
 //Importation du middleware de vérification des inputs par express-validator 
 const {body} = require('express-validator');
 //Importation du plugin qui permet de créer un slug à partir du titre de l'article
-var slugify = require("slugify");
+//var slugify = require("slugify");
 //Importation du plugin qui permet de créer un slug aléatoire pour chaque comment
 var cryptoRandomString = require('crypto-random-string');
 
@@ -35,7 +35,7 @@ exports.validate = (method) => {
 }
 
 
-//Fontion qui gère la logique métier de la route POST (ajout d'un nouveau comment)
+//Fonction qui gère la logique métier de la route POST (ajout d'un nouveau commentaire)
 exports.createComment = (req, res, next) => {
     let sql = `SELECT Comments.id FROM Comments INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Comments.deleted = false AND Articles.slug = ? AND Comments.user_id = ?`;
     let values = [req.params.slug, req.user.userId];
@@ -47,6 +47,7 @@ exports.createComment = (req, res, next) => {
         console.log(result);
         if (result === null || result === undefined) {
             let sql = `INSERT INTO Comments(cryptoslug, content, user_id, article_id, date_post) VALUES (?)`;
+            //Création d'un slug aléatoire
             let newSlug = cryptoRandomString({length: 5});;
             let values = [newSlug, req.body.content, req.body.user_id, req.body.article_id, req.body.date_post];
             db.query(sql, [values], function(err, data, fields) {
@@ -62,7 +63,7 @@ exports.createComment = (req, res, next) => {
 };
 
 
-//Fontion qui gère la logique métier de la route PUT (modification d'un comment posté par son auteur)
+//Fonction qui gère la logique métier de la route PUT (modification d'un commentaire posté par son auteur)
  exports.modifyComment = (req, res, next) => {
     //Recherche dans la BDD du commentaire à modifier
     let sql = "SELECT * FROM Comments WHERE cryptoslug = ?";
@@ -90,8 +91,9 @@ exports.createComment = (req, res, next) => {
 
     
 
-//Fontion qui gère la logique métier de la route DELETE (suppression d'un commentaire posté)
+//Fonction qui gère la logique métier de la route DELETE (suppression d'un commentaire posté)
 exports.deleteComment = (req, res, next) => {
+    //Recherche dans la BDD du commentaire à modifier
     let sql = "SELECT * FROM Comments WHERE cryptoslug = ?";
     db.query(sql, [req.params.cryptoslug], function(err, data) {
         if (err) {
@@ -116,7 +118,7 @@ exports.deleteComment = (req, res, next) => {
 
 
 
-//Fontion qui gère la logique métier de la route GET (affichage de tous les articles)
+//Fonction qui gère la logique métier de la route GET (affichage de tous les commentaires)
 exports.getAllComments = (req, res, next) => { 
     let articleSlug = req.params.slug; 
     let sql = "SELECT Comments.id, Comments.cryptoslug, Comments.user_id, content, Comments.date_post, username, Articles.title, Articles.slug FROM Comments INNER JOIN Users ON Comments.user_id = Users.id INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Articles.slug = ? AND Comments.deleted = false ORDER BY Comments.date_post DESC"; 
@@ -129,7 +131,7 @@ exports.getAllComments = (req, res, next) => {
 };
 
 
-//Fontion qui gère la logique métier de la route GET (affichage d'un article en particulier)
+//Fonction qui gère la logique métier de la route GET (affichage d'un commentaire en particulier)
 exports.getOneComment = (req, res, next) => {
     let commentSlug = req.params.cryptoslug; 
     let sql = "SELECT Comments.id, Comments.cryptoslug, Comments.user_id, content, Comments.date_post, username, Articles.slug FROM Comments INNER JOIN Users ON Comments.user_id = Users.id INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Comments.cryptoslug = ?";

@@ -10,16 +10,16 @@ const bcrypt = require("bcrypt");
 //Importation du package qui permet de créer et de vérifier les tokens d'authentification 
 const jwt = require("jsonwebtoken");
 //Importation du middleware de vérification des inputs par express-validator 
-//const {body} = require('express-validator');
+const {body} = require('express-validator');
 
 //Fonction de validation des inputs pour les requêtes post user
-/*exports.validate = (method) => {
+exports.validate = (method) => {
   switch (method) {
     case 'signup': {
      return [ 
-        body('username').exists().isLength({min: 3}),
+        body('username').exists().isLength({min: 3}).isLength({max: 10}),
         body('email').exists().isEmail().normalizeEmail(),
-        body('password').exists().isLength({min: 5}).isLength({max: 10}),
+        body('password').exists().isLength({min: 3}).isLength({max: 10}),
         body('first_name').exists().isAlpha(),
         body('last_name').exists().isAlpha()
        ]   
@@ -27,11 +27,11 @@ const jwt = require("jsonwebtoken");
     case 'login': {
         return [ 
         body('email').exists().isEmail(),
-        body('password').exists().isLength({min: 5}).isLength({max: 10})
+        body('password').exists().isLength({min: 3}).isLength({max: 10})
        ] 
     }       
   }
-}*/
+}
 
 //Fonction qui gère la logique métier de la route POST (inscription d'un nouvel user)
 exports.signup = (req, res, next) => {
@@ -53,7 +53,7 @@ exports.signup = (req, res, next) => {
                 if (err) {
                     return res.status(400).json({err}); 
                 }
-                //Si tout se passe bien, on crée un nouveau token pour ce new user
+                //Si absence d'erreur, on crée un nouveau token pour ce new user
                 let sql = `SELECT * FROM Users WHERE email = ?`;
                 db.query(sql, [req.body.email], function(err, data, fields) {
                     if (err) {
@@ -77,7 +77,7 @@ exports.signup = (req, res, next) => {
 };
 
 
-//Fontion qui gère la logique métier de la route POST (connexion d'un user existant dans la database)
+//Fonction qui gère la logique métier de la route POST (connexion d'un user existant dans la database)
 exports.login = (req, res, next) => {
     //Recherche de l'utilisateur dans la DB via son email 
     let sql = `SELECT * FROM Users WHERE email = ?`;
@@ -108,7 +108,7 @@ exports.login = (req, res, next) => {
 };
     
   
-//Fontion qui gère la logique métier de la route GET (affichage d'un user)
+//Fonction qui gère la logique métier de la route GET (affichage d'un user)
 exports.getOneUser = (req, res, next) => {
     let sql = `SELECT * FROM Users WHERE id = ?`;
     db.query(sql, [req.params.id], function(err, data, fields) {
@@ -120,7 +120,7 @@ exports.getOneUser = (req, res, next) => {
 };
 
 
-//Fontion qui gère la logique métier de la route DELETE (suppression d'un compte user existant dans la database)
+//Fonction qui gère la logique métier de la route DELETE (suppression d'un compte user existant dans la database)
 exports.deleteAccount = (req, res, next) => {
     let sql = `DELETE FROM Users WHERE id = ?`;
     db.query(sql, [req.params.id], function(err, data, fields) {

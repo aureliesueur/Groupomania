@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS Articles;
 DROP TABLE IF EXISTS Thumbs;
 DROP TABLE IF EXISTS Comments;
 
-/*Création de la table des utilisateurs, avec id, pseudo, mail, password, nom et prénom */
+/*Création de la table des utilisateurs, avec id, username, mail, password, nom, prénom. is_admin détermine si le user est administrateur du site ou juste utilisateur */
 CREATE TABLE Users (
     id SMALLINT UNSIGNED NOT NULL  AUTO_INCREMENT,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE Users (
 ) ENGINE = InnoDB ;
 
 
-/*Création de la table des articles postés, avec id, titre, description, sujet (pour classement des posts), auteur, date du post, et éventuellement photo de l'article */
+/*Création de la table des articles postés, avec id, titre, description, sujet (pour classement des posts), auteur, date du post, et éventuellement lien vers le site web de l'article. Deleted permet de conserver dans la base de données même les articles effacés. */
 CREATE TABLE Articles (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     title VARCHAR(50) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE Thumbs (
 ) ENGINE = InnoDB ;
 
 
-/*Création de la table des commentaires, avec id, titre et description, article et auteur associés */
+/*Création de la table des commentaires, avec id, titre et description, article et auteur associés. Deleted permet de conserver dans la base de données même les commentaires effacés. */
 CREATE TABLE Comments (
     id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
     cryptoslug VARCHAR(50) UNIQUE NOT NULL,
@@ -101,7 +101,8 @@ INSERT INTO Comments VALUES
     (8, '89nh9', 'Article très décevant, surtout que je suis un spécialiste de ce domaine...', 7, 1, '2021-01-21', false),
     (9, 'gye54', 'Merci de nous faire partager votre passion et vos compétences, c''est vraiment intéressant et inspirant... Je suis vos rubriques chaque mois avec beaucoup d''intérêt, continuez !', 5, 2, '2021-01-11', false);
     
-    
+
+/*Foreign keys qui associent les articles aux users qui les ont écrit, et les commentaires aux articles qu'ils concernent et aux users qui les font */
 ALTER TABLE Articles ADD CONSTRAINT fk_article_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE Thumbs ADD CONSTRAINT fk_thumb_article FOREIGN KEY (article_id) REFERENCES Articles(id) ON DELETE CASCADE ON UPDATE CASCADE;
