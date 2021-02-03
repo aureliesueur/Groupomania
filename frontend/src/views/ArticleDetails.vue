@@ -419,8 +419,16 @@ h1 {
     padding: 10px;
     border-radius: 5px;
     position: absolute;
-    bottom: 50%;
+    bottom: 75%;
+    right: 5%;
+    width: 110%;
+    & button {
+        width: 120px;
+        margin-bottom: 10px;
+        margin-left: 0!important;
+    }
 }
+    
 .text {
     color: $color-primary;
     font-style: italic;
@@ -478,11 +486,18 @@ h1 {
     }
     .cancel-btn {
         margin-left: 20px!important;
-    }
+    } 
     .confirmation {
-        width: 400px;
+        bottom: 50%;
+        left: -100%!important;
+        width: 300%!important;
+        & button {
+            width: 120px;
+            margin-left: 5px!important;
+        }
     }
 }
+   
     
 //Média query pour adapter la page au smartphone   
 @media screen and (max-width : 768px) {  
@@ -524,12 +539,13 @@ h1 {
         margin-left: 20px!important;
     }
     .confirmation {
-        background: #FFF;
-        border: 1px solid $color-primary;
-        padding: 10px;
-        border-radius: 5px;
-        position: absolute;
         bottom: 50%;
+        right: 10%;
+        width: 80%;
+        & button {
+            width: 120px;
+            margin-left: 5px!important;
+        }
     }
     .text {
         color: $color-primary;
