@@ -9,11 +9,11 @@ const authLimiter = rateLimit({
     message: "Vous avez dépassé le nombre maximal de tentatives, merci de réessayer ultérieurement."
 });
 
-const reqLimiter = rateLimit({
+/*const reqLimiter = rateLimit({
     windowMs : 5 * 60 * 1000, 
     max: 100, 
     message: "Vous avez dépassé le nombre maximal de requêtes, merci de réessayer ultérieurement."
-});
+});*/
 
 
-module.exports = { authLimiter, reqLimiter };
+module.exports = { authLimiter };//, reqLimiter };

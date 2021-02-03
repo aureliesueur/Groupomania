@@ -204,7 +204,7 @@ export default {
         updateArticle(slug, data, Authorization) {
             data = {
                 title: this.currentArticle[0].title,
-                slug: this.currentArticle[0].title,
+                //slug: this.currentArticle[0].title,
                 description: this.currentArticle[0].description,
                 subject: this.currentArticle[0].subject,
                 lien_web: this.currentArticle[0].lien_web,
@@ -221,6 +221,27 @@ export default {
                 })
             .catch(error => console.log(error));
         },
+        
+        updateComment(cryptoslug, slug, data, Authorization) {
+            data = {
+                content: this.currentComment.content,
+                user_id: this.userId,
+                date_post: new Date().toLocaleDateString('fr-CA'), 
+            };
+            console.log(data);
+            Authorization = `Bearer ${this.token}`;
+            CommentsDataServices.update(this.$route.params.cryptoslug, this.$route.params.slug, data, { Authorization }) 
+                .then(response => {
+                    console.log(response.data);
+                    this.updateAsked = false;
+                    this.message = "Votre commentaire a bien été modifié";
+                    this.updateIsAsked = false;
+                })
+            .catch(error => console.log(error));
+        },
+      
+        
+        
         deleteArticle(slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
             ArticlesDataServices.delete(this.currentArticle[0].slug, { Authorization })
@@ -380,6 +401,10 @@ h1 {
   
 #commentsList {
    padding:0 30px;     
+}
+
+#comments-title {
+    font-size: 1.2em;
 }
     
 .formUpdate {
