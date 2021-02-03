@@ -10,7 +10,7 @@ const {body} = require('express-validator');
 //Importation du package qui permet de créer et de vérifier les tokens d'authentification 
 const jwt = require("jsonwebtoken");
 //Importation du plugin qui permet de créer un slug à partir du titre de l'article
-var slugify = require("slugify");
+var slug = require("slug");
 
 //Fonction de validation des inputs pour les requêtes post et put
 exports.validate = (method) => {
@@ -39,7 +39,7 @@ exports.validate = (method) => {
 //Fontion qui gère la logique métier de la route POST (ajout d'un nouvel article)
 exports.createArticle = (req, res, next) => {
     let sql = `INSERT INTO Articles(title, slug, description, subject, lien_web, user_id, date_post) VALUES (?)`;
-    let newSlug = slugify(req.body.slug, { lower: true });
+    let newSlug = slug((req.body.slug + new Date().toLocaleDateString('fr-CA')), { lower: true });
     let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.body.user_id, req.body.date_post];
     db.query(sql, [values], function(err, data, fields) {
         if (err) {
@@ -63,7 +63,7 @@ exports.createArticle = (req, res, next) => {
         console.log(articleToModify);
         //Comparaison de l'id du user courant avec l'id du user ayant posté l'article'
         if (articleToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
-            let newSlug = slugify(req.body.title, { lower: true }); 
+            let newSlug = slug((req.body.title + new Date().toLocaleDateString('fr-CA')), { lower: true });
             let sql = `UPDATE Articles SET title = ?, slug = ?, description = ?, subject = ?, lien_web  = ?, user_id = ?, date_post = ? WHERE slug = ?`;
             let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.body.user_id, req.body.date_post, req.params.slug];
             db.query(sql, values, function(err, data, fields) {
