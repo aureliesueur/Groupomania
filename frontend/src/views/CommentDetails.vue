@@ -196,15 +196,20 @@ $color-primary: #cc2810;
 $color-secondary: #324392;
     
 .comment {
+    margin-bottom: 0!important;
     &__btns {
         display: flex;
         justify-content: space-around;
         margin-top: 10px;
         margin-bottom: 20px;
     }
+    &__box {
+        margin-top: 40px!important;
+        margin-bottom: 120px!important;
+    }
     &__btnBox {
         margin: auto!important;
-        margin-top: 20px!important;
+        margin-top: 40px!important;
     }
     &__msg {
         margin-top: 120px;
