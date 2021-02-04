@@ -1,4 +1,5 @@
-<!--Component du footer identique présent sur toutes les pages-->
+<!--COMPONENT AFFICHANT LE FOOTER, PRESENT SUR TOUTES LES PAGES-->
+
 <template>
     <footer>
         <div class="container footer">

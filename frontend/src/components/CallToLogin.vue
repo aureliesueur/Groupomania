@@ -1,3 +1,5 @@
+<!--COMPONENT APPARAISSANT QUAND LE USER N'EST PAS CONNECTE ET QU'IL CLIQUE SUR LE MENU OU SUR LES BOUTONS, POUR EXIGER QU'IL SE CONNECTE OU S'INSCRIVE-->
+
 <template>
     <div class="call">
         <h2>Pour profiter des fonctionnalités de cette plate-forme, merci de vous identifier ou de créer un compte !</h2>
@@ -10,13 +12,7 @@
 <script>
     
 export default {
-    name: "CallToLogin",
-	props: {
-        /*condition: {
-            type: Boolean,
-            required: true
-        }*/
-    }
+    name: "CallToLogin"
 }
     
 </script>

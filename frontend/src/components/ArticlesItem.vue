@@ -1,5 +1,8 @@
+<!--COMPONENT CORRESPONDANT A L'AFFICHAGE D'UN ARTICLE (UTILISE DANS LES PAGES ARTICLES.VUE ET ARTICLEDETAILS.VUE)-->
+
 <template>
     <div>
+        <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche la liste complète des articles-->
         <div v-if="this.$route.name == 'articles-list'" class="card text-center">
             <div class="card-body card__body">
                 <h3 class="card-title card__title">{{ title }}</h3>
@@ -8,6 +11,7 @@
             </div>
             <a class="btn btn-secondary card__btnDetails" :href="'/articles/' + slug"><font-awesome-icon :icon="['fas', 'info-circle']" /> En savoir plus</a>
         </div>
+        <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche un article en particulier-->
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <ul class="list-group">
@@ -16,16 +20,20 @@
                         <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
                     </li>
                     <li class="list-group-item">
+                        <!--La section suivante ne s'affiche que si le user a liké ou disliké l'article-->
                         <div v-if="liked || disliked" >
+                            <!--La section suivante ne s'affiche que si le user a liké l'article : donc le pouce du like est rouge et celui du dislike est grisé-->
                             <div v-if="liked">
                                 <span class="card__stats">{{ totalLikes }} </span><span @click="deleteThumb" class="thumbs thumbs__up thumbs__red"><i class="far fa-thumbs-up thumbs"></i></span>
                                 <span class="thumbs__down thumbs disabled"><i class="far fa-thumbs-down thumbs"></i></span><span class="card__stats"> {{ totalDislikes }}</span>
                             </div>
+                            <!--La section suivante ne s'affiche que si le user a disliké l'article : : donc le pouce du dislike est rouge et celui du like est grisé-->
                             <div v-else>
                                 <span class="card__stats">{{ totalLikes }} </span><span class="thumbs thumbs__up disabled"><i class="far fa-thumbs-up thumbs"></i></span>
                                 <span @click="deleteThumb" class="thumbs thumbs__down thumbs__red"><i class="far fa-thumbs-down thumbs"></i></span><span class="card__stats"> {{ totalDislikes }}</span>
                             </div>
                         </div>
+                        <!--La section suivante s'affiche si le user n'a pas encore liké ou disliké l'article-->
                         <div v-else>
                             <div>
                                 <span class="card__stats">{{ totalLikes }} </span><span @click="sendLike" class="thumbs thumbs__up"><i class="far fa-thumbs-up thumbs"></i></span>
@@ -121,10 +129,6 @@ export default {
 			required: true
 		}  
 	},
-    data() {
-        return {
-        }
-    },
     methods: {
         logout() {
             this.$store.commit("logout");
@@ -223,6 +227,8 @@ $color-bkg: #f1f1f2;
         color: lighten($color-secondary, 40%);
     }
 }
+ 
+
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  

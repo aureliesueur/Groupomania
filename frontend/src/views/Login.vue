@@ -4,11 +4,13 @@
     <div class="jumbotron">
         <div v-if="!submitted" class="jumbotron container">
             <h1>Entrez vos identifiants de connexion</h1>
+            <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'erreurs-->
             <ValidationObserver v-slot="{ invalid, handleSubmit }">
                 <form class="row formLogin" @submit.prevent="handleSubmit(loginSubmit)">
                     <div class="form-group col-12 col-md-6 text-center">
                         <label for="email">Votre email</label>
-                        <ValidationProvider name="user.email" rules="required|email">
+                        <!--Utilisation de Vee-Validate : ValidationProvider, pour tester la validité des données-->
+                        <ValidationProvider name="user.email" rules="required|email"><!--Définition des règles de validité de l'input-->
                             <div slot-scope="{ errors }">
                                 <input 
                                     id="email" 
@@ -18,7 +20,7 @@
                                     required 
                                     autofocus
                                     class="form-control">
-                                <p class="error">{{ errors[0] }}</p>
+                                <p class="error">{{ errors[0] }}</p><!--Une erreur s'affiche si l'input ne respecte pas les règles de ValidationProvider-->
                             </div>
                         </ValidationProvider>
                     </div>
@@ -37,17 +39,19 @@
                             </div>
                         </ValidationProvider>
                     </div>
-                    <button class="btn btn-success auth__btn" type="submit" v-bind:disabled="invalid">Valider</button>
+                    <button class="btn btn-success auth__btn" type="submit" v-bind:disabled="invalid">Valider</button><!--Le bouton reste grisé tant qu'il y a des erreurs, imposant au user de les corriger-->     
                 </form>
                 <p id="message">{{ errorMessage }}</p>
             </ValidationObserver>
         </div>
 
+        <!--Importation du component Footer-->
         <Footer />
     </div>
 </template>
 
 <script>
+//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import UsersDataServices from "../services/UsersDataServices"
 import { mapMutations } from 'vuex'
@@ -60,6 +64,7 @@ export default {
     },
     data () {
         return {
+            //Initialisation des variables
             email: "",
             password: "",
             submitted: false,
@@ -67,16 +72,22 @@ export default {
         }
     },
     methods: {
+        //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
         ...mapMutations([
             'setUserId',
             'setToken',
             'setIsAdmin'
         ]),
+        /**
+        *Fonction de connexion d'un user existant
+        * @param {Object} data - Email et password du user
+        */
         loginSubmit() {
             var data = {
                 email: this.email,
                 password: this.password
             };
+            //Fonction qui lance la requête Axios POST
             UsersDataServices.login(data) 
                 .then(response => {
                     this.setUserId(response.data.userId);
@@ -128,6 +139,8 @@ h1 {
     font-weight: bold;
     color: $color-primary;
 }
+
+/*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  

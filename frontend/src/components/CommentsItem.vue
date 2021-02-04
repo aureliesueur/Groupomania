@@ -1,5 +1,8 @@
+<!--COMPONENT CORRESPONDANT A L'AFFICHAGE D'UN COMMENTAIRE (UTILISE SUR LES PAGES ARTICLEDETAILS.VUE ET COMMENTDETAILS.VUE-->
+
 <template>
     <div>
+        <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche un commentaire en particulier-->
         <div v-if="this.$route.name == 'one-comment-details'" class="card text-center">
             <div class="card-header card__header">
                 <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
@@ -8,11 +11,13 @@
                 <p class="card-text card__text ">{{ content }}</p>
             </div>
         </div>
-        
+        <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche la liste complète des commentaires-->
         <div v-else class="card text-center">   
             <div class="card-header card__header">
                 <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
+                <!--Texte du bouton et icone s'affichent sur desktop-->
                 <a class="btn btn-primary card__btnDetails icon-text" :href="slug + '/comments/' + cryptoslug" aria-label="Détails du commentaire"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a>
+                <!--Icone seulement s'affiche sur tablette et smartphone-->
                 <a class="btn btn-primary card__btnDetails icon-only" :href="slug + '/comments/' + cryptoslug" aria-label="Détails du commentaire"><font-awesome-icon :icon="['fas', 'info-circle']" /></a>
             </div>
             <div class="card-body card__body">

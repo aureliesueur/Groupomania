@@ -6,13 +6,16 @@
             <h1>Plateforme de partage de Gifs : A développer...</h1>
         </div>  
 
+        <!--Importation du component CallToLogin-->
         <CallToLogin v-if="!isLoggedIn" />
         
+        <!--Importation du component Identification-->
         <Identification
             :logout="logout"
             :isUserAdmin="isUserAdmin"
             :isLoggedIn="isLoggedIn" />
 
+        <!--Importation du component Footer-->
         <Footer />
     </div>
 </template>

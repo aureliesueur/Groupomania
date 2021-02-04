@@ -1,11 +1,14 @@
+<!--PAGE AFFICHANT LES DETAILS D'UN COMMENTAIRE SELECTIONNE, ET PERMETTANT SUPPRESSION ET MODIFICATION-->
+
 <template>
    <div>
         <div class="jumbotron container comment">
-            <h1 class="comment__msg">{{ message }}</h1>
+            <h1 class="comment__msg">{{ message }}</h1><!--Message de suppression ou de modification du commentaire-->
             <div class="row">
                 <div class="container col-12 col-md-10">
                     <div class='row'>
                         <div v-if="!deleted" div class="col-12 col-md-9 comment__box">
+                            <!--Importation du component CommentsItem-->
                             <CommentsItem
                                 :id="currentComment.id"
                                 :cryptoslug="currentComment.cryptoslug"
@@ -16,6 +19,7 @@
                                 :slug="currentComment.slug" />
                         </div>
                         <div class="comment__btnBox">
+                            <!--La section des boutons "suppression" et "modification" ne s'affiche que si le user est celui qui a posté le commentaire à l'origine ou s'il est administrateur-->
                             <div v-if="validUser && !deleted" class="comment__btns">
                                 <button @click="showUpdate" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'edit']" /></button>
                                 <button @click="suppressComment" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'trash-alt']" /></button>
@@ -26,7 +30,7 @@
                                 <router-view />
                             </div>
                         </div>
-                        
+                        <!--Formulaire qui ne s'affiche que quand le user clique sur le bouton "modifier"-->
                         <div v-if="updateIsAsked" class="formUpComment container">
                             <h2 class="formUpComment__title">Mettez à jour votre commentaire :</h2>
                             <div class="row">
@@ -52,16 +56,19 @@
             </div>
         </div>
         
+        <!--Importation du component Identification-->
         <Identification
             :logout="logout"
             :isUserAdmin="isUserAdmin"
             :isLoggedIn="isLoggedIn" />
     
+        <!--Importation du component Footer-->
         <Footer />
     </div>
 </template>
 
 <script>
+//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import CommentsItem from "../components/CommentsItem"
@@ -75,6 +82,7 @@ export default {
     },
     data () {
         return { 
+            //Initialisation des variables
             message: "",
             deleted: null,
             currentComment: {
@@ -92,18 +100,28 @@ export default {
         }
     },
     computed: {
-      ...mapGetters(['isLoggedIn']),
+        //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
+        ...mapGetters(['isLoggedIn']),
         ...mapGetters(['isUserAdmin']),
         ...mapState({ token: "token"}),
         ...mapState({ userId: "userId"}),
         ...mapState({ isAdmin: "isAdmin"})
      },
     methods: {
+        /**
+        *Fonction de récupération d'un commentaire particulier via une requête Axios GET
+        * @param {String} cryptoslug - Slug du commentaire concerné, visible dans l'URL
+        * @param {String} slug - Slug de l'article concerné, visible dans l'URL
+        * @param {String} Authorization qui doit contenir le token 
+        * @return {Object} currentComment - Données du commentaire
+        */
        getOneComment(cryptoslug, slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
+           //Fonction qui lance la requête GET via Axios
             CommentsDataServices.getOne(this.$route.params.cryptoslug, this.$route.params.slug, { Authorization }) 
                 .then(response => {
                     this.currentComment = JSON.parse(JSON.stringify(response.data.data[0]));
+                    //Vérification de l'autorisation du user : si le user courant est l'auteur du commentaire ou l'administrateur, les boutons "suppression" et "modification" s'affichent (et le user peut agir sur le commentaire), sinon ils restent masqués
                     if (this.currentComment.user_id == this.userId || this.isAdmin === 1) {
                         this.validUser = true;  
                     } else {
@@ -112,9 +130,17 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
+        //Fonction d'affichage du formulaire pour modifier le commentaire
         showUpdate() {
             this.updateIsAsked = true;
         },
+        /**
+        *Fonction de modification d'un commentaire particulier via une requête Axios PUT
+        * @param {String} cryptoslug - Slug du commentaire concerné, visible dans l'URL
+        * @param {String} slug - Slug de l'article concerné, visible dans l'URL
+        * @param {String} Authorization qui doit contenir le token 
+        * @param {Object} data - Données du commentaire
+        */
         updateComment(cryptoslug, slug, data, Authorization) {
             data = {
                 content: this.currentComment.content,
@@ -123,6 +149,7 @@ export default {
             };
             console.log(data);
             Authorization = `Bearer ${this.token}`;
+            //Fonction qui lance la requête PUT via Axios
             CommentsDataServices.update(this.$route.params.cryptoslug, this.$route.params.slug, data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
@@ -131,8 +158,15 @@ export default {
                 })
             .catch(error => console.log(error));
         },
+        /**
+        *Fonction de suppression d'un commentaire particulier via une requête Axios DELETE
+        * @param {String} cryptoslug - Slug du commentaire concerné, visible dans l'URL
+        * @param {String} slug - Slug de l'article concerné, visible dans l'URL
+        * @param {String} Authorization qui doit contenir le token 
+        */
         suppressComment(cryptoslug, slug, Authorization) {
             Authorization = `Bearer ${this.token}`;
+            //Fonction qui lance la requête DELETE via Axios
             CommentsDataServices.delete(this.$route.params.cryptoslug, this.$route.params.slug, { Authorization })
                 .then(response => {
                     console.log(response.data);
@@ -141,12 +175,14 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
+        //Fonction de déconnexion
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });
             localStorage.clear();
         }
-    },    
+    }, 
+    //Déclenchement de la récupération des données du commentaire avant le rendu de la page 
     beforeMount() {
         this.getOneComment(this.$route.params.cryptoslug, this.$route.params.slug);
     }

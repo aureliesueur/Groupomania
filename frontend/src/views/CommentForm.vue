@@ -1,3 +1,5 @@
+<!--PAGE PERMETTANT DE POSTER UN NOUVEAU COMMENTAIRE-->
+
 <template>
     <div>
         <div class="container jumbotron text-center comment">
@@ -20,7 +22,7 @@
                         <div class="action">
                             <button class="btn btn-success btn-post" @click="postComment" aria-label="Poster le commentaire">Poster ce commentaire</button>
                             <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
-                            <div v-if="forbidden" class="confirmation">
+                            <div v-if="forbidden" class="confirmation"><!--Message qui s'affiche uniquement si le "alreadyCommented" du localStorage est "true", donc si le user a déjà commenté cet article-->
                                 <p class="text">Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
                                 <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                             </div>
@@ -35,12 +37,13 @@
             </div>
         </div>
 
+        <!--Importation du component Footer-->
         <Footer />
     </div>
 </template>
 
 <script>
- 
+//Importation des components et plugins nécessaires dans la page 
 import Footer from "../components/Footer"
 import CommentsDataServices from "../services/CommentsDataServices"
 import { mapState } from 'vuex'
@@ -52,6 +55,7 @@ export default {
     },
     data () {
         return {
+            //Initialisation des variables
             comment: {
                 content: "",
                 user_id: "", 
@@ -64,10 +68,17 @@ export default {
         }
     },
     computed: {
+        //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
         ...mapState({ token: "token"}),
         ...mapState({ userId: "userId"}),
     },
     methods: {
+        /**
+        *Fonction d'envoi d'un nouveau commentaire via une requête Axios POST
+        * @param {String} slug - Slug de l'article concerné, visible dans l'URL
+        * @param {Object} data - Contenu du formulaire
+        * @param {String} Authorization qui doit contenir le token 
+        */
         postComment(slug, data, Authorization) {
             let alreadyCommented = localStorage.getItem("alreadyCommented");
             if (alreadyCommented && alreadyCommented == this.$route.params.slug) {
@@ -81,6 +92,7 @@ export default {
                 };
                 Authorization = `Bearer ${this.token}`;
                 slug = this.$route.params.slug;
+                //Fonction qui lance la requête Axios POST
                 CommentsDataServices.create(slug, data, { Authorization }) 
                     .then(response => {
                         console.log(response.data);
@@ -149,14 +161,14 @@ $color-secondary: #324392;
 }
 
 
+/*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
+    
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
     .confirmation {
         bottom: 0%;
     }
-}
-    
-    
+}  
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {      

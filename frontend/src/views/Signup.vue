@@ -5,12 +5,14 @@
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
+            <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'erreurs-->
             <ValidationObserver v-slot="{ invalid, handleSubmit }">
                 <form class="formSignup row" @submit.prevent="handleSubmit(createUser)">
                     <div class="formSignup__box col-12 col-md-7">
                         <div class="form-group ">
                             <label for="username">Votre pseudo</label>
-                            <ValidationProvider name="user.username" rules="required|minmax:3,10">
+                            <!--Utilisation de Vee-Validate : ValidationProvider, pour tester la validité des données-->
+                            <ValidationProvider name="user.username" rules="required|minmax:3,10"><!--Définition des règles de validité de l'input-->
                                 <div slot-scope="{ errors }">
                                     <input 
                                        type="text" 
@@ -19,7 +21,7 @@
                                        v-model="user.username"
                                        name="username"
                                        placeholder="missKeane"/>
-                                    <p class="error">{{ errors[0] }}</p>
+                                    <p class="error">{{ errors[0] }}</p><!--Une erreur s'affiche si l'input ne respecte pas les règles de ValidationProvider-->
                                 </div>
                             </ValidationProvider>
                         </div>
@@ -84,13 +86,14 @@
                             </ValidationProvider>
                         </div>
 
-                        <button class="btn btn-success btn-submit" type="submit" value="Submit" v-bind:disabled="invalid">Créer votre compte</button>     
+                        <button class="btn btn-success btn-submit" type="submit" value="Submit" v-bind:disabled="invalid">Créer votre compte</button><!--Le bouton reste grisé tant qu'il y a des erreurs, imposant au user de les corriger-->     
                     </div>
                 </form>
             </ValidationObserver>
         </div>
 
         <div>
+            <!--Importation du component Footer-->
             <Footer />
         </div>
     </div>
@@ -98,6 +101,7 @@
 
 
 <script>
+//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import UsersDataServices from "../services/UsersDataServices"
 import { mapMutations } from 'vuex'
@@ -110,6 +114,7 @@ export default {
     },
     data () {
         return {
+            //Initialisation des variables
                 user: {
                     username: "",
                     email: "",
@@ -123,11 +128,16 @@ export default {
         }
     },
     methods: {
+        //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
         ...mapMutations([
             'setUserId',
             'setToken',
             'setIsAdmin'
         ]),
+        /**
+        *Fonction de création d'un nouvel utilisateur
+        * @param {Object} data - Données de l'utilisateur
+        */
         createUser() { 
             var data = {
                 username: this.user.username,
@@ -136,6 +146,7 @@ export default {
                 first_name: this.user.first_name,
                 last_name: this.user.last_name
             };
+            //Fonction qui lance la requête Axios POST
             UsersDataServices.signup(data) 
                 .then(response => {
                     console.log(response.data);

@@ -1,13 +1,17 @@
-<!--Component d'identification présent sur toutes les pages-->
+<!--COMPONENT AFFICHANT LE MENU DE CONNEXION/INSCRIPTION, PRESENT SUR TOUTES LES PAGES-->
+
 <template>
     <div class="auth">
+        <!--Section qui s'affiche si le user n'est pas connecté-->
         <div v-if="!isLoggedIn">
             <router-link to="/auth/signup" class="auth__signup"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'user-plus']" /> Inscription</button></router-link><br/>
             <router-link to="/auth/login" class="auth__login"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Connexion</button></router-link>
             <router-view />
         </div>
+        <!--Section qui s'affiche si le user est connecté-->
         <div v-else class="deconnect">
             <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
+            <!--Message qui ne s'affiche que si le user est connecté et est l'administrateur-->
             <div class="admin">
                 <p v-if="isUserAdmin">ADMINISTRATEUR<br/>CONNECTE</p>
             </div>

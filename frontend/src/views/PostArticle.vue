@@ -1,4 +1,5 @@
 <!--PAGE D'AJOUT D'UN NOUVEL ARTICLE-->
+
 <template>
     <div class="jumbotron"> 
         <h1 v-if="!submitted">Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
@@ -65,16 +66,19 @@
             <router-view />
         </div>
         
+        <!--Importation du component Identification-->
         <Identification
             :logout="logout"
             :isUserAdmin="isUserAdmin"
             :isLoggedIn="isLoggedIn" />
            
+        <!--Importation du component Footer-->
         <Footer />
     </div>
 </template>
 
 <script>
+//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesDataServices from "../services/ArticlesDataServices"
@@ -87,6 +91,7 @@ export default {
 	},
     data () {
         return {
+            //Initialisation des variables
             article: {
                 title: "",
                 slug: "",
@@ -98,12 +103,18 @@ export default {
         };
     },
      computed: {
+         //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
         ...mapGetters(['isLoggedIn']),
         ...mapState({ token: "token"}),
         ...mapState({ userId: "userId"}),
         ...mapGetters(['isUserAdmin'])
     },
     methods: {
+        /**
+        *Fonction de création d'un nouvel article
+        * @param {Object} data - Données du nouvel article
+        * @param {String} Authorization qui doit contenir le token
+        */
         saveArticle(data, Authorization) {
             data = {
                 title: this.article.title,
@@ -115,6 +126,7 @@ export default {
                 date_post: new Date().toLocaleDateString('fr-CA'), 
             };
             Authorization = `Bearer ${this.token}`;
+            //Fonction qui lance la requête Axios POST
             ArticlesDataServices.create(data, { Authorization }) 
                 .then(response => {
                     console.log(response.data);
@@ -122,9 +134,11 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
+        // Fonction de déconnection
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });
+            localStorage.clear();
         }
     }
 }
@@ -164,6 +178,8 @@ $color-secondary: #324392;
     padding-top: 200px;
     padding-bottom: 150px;
 }
+   
+/*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

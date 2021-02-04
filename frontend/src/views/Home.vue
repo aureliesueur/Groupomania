@@ -1,7 +1,9 @@
 <!--PAGE D'ACCUEIL PRESENTANT LES ACCES AUX DEUX PLATEFORMES-->
+
 <template>
     <div>
         <div class="introPage">
+            <!--Si le user est connecté, les liens vers les plateformes sont disponibles et cliquables-->
             <section v-if="isLoggedIn" class="container jumbotron text-center intro">
                 <div>
                     <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social de votre entreprise !</h1>
@@ -21,6 +23,7 @@
                 </div>
             </section>
 
+            <!--Si le user n'est pas connecté, les liens vers les plateformes ne sont pas disponibles, ils renvoient le user au la page de connexion/inscription via le "CallToLogin"-->
             <section v-else class="container jumbotron text-center intro">
                 <h1 class="intro__title">Bienvenue sur Groupomania, le réseau social de votre entreprise !</h1>
                 <div class='row intro__box text-center'>
@@ -37,19 +40,23 @@
                     </div>
             </section>
 
+            <!--Importation du component CallToLogin-->
             <CallToLogin v-if="loginCalled" />
 
             <div> 
+                <!--Importation du component Identification-->
                 <Identification
                 :logout="logout"
                 :isUserAdmin="isUserAdmin"
                 :isLoggedIn="isLoggedIn"
                  />
                 <div class="info">
+                    <!--Si le user est connecté et non-administrateur, l'icône de son compte s'afficher-->
                     <button v-if="isLoggedIn && !isUserAdmin" class="btn btn-primary auth__btn info__btn" @click="showAccount"><font-awesome-icon :icon="['fas', 'user']" /> Votre compte</button>
                 </div>
             </div>
 
+            <!--Ecran qui détaille les données du compte-->
             <div v-if="accountAsked" class="account">
                 <span class="card__icon"><font-awesome-icon :icon="['fas', 'user']" /></span>
                 <h3>Détails de votre compte</h3>
@@ -60,19 +67,21 @@
                 <button class="btn account__btn" @click="confirmDelete" >Supprimer votre compte</button>
                 <button class="btn account__btn" @click="hideAccount">Retour</button>
             </div>
-
+            <!--Ecran qui demande confirmation pour la suppression du compte-->
             <div v-if="confirmation" class="confirm">
                 <p>Etes-vous sûr de vouloir supprimer votre compte ? Toute suppression est définitive.</p>
                 <button type= "button" class="btn confirm__btn" @click="suppressUser">Supprimer</button>
                 <button type= "button" class="btn confirm__btn" @click="refreshPage">Annuler</button>
             </div>
         </div> 
+        <!--Importation du component Footer-->
         <Footer />
     </div>
 </template>
 
 
 <script>
+//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import CallToLogin from "../components/CallToLogin"
@@ -86,6 +95,7 @@ export default {
 	},
 	data() {
 		return {
+            //Initialisation des variables
             loginCalled: false,
             accountAsked: false,
             username: "",
@@ -96,33 +106,42 @@ export default {
         }
     },
 	computed: {
+        //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
         ...mapGetters(['isLoggedIn']),
         ...mapGetters(['isUserAdmin']),
         ...mapState({ userId: "userId"}),
         ...mapState({ token: "token"})
 	},
 	methods: {
+        //Fonction d'appel du component CallToLogin
         callToLogin() {
             if (this.isLoggedIn == false) {
                 this.loginCalled = true;
             }
         },
+        //Fonction de déconnexion
         logout() {
             this.$store.commit("logout");
             this.$router.push({ path: "/" });
             localStorage.clear();
         },
+        //Fonction d'affichage des données du user courant
         showAccount() {
             this.accountAsked = true
         },
+        //Fonction de masquage des données du compte
         hideAccount() {
           this.accountAsked = false
         },
+        /**
+        *Fonction de récupération des données du user courant via une requête Axios GET
+        * @param {Number} userId
+        * @return {Object} currentUser
+        */
         showUser() {
             UsersDataServices.getCurrentUser(this.userId) 
                 .then(response => {
                     this.currentUser = JSON.parse(JSON.stringify(response.data.data[0]));
-                    console.log(this.currentUser);//
                     this.username = this.currentUser.username,
                     this.email = this.currentUser.email,
                     this.first_name = this.currentUser.first_name,
@@ -131,6 +150,10 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
+        /**
+        *Fonction de suppression du compte user courant via une requête Axios DELETE
+        * @param {Number} userId
+        */
         suppressUser() {
             UsersDataServices.deleteUser(this.userId) 
                 .then(response => {
@@ -141,15 +164,18 @@ export default {
                 })
                 .catch(error => console.log(error));
         },
+        //Fonction d'affichage de la demande de confirmation de suppression
         confirmDelete() {
             return (this.confirmation = true);
         },
+        //Fonction de rafraîchissement de la page
         refreshPage() {
             this.$router.push({ path: "/" });
             this.hideAccount();
             this.confirmation = false;
         },
 	},
+    //Déclenchement de la récupération des données du user au moment du rendu de la page 
     mounted() {
         this.showUser(this.userId);
     },
@@ -175,11 +201,9 @@ $color-tertiary: #6f757b;
     padding-top: 90px!important;
     background: none!important;
     z-index: 3;
-    //background: url("/images/network7.jpg") no-repeat!important;
-   //background-size: cover!important;
     padding-bottom: 100px!important;
     &__title {
-        background: rgba(250, 250, 250, 0.6);
+        background: rgba(250, 250, 250, 0.7);
         padding: 10px;
         color: #000;
     }
@@ -263,6 +287,7 @@ $color-tertiary: #6f757b;
     }
 }
  
+ /*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
 //Média query pour adapter la page au smartphone
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

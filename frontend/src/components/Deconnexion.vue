@@ -1,4 +1,5 @@
-<!--Component de déconnexion présent sur toutes les pages-->
+<!--COMPONENT DE DECONNEXION PRESENT SUR TOUTES LES PAGES-->
+
 <template>
     <div>
         <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
