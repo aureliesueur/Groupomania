@@ -8,7 +8,7 @@
                 <h2>Derniers articles postés</h2>
                 <div class="container">
                     <div class='row articles__box'>
-                        <ul class="col-12 col-md-10">
+                        <ul class="col-12 col-lg-10">
                             <!--Boucle sur le tableau des articles récupérés depuis la base de données-->
                             <li v-for="article in articles" :key="article.title">
                                 <!--Importation du component ArticlesItem-->
@@ -24,8 +24,8 @@
                                 />
                             </li>
                         </ul>
-                        <div class="col-12 col-md-2">
-                            <router-link to="/articles/add" aria-label="Poster l'article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
+                        <div class="col-12 col-lg-2">
+                            <router-link to="/articles/add" aria-label="Poster un nouvel article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
                         </div> 
                     </div>
                 </div>
@@ -118,17 +118,6 @@ $color-secondary: #324392;
     margin-bottom: 0!important;
     background: url("/images/network3.jpg") fixed no-repeat!important;
     background-size: cover!important;
-    &__box {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        margin-left: -200px;
-        & img {
-            margin-top: 40px;
-            border: 1px solid $color-primary;
-        }
-    }
  }
     
 ul, li {
@@ -141,23 +130,19 @@ a {
     height: 50px;
     margin-top: 40px!important;
 }
-    
-.btn-add {
-    width: 200px!important;
-    margin-left: -200px!important;
-}
-    
 
+    
 /*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
-    .btn-add {
-        width: 200px!important;
-        margin-left: -150px!important;
-    }
     ul {
         padding: 0!important;
+    }
+    .articles__box {
+        display: none;
+        //flex-direction: column;
+        //align-items: center;
     }
 }
    
@@ -170,7 +155,6 @@ a {
         margin-bottom: 0px!important;
     }
     .btn-add {
-        margin: 10px auto!important;
         font-size: 1em!important;
         
     }

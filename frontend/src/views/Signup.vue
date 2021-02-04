@@ -5,6 +5,7 @@
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
+            <span id="newUser"><i class="fas fa-user-plus"></i></span>
             <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'erreurs-->
             <ValidationObserver v-slot="{ invalid, handleSubmit }">
                 <form class="formSignup row" @submit.prevent="handleSubmit(createUser)">
@@ -169,8 +170,18 @@ export default {
 $color-primary: #cc2810;
 $color-secondary: #324392;    
  
+#newUser {
+    font-size: 2.5em;
+    color: $color-secondary;
+}
+
+h2 {
+    margin-bottom: 0px!important;
+}
+    
 .formSignup__box {
     margin: auto!important;
+    margin-top: 30px!important;
 }
     
 .error {

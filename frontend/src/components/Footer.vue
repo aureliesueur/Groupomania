@@ -36,7 +36,9 @@
                     </div>
 
                     <div class="col-md-2">
+                        <!--Petit logo s'affiche quand on est sur écran desktop-->
                         <img src="/images/icon.png" width="100" alt="Petit logo Groupomania" aria-label="Logo Groupomania" class="footer__logo img-narrow"/>
+                        <!--Grand logo s'affiche quand on est sur tablette ou smartphone-->
                         <img src="/images/icon-left-font.png" width="250" alt="Grand logo Groupomania" class=" footer__logo navbar-brand img-large" aria-label="Logo Groupomania" />
                     </div>
                 </div>

@@ -21,8 +21,8 @@
                         <div class="comment__btnBox">
                             <!--La section des boutons "suppression" et "modification" ne s'affiche que si le user est celui qui a posté le commentaire à l'origine ou s'il est administrateur-->
                             <div v-if="validUser && !deleted" class="comment__btns">
-                                <button @click="showUpdate" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'edit']" /></button>
-                                <button @click="suppressComment" type= "button" class="btn btn-primary"><font-awesome-icon :icon="['fas', 'trash-alt']" /></button>
+                                <button @click="showUpdate" type= "button" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                <button @click="suppressComment" type= "button" class="btn btn-primary"><i class="far fa-trash-alt"></i></button>
                             </div>
 
                             <div>

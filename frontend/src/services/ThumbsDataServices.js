@@ -1,3 +1,7 @@
+/*CONFIGURATION DES REQUETES AXIOS CONCERNANT LES THUMBS (LIKES OU DISLIKES).
+Actions: création d'un like/dislike, suppression d'un like/dislike, affichage de tous les thumbs, affichage d'un thumb particulier.
+*/
+
 import http from "../http-common";
 
 class ThumbsDataServices {
@@ -14,6 +18,5 @@ class ThumbsDataServices {
         return http.delete(`/articles/${slug}/thumbs`, { headers });
     }
 }
-
 
 export default new ThumbsDataServices();

@@ -5,7 +5,7 @@
         <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche un commentaire en particulier-->
         <div v-if="this.$route.name == 'one-comment-details'" class="card text-center">
             <div class="card-header card__header">
-                <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
+                <p><i class="fas fa-comments"></i> Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
             <div class="card-body card__body">
                 <p class="card-text card__text ">{{ content }}</p>
@@ -14,11 +14,11 @@
         <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche la liste complète des commentaires-->
         <div v-else class="card text-center">   
             <div class="card-header card__header">
-                <p>Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
+                <p><i class="fas fa-comments"></i> Commentaire posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
                 <!--Texte du bouton et icone s'affichent sur desktop-->
-                <a class="btn btn-primary card__btnDetails icon-text" :href="slug + '/comments/' + cryptoslug" aria-label="Détails du commentaire"><font-awesome-icon :icon="['fas', 'info-circle']" /> Détails</a>
+                <a class="btn btn-primary card__btnDetails icon-text" :href="slug + '/comments/' + cryptoslug" aria-label="Détails du commentaire"><i class="fas fa-info-circle"></i> Détails</a>
                 <!--Icone seulement s'affiche sur tablette et smartphone-->
-                <a class="btn btn-primary card__btnDetails icon-only" :href="slug + '/comments/' + cryptoslug" aria-label="Détails du commentaire"><font-awesome-icon :icon="['fas', 'info-circle']" /></a>
+                <a class="btn btn-primary card__btnDetails icon-only" :href="slug + '/comments/' + cryptoslug" aria-label="Détails du commentaire"><i class="fas fa-info-circle"></i></a>
             </div>
             <div class="card-body card__body">
                 <p class="card-text card__text ">{{ content }}</p>

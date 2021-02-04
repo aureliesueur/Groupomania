@@ -11,12 +11,12 @@
                 <div class='row intro__box text-center'>
                     <div class="card col-12 col-sm-5 intro__articles">
                         <h2 class="card__title">Partagez vos articles préférés</h2>
-                        <span class="card__icon"><font-awesome-icon :icon="['fas', 'newspaper']" /></span>
+                        <span class="card__icon"><i class="fas fa-newspaper"></i></span>
                         <router-link to="/articles" aria-label="Lien vers la plateforme d'articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
                     </div>
                     <div class="card col-12 col-sm-5 intro__gifs">
                         <h2 class="card__title">Partagez vos vidéos préférées</h2>
-                        <span class="card__icon"><font-awesome-icon :icon="['fas', 'file-video']" /></span>
+                        <span class="card__icon"><i class="fas fa-file-video"></i></span>
                         <router-link to="/gifs" aria-label="Lien vers la plateforme Gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
                     </div>
                     <router-view />
@@ -52,20 +52,20 @@
                  />
                 <div class="info">
                     <!--Si le user est connecté et non-administrateur, l'icône de son compte s'afficher-->
-                    <button v-if="isLoggedIn && !isUserAdmin" class="btn btn-primary auth__btn info__btn" @click="showAccount"><font-awesome-icon :icon="['fas', 'user']" /> Votre compte</button>
+                    <button v-if="isLoggedIn && !isUserAdmin" class="btn btn-primary auth__btn info__btn" @click="showAccount"><i class="fas fa-user"></i> Votre compte</button>
                 </div>
             </div>
 
             <!--Ecran qui détaille les données du compte-->
             <div v-if="accountAsked" class="account">
-                <span class="card__icon"><font-awesome-icon :icon="['fas', 'user']" /></span>
+                <span id="user-icon"><i class="fas fa-user"></i></span>
                 <h3>Détails de votre compte</h3>
                 <p>Pseudo : {{ username }}</p>
                 <p>Email: {{ email }}</p>
                 <p>Prénom: {{ first_name }}</p>
                 <p>Nom: {{  last_name }}</p>
-                <button class="btn account__btn" @click="confirmDelete" >Supprimer votre compte</button>
-                <button class="btn account__btn" @click="hideAccount">Retour</button>
+                <button class="btn account__btn" @click="confirmDelete"><i class="far fa-trash-alt"></i> Supprimer votre compte</button>
+                <button class="btn account__btn" @click="hideAccount"><i class="fas fa-arrow-left"></i> Retour</button>
             </div>
             <!--Ecran qui demande confirmation pour la suppression du compte-->
             <div v-if="confirmation" class="confirm">
@@ -231,12 +231,16 @@ $color-tertiary: #6f757b;
         font-size: 2em;
         color: #000;
         margin-top: 20px;
-        margin-bottom: -20px;
     }
     &__btn {
         margin-top: 0;
         margin-bottom: 10px!important;
     }
+}
+    
+#user-icon {
+    color: #FFF;
+    font-size: 2em;
 }
 
 .info {

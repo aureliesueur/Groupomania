@@ -1,3 +1,7 @@
+/*CONFIGURATION DES REQUETES AXIOS CONCERNANT LES COMMENTAIRES.
+Actions : CRUD (Création de commentaire, affichage d'un ou de tous les commentaires, modification et suppression d'un commentaire)
+*/
+
 import http from "../http-common";
 
 class CommentsDataServices {
@@ -17,6 +21,5 @@ class CommentsDataServices {
         return http.delete(`/articles/${slug}/comments/${cryptoslug}`, { headers });
     }
 }
-
 
 export default new CommentsDataServices();

@@ -4,13 +4,13 @@
     <div class="auth">
         <!--Section qui s'affiche si le user n'est pas connecté-->
         <div v-if="!isLoggedIn">
-            <router-link to="/auth/signup" class="auth__signup"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'user-plus']" /> Inscription</button></router-link><br/>
-            <router-link to="/auth/login" class="auth__login"><button type= "button" class="btn btn-primary auth__btn"><font-awesome-icon :icon="['fas', 'sign-in-alt']" /> Connexion</button></router-link>
+            <router-link to="/auth/signup" class="auth__signup"><button type= "button" class="btn btn-primary auth__btn"><i class="fas fa-user-plus"></i> Inscription</button></router-link><br/>
+            <router-link to="/auth/login" class="auth__login"><button type= "button" class="btn btn-primary auth__btn"><i class="fas fa-sign-in-alt"></i> Connexion</button></router-link>
             <router-view />
         </div>
         <!--Section qui s'affiche si le user est connecté-->
         <div v-else class="deconnect">
-            <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Déconnexion</button>
+            <button type="button" class="btn btn-secondary deconnect__btn" @click="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</button>
             <!--Message qui ne s'affiche que si le user est connecté et est l'administrateur-->
             <div class="admin">
                 <p v-if="isUserAdmin">ADMINISTRATEUR<br/>CONNECTE</p>

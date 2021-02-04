@@ -1,40 +1,20 @@
+//CONFIGURATION GENERALE DE LA LA SINGLE PAGE APPLICATION AVEC VUE
+
+//Importation des plugins nécessaires
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
-
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons'
-import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
-import { faEdit } from '@fortawesome/free-solid-svg-icons'
-import { faNewspaper } from '@fortawesome/free-solid-svg-icons'
-import { faFileVideo } from '@fortawesome/free-solid-svg-icons'
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { faEye } from '@fortawesome/free-solid-svg-icons'
-import { faPlusSquare } from '@fortawesome/free-solid-svg-icons'
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-import { faThumbsDown } from '@fortawesome/free-solid-svg-icons'
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
-
-
-library.add(faUser, faUserPlus, faSignInAlt, faSignOutAlt, faTrashAlt, faEdit, faNewspaper, faFileVideo, faInfoCircle, faArrowLeft, faEye, faPlusSquare, faThumbsUp, faThumbsDown, faWindowClose)
-
+//Configuration de Vee-Validate pour la validation des inputs du login et du signup
 import { ValidationProvider, extend } from "vee-validate"
 import { required, email } from "vee-validate/dist/rules"
 import { ValidationObserver } from "vee-validate"
 
-//Configuration de Vee-Validate
 extend("required", {
     ...required,
     message: "Ce champ est obligatoire"
@@ -50,18 +30,16 @@ extend('minmax', {
     params: ['min', 'max'],
     message: "Ce champ a trop ou pas assez de caractères"
 })
-
+// Fin configuration Vee-validate
 
 Vue.use(BootstrapVue)
 Vue.use(Vuex)
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('ValidationProvider', ValidationObserver)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-
 
 Vue.config.productionTip = false
 
-//Configuration du store de Vuex
+//Configuration du store de Vuex pour permettre l'assignation des rôles (user/admin) et les autorisations sur les différentes requêtes
 const store = new Vuex.Store({
     plugins: [createPersistedState()],
     state: {
@@ -97,6 +75,8 @@ const store = new Vuex.Store({
         }
     }
 })
+//Fin configuration Vuex
+
 
 new Vue({
     router,

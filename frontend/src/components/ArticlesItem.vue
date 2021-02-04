@@ -9,15 +9,15 @@
                 <p class="card-subtitle card__subtitle">{{ subject }}</p>
                 <p class="card__date">Article posté le : {{ new Date(date_post).toLocaleDateString('fr-CA') }} par {{ username }}</p>
             </div>
-            <a class="btn btn-secondary card__btnDetails" :href="'/articles/' + slug"><font-awesome-icon :icon="['fas', 'info-circle']" /> En savoir plus</a>
+            <a class="btn btn-secondary card__btnDetails" :href="'/articles/' + slug"><i class="fas fa-info-circle"></i> En savoir plus</a>
         </div>
         <!--Section qui s'affiche si la page qui appelle ce component est celle qui affiche un article en particulier-->
         <div v-else class="card text-center">
             <div class="card-header card__header">
                 <ul class="list-group">
                     <li class="list-group-item card__comments">
-                        <a href="#commentsList"><font-awesome-icon :icon="['fas', 'eye']" /> Voir tous les commentaires</a>
-                        <a :href="'/articles/' + slug + '/comments'"><font-awesome-icon :icon="['fas', 'edit']" /> Poster un commentaire</a>
+                        <a href="#commentsList"><i class="far fa-eye"></i> Voir tous les commentaires</a>
+                        <a :href="'/articles/' + slug + '/comments'"><i class="far fa-edit"></i> Poster un commentaire</a>
                     </li>
                     <li class="list-group-item">
                         <!--La section suivante ne s'affiche que si le user a liké ou disliké l'article-->

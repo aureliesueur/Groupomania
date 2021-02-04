@@ -1,3 +1,7 @@
+/*CONFIGURATION DES REQUETES AXIOS CONCERNANT LES ARTICLES.
+Actions : CRUD (Création d'article, affichage d'un ou de tous les articles, modification et suppression d'article)
+*/
+
 import http from "../http-common";
 
 class ArticlesDataServices {
@@ -17,8 +21,6 @@ class ArticlesDataServices {
         return http.delete(`/articles/${slug}`, { headers });
     }
 }
-
-
 
 export default new ArticlesDataServices();
 

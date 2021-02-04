@@ -4,6 +4,7 @@
     <div class="jumbotron">
         <div v-if="!submitted" class="jumbotron container">
             <h1>Entrez vos identifiants de connexion</h1>
+            <span id="secureUser"><i class="fas fa-user-lock"></i></span>
             <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'erreurs-->
             <ValidationObserver v-slot="{ invalid, handleSubmit }">
                 <form class="row formLogin" @submit.prevent="handleSubmit(loginSubmit)">
@@ -117,6 +118,11 @@ export default {
 //Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
+
+#secureUser {
+    font-size: 2.5em;
+    color: $color-secondary;
+}
     
 .formLogin {
     justify-content: center;

@@ -1,8 +1,11 @@
-                            
+<!--PAGE DE BASE DU FRONTEND DE L'APPLICATION GROUPOMANIA-->                           
 <template>
     <div id="app">
+        <!--Menu présent sur toutes les pages quand on est sur desktop-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> 
+            <!--Grand logo s'affiche quand on est sur desktop-->
             <img src="/images/icon-left-font.png" width="400" aria-label="Logo Groupomania" alt="Logo Groupomania" class="navbar-brand img-large" />
+            <!--Petit logo s'affiche quand on est sur tablette ou smartphone-->
             <img src="/images/icon.png" width="100" alt="Site logo" class="navbar-brand img-narrow"/>
             <div class="collapse navbar-collapse" id="navCollapse">
                 <ul class="navbar-nav mr-auto">
@@ -11,15 +14,14 @@
                     <li class="nav-item "><router-link to="/gifs" class="nav-link navbar__link" aria-label="Lien vers la plateforme Gifs">Partagez vos Gifs</router-link></li>
                 </ul>
             </div>
+            <!--Bouton qui permet d'ouvrir ou de fermer un menu latéral quand on est sur smartphone ou tablette-->
             <button @click="toggleNav" type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navCollapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            
-        
         </nav>
             
         <nav v-if="toggleOn" >
+            <!--Menu latéral qui s'affiche quand on est sur smartphone ou tablette-->
             <div class="menu">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><router-link to="/" class="nav-link" aria-label="Lien vers la page accueil">Accueil</router-link></li>   
@@ -197,7 +199,6 @@ h2 {
     .btn, .btn-primary {
         font-size: 0.8em!important;
     }
-}
-    
+}    
     
 </style>

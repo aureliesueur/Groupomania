@@ -51,9 +51,9 @@
                 
                 <!--La section suivante des boutons "suppression" et "modification" ne s'affiche que si le user est celui qui a posté l'article' à l'origine ou s'il est administrateur-->
                 <div v-if="validUser || isAdmin" class="col-12 col-md-2 action valid">
-                    <button type= "button" class="btn btn-primary action__btn" @click="showUpdate"><font-awesome-icon :icon="['fas', 'edit']" /> Modifier</button><br/>
+                    <button type= "button" class="btn btn-primary action__btn" @click="showUpdate"><i class="far fa-edit"></i> Modifier</button><br/>
                     <p class="text">{{ messageUpdate }}</p>
-                    <button type= "button" class="btn btn-primary btn-suppress action__btn" @click="confirmDelete"><font-awesome-icon :icon="['fas', 'trash-alt']" /> Supprimer</button>
+                    <button type= "button" class="btn btn-primary btn-suppress action__btn" @click="confirmDelete"><i class="far fa-trash-alt"></i> Supprimer</button>
                     <!--Message qui ne s'affiche que quand le user clique sur le bouton "suppression"-->
                     <div v-if="confirmation" class="confirmation">
                         <p class="text">Etes-vous sûr de vouloir supprimer ce post ?</p>

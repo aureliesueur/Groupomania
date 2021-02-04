@@ -20,8 +20,8 @@
                                 name="content" />
                         </div>
                         <div class="action">
-                            <button class="btn btn-success btn-post" @click="postComment" aria-label="Poster le commentaire">Poster ce commentaire</button>
-                            <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Annuler</button></router-link>
+                            <button class="btn btn-success btn-post" @click="postComment" aria-label="Poster le commentaire"><i class="fas fa-check"></i> Poster ce commentaire</button>
+                            <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-times"></i> Annuler</button></router-link>
                             <div v-if="forbidden" class="confirmation"><!--Message qui s'affiche uniquement si le "alreadyCommented" du localStorage est "true", donc si le user a déjà commenté cet article-->
                                 <p class="text">Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
                                 <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>

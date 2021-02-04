@@ -53,8 +53,8 @@
                            name="lien-web" />
                     </div>
                     <div class="post-btns">
-                        <button class="btn btn-success" @click="saveArticle">Valider ce post</button>
-                        <router-link to="/articles" class="btn-return" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                        <button class="btn btn-success" @click="saveArticle"><i class="fas fa-check"></i> Valider ce post</button>
+                        <router-link to="/articles" class="btn-return" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Retour à la liste</button></router-link>
                         <router-view />
                     </div>
                 </div>
