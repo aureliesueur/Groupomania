@@ -168,7 +168,74 @@ h2 {
 .img-narrow {
     display: none!important;
 }
-   
+
+/*KEYFRAMES UTILISES SUR PLUSIEURS PAGES*/
+    
+@keyframes opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+    
+@keyframes revelation {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes reverseRevelation {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+    
+@keyframes lateralRevelation {
+    0% {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+    
+@keyframes leftShow {
+    0% {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+    
+@keyframes rightShow {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}
+ 
+/*MEDIA QUERIES POUR RENDRE LE SITE RESPONSIVE*/
     
 //Média query pour adapter la page au smartphone
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

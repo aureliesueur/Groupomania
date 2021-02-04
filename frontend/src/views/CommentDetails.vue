@@ -234,6 +234,24 @@ $color-secondary: #324392;
 h1 {
     margin-bottom: 0px!important;
 }
+  
+    
+/*ANIMATION A L'ARRIVEE SUR LA PAGE*/    
+
+.comment {
+    &__box {
+    animation: leftShow 700ms both ease-in-out;
+    }
+    &__btnBox {
+    animation: rightShow 700ms both ease-in-out;
+    }     
+} 
+    
+ 
+.formUpComment {
+    animation: opacity 700ms both ease-in-out;
+}
+     
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

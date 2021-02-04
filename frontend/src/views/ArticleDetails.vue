@@ -10,7 +10,7 @@
             <div class="row articlePage__box">
                 <div v-if="currentArticle[0]" class="container col-12 col-md-10">
                     <div class='row'>
-                        <div class="col-12 col-lg-11">
+                        <div class="col-12 col-lg-11 article-item">
                             <!--Importation du component ArticlesItem-->
                             <ArticlesItem 
                                 :key="currentArticle[0].title"
@@ -511,6 +511,21 @@ h1 {
 .invalid {
     margin: auto;
     margin-top: 20px;
+}
+    
+   
+/*ANIMATION A L'ARRIVEE SUR LA PAGE*/    
+
+.article-item {
+    animation: revelation 700ms both ease-in-out;
+} 
+    
+.action {
+    animation: lateralRevelation 700ms both ease-in-out;
+} 
+    
+.formUpdate {
+    animation: opacity 700ms both ease-in-out;
 }
     
     

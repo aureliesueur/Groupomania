@@ -8,9 +8,9 @@
                 <h2>Derniers articles postés</h2>
                 <div class="container">
                     <div class='row articles__box'>
-                        <ul class="col-12 col-lg-10">
+                        <ul class="col-12 col-lg-9">
                             <!--Boucle sur le tableau des articles récupérés depuis la base de données-->
-                            <li v-for="article in articles" :key="article.title">
+                            <li v-for="article in articles" :key="article.title" class="articles-item">
                                 <!--Importation du component ArticlesItem-->
                                 <ArticlesItem 
                                 :id="article.id"
@@ -20,11 +20,11 @@
                                 :subject="article.subject"
                                 :lien_web="article.lien_web"
                                 :username="article.username"
-                                :date_post="article.date_post"          
+                                :date_post="article.date_post" 
                                 />
                             </li>
                         </ul>
-                        <div class="col-12 col-lg-2">
+                        <div class="col-12 col-lg-3">
                             <router-link to="/articles/add" aria-label="Poster un nouvel article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
                         </div> 
                     </div>
@@ -130,7 +130,22 @@ a {
     height: 50px;
     margin-top: 40px!important;
 }
+    
+.btn-add {
+    min-width: 150px;
+}
 
+    
+/*ANIMATION A L'ARRIVEE SUR LA PAGE*/    
+
+.articles-item {
+    animation: revelation 700ms both ease-in-out;
+} 
+    
+.btn-add {
+    animation: lateralRevelation 700ms both ease-in-out;
+} 
+    
     
 /*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     

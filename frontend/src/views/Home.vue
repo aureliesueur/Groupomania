@@ -32,7 +32,7 @@
                         <span class="card__icon"><i class="fas fa-newspaper"></i></span>
                         <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Articles</button>
                     </div>
-                    <div class="card col-12 col-sm-5">
+                    <div class="card col-12 col-sm-5 intro__gifs">
                         <h2 class="card__title">Partagez vos vidéos préférées</h2>
                         <span class="card__icon"><i class="fas fa-file-video"></i></span>
                         <button class="btn btn-primary card__btn" @click="callToLogin">Accès au Forum Groupomania Vidéos</button>
@@ -290,8 +290,20 @@ $color-tertiary: #6f757b;
         margin-right: 20px;
     }
 }
+  
+    
+/*ANIMATION A L'ARRIVEE SUR LA PAGE*/
+    
+.intro__articles, .intro__gifs {
+    animation: revelation 700ms both ease-in-out;
+}
+    
+.intro__title {
+    animation: reverseRevelation 700ms both ease-in-out;
+}
+    
  
- /*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
+/*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
 //Média query pour adapter la page au smartphone
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
