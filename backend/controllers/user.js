@@ -1,4 +1,3 @@
-
 /*LOGIQUE METIER POUR CE QUI CONCERNE L'AUTHENTIFICATION DES USERS */
 
 //Importation du fichier de configuration de la connection à MySQL
@@ -32,6 +31,8 @@ exports.validate = (method) => {
     }       
   }
 }
+
+/*REMARQUE : dans toutes les requêtes suivantes, sont utilisés des placeholders et des "escaped variables" pour éviter les attaques par injection SQL */
 
 //Fonction qui gère la logique métier de la route POST (inscription d'un nouvel user)
 exports.signup = (req, res, next) => {
@@ -95,7 +96,7 @@ exports.login = (req, res, next) => {
                     userId: data[0].id,
                     username: data[0].username,
                     isAdmin: data[0].is_admin,
-                    //Encodage d'un nouveau token
+                    //Si le password est correct, encodage d'un nouveau token
                     token: jwt.sign(
                         {userId : data[0].id, username: data[0].username, isAdmin: data[0].is_admin},
                         "DD49869BBAD47",
@@ -108,7 +109,7 @@ exports.login = (req, res, next) => {
 };
     
   
-//Fonction qui gère la logique métier de la route GET (affichage d'un user)
+//Fonction qui gère la logique métier de la route GET (affichage des données d'un user)
 exports.getOneUser = (req, res, next) => {
     let sql = `SELECT * FROM Users WHERE id = ?`;
     db.query(sql, [req.params.id], function(err, data, fields) {

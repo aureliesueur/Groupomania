@@ -9,12 +9,12 @@
                 <div class='row intro__box text-center'>
                     <div class="card col-12 col-sm-5 intro__articles">
                         <h2 class="card__title">Partagez vos articles préférés</h2>
-                        <span class="card__icon"><i class="fas fa-newspaper"></i></span>
+                        <span class="card__icon"><font-awesome-icon :icon="['fas', 'newspaper']" /></span>
                         <router-link to="/articles" aria-label="Lien vers la plateforme d'articles"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Articles</button></router-link>
                     </div>
                     <div class="card col-12 col-sm-5 intro__gifs">
                         <h2 class="card__title">Partagez vos vidéos préférées</h2>
-                        <span class="card__icon"><i class="fas fa-file-video"></i></span>
+                        <span class="card__icon"><font-awesome-icon :icon="['fas', 'file-video']" /></span>
                         <router-link to="/gifs" aria-label="Lien vers la plateforme Gifs"><button class="btn btn-primary card__btn">Accès au Forum Groupomania Vidéos</button></router-link>
                     </div>
                     <router-view />
@@ -206,6 +206,8 @@ $color-tertiary: #6f757b;
     &__icon {
         font-size: 2em;
         color: #000;
+        margin-top: 20px;
+        margin-bottom: -20px;
     }
     &__btn {
         margin-top: 0;

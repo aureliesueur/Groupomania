@@ -20,8 +20,7 @@ exports.validate = (method) => {
         body('title').exists().isAlpha(),
         body('description').optional().isAlpha(),
         body('subject').exists().isAlpha(),
-        body('lien_web').optional().isURL(),
-        body('date_post').exists().isDate(),
+        body('lien_web').optional().isURL()
        ]   
     }
     case 'modifyArticle': {
@@ -29,12 +28,14 @@ exports.validate = (method) => {
         body('title').exists().isAlpha(),
         body('description').optional().isAlpha(),
         body('subject').exists().isAlpha(),
-        body('lien_web').optional().isURL(),
-        body('date_post').exists().isDate(),
+        body('lien_web').optional().isURL()
        ]   
     }  
   }
 }
+
+/*REMARQUE : dans toutes les requêtes suivantes, sont utilisés des placeholders et des "escaped variables" pour éviter les attaques par injection SQL */
+
 
 //Fonction qui gère la logique métier de la route POST (ajout d'un nouvel article)
 exports.createArticle = (req, res, next) => {
@@ -61,9 +62,9 @@ exports.createArticle = (req, res, next) => {
             return res.status(400).json({err});
         }
         var articleToModify = data[0];
-        console.log(articleToModify);
         //Comparaison de l'id du user courant avec l'id du user ayant posté l'article
         if (articleToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
+            //Création du nouveau slug correspondant au nouveau titre
             let newSlug = slug((req.body.title + new Date().toLocaleDateString('fr-CA')), { lower: true });
             let sql = `UPDATE Articles SET title = ?, slug = ?, description = ?, subject = ?, lien_web  = ?, user_id = ?, date_post = ? WHERE slug = ?`;
             let values = [req.body.title, newSlug, req.body.description, req.body.subject, req.body.lien_web, req.body.user_id, req.body.date_post, req.params.slug];
@@ -90,7 +91,6 @@ exports.deleteArticle = (req, res, next) => {
             return res.status(400).json({err});
         }
         var articleToModify = data[0];
-        console.log(articleToModify);
         //Comparaison de l'id du user courant avec l'id du user ayant posté l'article
         if (articleToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
               let sql = "UPDATE Articles SET deleted = true WHERE slug = ?";

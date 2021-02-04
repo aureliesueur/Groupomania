@@ -88,6 +88,7 @@ h1 {
     margin-bottom: 30px!important;
     font-weight: bold;
     color: #OOO;
+    font-family: 'Comfortaa', 'Varela', Verdana, sans-serif;
 }
     
 h2 {
@@ -96,6 +97,7 @@ h2 {
     font-weight: bold;
     text-align: center;
     margin-bottom: 30px!important;
+    font-family: 'Comfortaa', 'Varela', Verdana, sans-serif;
 }
     
 .navbar {

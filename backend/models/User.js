@@ -1,3 +1,5 @@
+/* Structuration des données "users" dans la base de données MySQL */
+
 //Importation du module mysql
 var mysql = require("mysql");
 

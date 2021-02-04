@@ -1,14 +1,11 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE LES REQUETES SUR LES COMMENTAIRES POSTES A PROPOS D'UN ARTICLE */
 
-
 //Importation du modèle Comment
 const Comment = require("../models/Comment"); 
 //Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");
 //Importation du middleware de vérification des inputs par express-validator 
 const {body} = require('express-validator');
-//Importation du plugin qui permet de créer un slug à partir du titre de l'article
-//var slugify = require("slugify");
 //Importation du plugin qui permet de créer un slug aléatoire pour chaque comment
 var cryptoRandomString = require('crypto-random-string');
 
@@ -17,26 +14,22 @@ exports.validate = (method) => {
   switch (method) {
     case 'createComment': {
      return [ 
-        body('content').exists().isAlpha(),
-        body('user_id').exists().isInt(),
-        body('article_id').exists().isInt(),
-        body('date_post').exists().isDate(),
+        body('content').exists().isAlpha()
        ]   
     }
     case 'modifyComment': {
      return [ 
-        body('content').exists().isAlpha(),
-        body('user_id').exists().isInt(),
-        body('article_id').exists().isInt(),
-        body('date_post').exists().isDate(),
+        body('content').exists().isAlpha()
        ]   
     }  
   }
 }
 
+/*REMARQUE : dans toutes les requêtes suivantes, sont utilisés des placeholders et des "escaped variables" pour éviter les attaques par injection SQL */
 
-//Fonction qui gère la logique métier de la route POST (ajout d'un nouveau commentaire)
+//Fonction qui gère la logique métier de la route POST (ajout d'un nouveau commentaire) à condition que le user n'ait pas déjà posté un commentaire
 exports.createComment = (req, res, next) => {
+    //Recherche dans la BDD si le user courant a déjà posté un commentaire sur l'article concerné
     let sql = `SELECT Comments.id FROM Comments INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Comments.deleted = false AND Articles.slug = ? AND Comments.user_id = ?`;
     let values = [req.params.slug, req.user.userId];
     db.query(sql, values, function(err, data) {
@@ -44,7 +37,7 @@ exports.createComment = (req, res, next) => {
             return res.status(400).json({err});
         }
         var result = data[0];
-        console.log(result);
+        //Si aucun commentaire existant, le user est autorisé à poster un commentaire
         if (result === null || result === undefined) {
             let sql = `INSERT INTO Comments(cryptoslug, content, user_id, article_id, date_post) VALUES (?)`;
             //Création d'un slug aléatoire
@@ -63,16 +56,15 @@ exports.createComment = (req, res, next) => {
 };
 
 
-//Fonction qui gère la logique métier de la route PUT (modification d'un commentaire posté par son auteur)
+//Fonction qui gère la logique métier de la route PUT (modification d'un commentaire posté, autorisée pour son auteur uniquement)
  exports.modifyComment = (req, res, next) => {
-    //Recherche dans la BDD du commentaire à modifier
+    //Recherche dans la BDD du commentaire à modifier via son slug
     let sql = "SELECT * FROM Comments WHERE cryptoslug = ?";
     db.query(sql, [req.params.cryptoslug], function(err, data) {
         if (err) {
             return res.status(400).json({err});
         }
         var commentToModify = data[0];
-        console.log(commentToModify);
         //Comparaison de l'id du user courant avec l'id du user ayant posté le commentaire
         if (commentToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
             let sql = `UPDATE Comments SET content = ?, user_id = ?, date_post = ? WHERE cryptoslug = ?`;
@@ -90,8 +82,7 @@ exports.createComment = (req, res, next) => {
 }; 
 
     
-
-//Fonction qui gère la logique métier de la route DELETE (suppression d'un commentaire posté)
+//Fonction qui gère la logique métier de la route DELETE (suppression d'un commentaire posté, autorisée pour son auteur uniquement)
 exports.deleteComment = (req, res, next) => {
     //Recherche dans la BDD du commentaire à modifier
     let sql = "SELECT * FROM Comments WHERE cryptoslug = ?";
@@ -100,7 +91,6 @@ exports.deleteComment = (req, res, next) => {
             return res.status(400).json({err});
         }
         var commentToModify = data[0];
-        console.log(commentToModify);
         //Comparaison de l'id du user courant avec l'id du user ayant posté le commentaire
         if (commentToModify.user_id === req.user.userId || req.user.isAdmin === 1) {
             let sql = "UPDATE Comments SET deleted = true WHERE Comments.cryptoslug = ?";
@@ -117,7 +107,6 @@ exports.deleteComment = (req, res, next) => {
 };
 
 
-
 //Fonction qui gère la logique métier de la route GET (affichage de tous les commentaires)
 exports.getAllComments = (req, res, next) => { 
     let articleSlug = req.params.slug; 
@@ -131,7 +120,7 @@ exports.getAllComments = (req, res, next) => {
 };
 
 
-//Fonction qui gère la logique métier de la route GET (affichage d'un commentaire en particulier)
+//Fonction qui gère la logique métier de la route GET (affichage d'un commentaire en particulier, sélectionné par son slug)
 exports.getOneComment = (req, res, next) => {
     let commentSlug = req.params.cryptoslug; 
     let sql = "SELECT Comments.id, Comments.cryptoslug, Comments.user_id, content, Comments.date_post, username, Articles.slug FROM Comments INNER JOIN Users ON Comments.user_id = Users.id INNER JOIN Articles ON Comments.article_id = Articles.id WHERE Comments.cryptoslug = ?";

@@ -1,3 +1,5 @@
+/* Structuration des données "commentaires" dans la base de données MySQL */
+
 //Importation du plugin mysql 
 var mysql = require("mysql");
 

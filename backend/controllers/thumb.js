@@ -1,6 +1,5 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE LES REQUETES SUR LES LIKES/DISLIKES */
 
-
 //Importation du modèle Thumb 
 const Thumb = require("../models/Thumb"); 
 //Importation du fichier de configuration de la connection à MySQL
@@ -11,8 +10,11 @@ const {body} = require('express-validator');
 const jwt = require("jsonwebtoken");
 
 
+/*REMARQUE : dans toutes les requêtes suivantes, sont utilisés des placeholders et des "escaped variables" pour éviter les attaques par injection SQL */
 
-//Fontion qui gère la logique métier de la route POST (envoi d'un nouveau like ou dislike). Si thumb=1, le like est enregistré, si thumb=-1, le dislike est enregistré.
+
+/*Fontion qui gère la logique métier de la route POST (envoi d'un nouveau like ou dislike). 
+Règle : si thumb=1, le like est enregistré, si thumb=-1, le dislike est enregistré.*/
 exports.sendThumb = (req, res, next) => {
      //Recherche dans la BDD l'id de l'article concerné par les thumbs
     let sql = "SELECT * FROM Articles WHERE slug = ?";
@@ -33,7 +35,7 @@ exports.sendThumb = (req, res, next) => {
 };
 
 
-//Fontion qui gère la logique métier de la route DELETE (suppression d'un like ou d'un dislike)
+//Fontion qui gère la logique métier de la route DELETE (suppression d'un like ou d'un dislike, autorisée pour celui qui l'a posté uniquement)
 exports.deleteThumb = (req, res, next) => {
     //Recherche dans la BDD l'id de l'article concerné par les thumbs
     let sql = "SELECT * FROM Articles WHERE slug = ?";
@@ -42,7 +44,6 @@ exports.deleteThumb = (req, res, next) => {
             return res.status(400).json({err});
         }
         var articleId = data[0].id;
-        console.log(articleId);
         let sql = `DELETE FROM Thumbs WHERE article_id = ? AND user_id = ?`;
         let values = [articleId, req.user.userId];
         db.query(sql, values, function(err, data) {
@@ -56,7 +57,7 @@ exports.deleteThumb = (req, res, next) => {
 };
 
  
-//Fontion qui gère la logique métier de la route GET (affichage de tous les likes et dislikes)  
+//Fontion qui gère la logique métier de la route GET (affichage des totaux de tous les likes et dislikes par article)  
 exports.getAllThumbs = (req, res, next) => {
     //Recherche dans la BDD l'id de l'article concerné par les thumbs
     let sql = "SELECT * FROM Articles WHERE slug = ?";
@@ -76,7 +77,7 @@ exports.getAllThumbs = (req, res, next) => {
     });
 };  
 
-//Fontion qui gère la logique métier de la route GET (affichage d'un seul like)  
+//Fontion qui gère la logique métier de la route GET (affichage d'un seul thumb, pour déterminer si un user a déjà liké ou disliké un certain article)  
 exports.getUserThumb = (req, res, next) => {
     //Recherche dans la BDD l'id de l'article concerné par les thumbs
     let sql = "SELECT * FROM Articles WHERE slug = ?";
