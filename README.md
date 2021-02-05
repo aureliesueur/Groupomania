@@ -1,5 +1,5 @@
 # Groupomania
-Réseau social de l'entreprise Groupomania : frontend et backend (Node, Express, MySQL et Vue CLI)
+Groupomania Social Network : frontend and backend project.
 
 PREREQUISITES
 
@@ -11,7 +11,11 @@ Please clone this repository : it will provide you with the two necessary folder
 
 ACCESS TO THE DATABASE
 
-This app uses the plugin dotenv to mask the connexion data. In this folder, you'll find a ".env-evaluator" file, which will provide you access to MySQL groupomania database, once filled with right values. To make it work, please change its name to ".env", and fill up the values with DB_USER and DB_PASS provided separately. .
+This app uses the plugin dotenv to mask the connexion data. In this folder, you'll find a ".env-evaluator" file, which will provide you access to MySQL groupomania database, once filled with right values. To make it work, please change its name to ".env", and fill up the values with DB_USER and DB_PASS provided separately. 
+
+Also, you need to locally create the database.
+In the "backend/db" folder that you've have cloned, please type : mysql -u "DB_USER" -p. Then password = "DB_PASS" (of course replace "DB_USER" and "DB_PASS" by the correct datas). And finally : USE groupomania. 
+Then you need to copy the whole content of "db.sql" file (in "backend/db" folder). Your groupomania database is created.
 
 RUN THE APP
 
