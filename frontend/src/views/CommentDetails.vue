@@ -270,4 +270,12 @@ h1 {
     }
 }
     
+//Média query pour adapter la page au smartphone   
+@media screen and (max-width : 768px) {   
+    .comment__box {
+        margin-bottom: 40px!important;
+    }
+}
+    
+    
 </style>

@@ -629,7 +629,7 @@ h1 {
     .formUpdate {
         left: 5%;
         max-width: 90%;
-        top: 100%;
+        top: 70%;
         &__box {
             margin: auto;
         }

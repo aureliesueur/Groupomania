@@ -68,10 +68,10 @@
                 <button class="btn account__btn" @click="hideAccount"><i class="fas fa-arrow-left"></i> Retour</button>
             </div>
             <!--Ecran qui demande confirmation pour la suppression du compte-->
-            <div v-if="confirmation" class="confirm">
+            <div v-if="confirmation" class="confirmSuppress">
                 <p>Etes-vous sûr de vouloir supprimer votre compte ? Toute suppression est définitive.</p>
-                <button type= "button" class="btn confirm__btn" @click="suppressUser">Supprimer</button>
-                <button type= "button" class="btn confirm__btn" @click="refreshPage">Annuler</button>
+                <button type= "button" class="btn confirmSuppress__btn" @click="suppressUser">Supprimer</button>
+                <button type= "button" class="btn confirmSuppress__btn" @click="refreshPage">Annuler</button>
             </div>
         </div> 
         <!--Importation du component Footer-->
@@ -255,8 +255,7 @@ $color-tertiary: #6f757b;
         font-size: 0.9em!important;
     }
 } 
- 
-    
+     
 .account {
     background: $color-secondary;
     border: 2px solid #FFF;
@@ -275,7 +274,7 @@ $color-tertiary: #6f757b;
     }
 }
     
-.confirm {
+.confirmSuppress {
     background: $color-secondary;
     border: 2px solid #FFF;
     border-radius: 10px;
@@ -305,7 +304,7 @@ $color-tertiary: #6f757b;
  
 /*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
-//Média query pour adapter la page au smartphone
+//Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 
     .info {
         right: 60px!important;

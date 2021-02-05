@@ -4,34 +4,43 @@
     <div>
         <div class="container jumbotron text-center comment">
             <img src="/images/network11.jpg" width="250" alt="Groupe échangeant des commentaires" aria-label="Groupe échangeant des commentaires" class="comment__img" />
-            <div v-if="!submitted" class="formComment">
-                <h1>Pour ajouter un commentaire, remplissez le champ suivant :</h1>
-                <div class="row">
-                    <div role="form" class="col-12 col-md-9 text-center formComment__box ">
-                        <div class="form-group">
-                            <textarea
-                                type="textarea" 
-                                rows="5"
-                                cols="30"
-                                class="form-control"
-                                required
-                                v-model="comment.content"
-                                placeholder="Formidable !"
-                                name="content" />
-                        </div>
-                        <div class="action">
-                            <button class="btn btn-success btn-post" @click="postComment" aria-label="Poster le commentaire"><i class="fas fa-check"></i> Poster ce commentaire</button>
-                            <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-times"></i> Annuler</button></router-link>
-                            <div v-if="forbidden" class="confirmation"><!--Message qui s'affiche uniquement si le "alreadyCommented" du localStorage est "true", donc si le user a déjà commenté cet article-->
-                                <p class="text">Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
-                                <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+            <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'une erreur-->
+            <ValidationObserver v-slot="{ invalid, handleSubmit }">
+                <form v-if="!submitted" class="formComment" @submit.prevent="handleSubmit(postComment)">
+                    <h1>Pour ajouter un commentaire, remplissez le champ suivant :</h1>
+                    <div class="row">
+                        <div role="form" class="col-12 col-md-9 text-center formComment__box ">
+                            <div class="form-group">
+                                <!--Utilisation de Vee-Validate : ValidationProvider, pour tester la validité du content-->
+                                <ValidationProvider name="comment.content" rules="required|minmax:3,300"><!--Définition des règles de validité de l'input-->
+                                    <div slot-scope="{ errors }">
+                                        <textarea
+                                            type="textarea" 
+                                            rows="5"
+                                            cols="30"
+                                            class="form-control"
+                                            required
+                                            v-model="comment.content"
+                                            placeholder="Formidable !"
+                                            name="content" />
+                                            <p class="error">{{ errors[0] }}</p><!--Une erreur s'affiche si l'input ne respecte pas les règles de ValidationProvider-->
+                                    </div>
+                                </ValidationProvider>
+                            </div>
+                            <div class="action">
+                                <button class="btn btn-success btn-post" aria-label="Poster le commentaire" type="submit" value="Submit" v-bind:disabled="invalid"><i class="fas fa-check"></i> Poster ce commentaire</button>
+                                <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary"><i class="fas fa-times"></i> Annuler</button></router-link>
+                                <div v-if="forbidden" class="confirmation"><!--Message qui s'affiche uniquement si le "alreadyCommented" du localStorage contient le slug de l'article, donc si le user a déjà commenté cet article-->
+                                    <p class="text">Vous avez déjà commenté cet article, vous ne pouvez le faire qu'une fois !</p>
+                                    <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </form>
+            </ValidationObserver>
             <div v-if="submitted" >
-                <p>{{ message }}</p>
+                <p id="confirmComment">{{ message }}</p>
                 <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary">Retour à la liste</button></router-link>
                 <router-view />
             </div>
@@ -42,16 +51,18 @@
     </div>
 </template>
 
+
 <script>
 //Importation des components et plugins nécessaires dans la page 
 import Footer from "../components/Footer"
 import CommentsDataServices from "../services/CommentsDataServices"
 import { mapState } from 'vuex'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
     
 export default {
     name: 'CommentForm',
     components: {
-        Footer
+        Footer, ValidationProvider, ValidationObserver
     },
     data () {
         return {
@@ -64,7 +75,8 @@ export default {
             },
             submitted: false, 
             message:"",
-            forbidden: false
+            forbidden: false,
+            errors: []
         }
     },
     computed: {
@@ -138,6 +150,11 @@ $color-secondary: #324392;
     &__box {
         margin: auto!important;
     }
+}
+    
+.error, #confirmComment {
+    font-weight: bold;
+    color: $color-primary;
 }
 
 .btn-post {
