@@ -177,6 +177,10 @@ $color-secondary: #324392;
 #afterMessage {
     padding-top: 200px;
     padding-bottom: 150px;
+    color: $color-primary;
+    & h3 {
+        margin-bottom: 20px;
+    }
 }
    
 /*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */

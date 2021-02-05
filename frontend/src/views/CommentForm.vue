@@ -80,8 +80,8 @@ export default {
         * @param {String} Authorization qui doit contenir le token 
         */
         postComment(slug, data, Authorization) {
-            let alreadyCommented = localStorage.getItem("alreadyCommented");
-            if (alreadyCommented && alreadyCommented == this.$route.params.slug) {
+            let previousComments = JSON.parse(localStorage.getItem("alreadyCommented"));     
+            if (previousComments && previousComments.indexOf(this.$route.params.slug) != -1) {
                 this.forbidden = true;
             } else {
                 data = {

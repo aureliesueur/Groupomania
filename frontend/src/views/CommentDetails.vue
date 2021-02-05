@@ -172,6 +172,11 @@ export default {
                     console.log(response.data);
                     this.message = "Votre commentaire a bien été supprimé";
                     this.deleted = true;
+                    //Actualisation du localStorage pour permettre au user de réécrire un nouveau commentaire à l'avenir
+                    let previousComments = JSON.parse(localStorage.getItem("alreadyCommented"));
+                    console.log(previousComments);
+                    previousComments = previousComments.filter(item => (item != this.$route.params.slug));
+                    localStorage.setItem("alreadyCommented", JSON.stringify(previousComments)); 
                 })
                 .catch(error => console.log(error));
         },

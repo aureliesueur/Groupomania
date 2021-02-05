@@ -37,7 +37,7 @@ exports.createComment = (req, res, next) => {
             return res.status(400).json({err});
         }
         var result = data[0];
-        //Si aucun commentaire existant, le user est autorisé à poster un commentaire
+        //Si aucun commentaire du user sur cet article n'existe, le user est autorisé à poster un commentaire
         if (result === null || result === undefined) {
             let sql = `INSERT INTO Comments(cryptoslug, content, user_id, article_id, date_post) VALUES (?)`;
             //Création d'un slug aléatoire

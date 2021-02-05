@@ -73,7 +73,7 @@
         
             <!--Formulaire qui ne s'affiche que quand le user clique sur le bouton "modifier"-->
             <div v-if="askForUpdate">
-                <div role="form" class="container text-center formUpdate">
+               <div role="form" class="container text-center formUpdate">
                     <h2 >Pour modifier cet article, merci de remplir les champs suivants :</h2>
                     <div class="row">
                         <div class="col-12 col-md-9 text-center formUpdate__box ">
@@ -125,6 +125,8 @@
                         </div>
                     </div>
                 </div>
+                
+                
             </div>
 
             <!--Importation du component Identification-->
@@ -153,7 +155,7 @@ import { mapGetters, mapState } from 'vuex'
 export default {
     name: "ArticleDetails",
     components: {
-		Footer, ArticlesItem, CommentsItem, Identification
+		Footer, ArticlesItem, CommentsItem, Identification//, ItemForm
 	},
     data () {
         return {
@@ -171,7 +173,6 @@ export default {
             thumbs: [],
             totalLikes: 0,
             totalDislikes: 0,
-            alreadyCommented: false,
             presenceOfLinks: true
         }
     },
@@ -195,7 +196,6 @@ export default {
             ArticlesDataServices.getOne(slug, { Authorization }) 
                 .then(response => {
                     this.currentArticle = JSON.parse(JSON.stringify(response.data.data));
-                    console.log(this.currentArticle[0].id);
                     if (this.currentArticle[0].lien_web === null || this.currentArticle[0].lien_web === undefined || this.currentArticle[0].lien_web === "") {
                         this.presenceOfLinks = false;
                     }
@@ -284,11 +284,18 @@ export default {
                     } else {
                         this.messageComments = "Il n'y a aucun commentaire pour le moment.";
                     }
-                    //Vérification de l'existence d'un commentaire déjà posté par le user courant sur l'article courant
+                    //Vérification de l'existence d'un commentaire déjà posté par le user courant sur l'article courant. Si oui, on ajoute le slug de l'article au tableau alreadyCommented du localStorage
                     this.comments.forEach(comment => {
                         if (comment.user_id === this.userId) {
-                            this.alreadyCommented = true;
-                            localStorage.setItem("alreadyCommented", this.currentArticle[0].slug);
+                            let previousComments = JSON.parse(localStorage.getItem("alreadyCommented"));
+                            if (previousComments && previousComments.length !== 0) {
+                                previousComments.push(this.currentArticle[0].slug);
+                                localStorage.setItem("alreadyCommented", JSON.stringify(previousComments));   
+                            } else {
+                                let previousComments = [];
+                                previousComments[0] = this.currentArticle[0].slug;
+                                localStorage.setItem("alreadyCommented", JSON.stringify(previousComments)); 
+                            }
                         }
                     });
                 })
