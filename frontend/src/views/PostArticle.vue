@@ -1,7 +1,7 @@
 <!--PAGE D'AJOUT D'UN NOUVEL ARTICLE-->
 
 <template>
-    <div class="jumbotron"> 
+    <main class="jumbotron"> 
         <h1 v-if="!submitted">Vous souhaitez partager vos intérêts avec votre communauté ? C'est ici !</h1>
         <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'erreurs-->
             <ValidationObserver v-slot="{ invalid, handleSubmit }" v-if="!submitted" >    
@@ -99,7 +99,7 @@
            
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 <script>

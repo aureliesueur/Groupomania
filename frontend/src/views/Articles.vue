@@ -1,7 +1,7 @@
 <!--PAGE D'ACCUEIL DU FORUM ARTICLES PRESENTANT LA LISTE COMPLETE DES ARTICLES-->
 
 <template>
-    <div>
+    <main>
         <div class="jumbotron articles">
             <h1>Plateforme de partage d'articles</h1>
             <div>
@@ -45,7 +45,7 @@
         </div> 
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 <script>

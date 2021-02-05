@@ -1,7 +1,7 @@
 <!--PAGE D'ACCUEIL PRESENTANT LES ACCES AUX DEUX PLATEFORMES-->
 
 <template>
-    <div>
+    <main>
         <div class="introPage">
             <!--Si le user est connecté, les liens vers les plateformes sont disponibles et cliquables-->
             <section v-if="isLoggedIn" class="container jumbotron text-center intro">
@@ -76,7 +76,7 @@
         </div> 
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 

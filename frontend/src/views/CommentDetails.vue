@@ -1,7 +1,7 @@
 <!--PAGE AFFICHANT LES DETAILS D'UN COMMENTAIRE SELECTIONNE, ET PERMETTANT SUPPRESSION ET MODIFICATION-->
 
 <template>
-   <div>
+   <main>
         <div class="jumbotron container comment">
             <h1 class="comment__msg">{{ message }}</h1><!--Message de suppression ou de modification du commentaire-->
             <div class="row">
@@ -64,7 +64,7 @@
     
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 <script>

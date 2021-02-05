@@ -1,7 +1,7 @@
 <!--PAGE DE CONNEXSION D'UN USER PRESENT DANS LA BDD : LOGIN-->
 
 <template>
-    <div class="jumbotron">
+    <main class="jumbotron">
         <div v-if="!submitted" class="jumbotron container">
             <h1>Entrez vos identifiants de connexion</h1>
             <span id="secureUser"><i class="fas fa-user-lock"></i></span>
@@ -48,7 +48,7 @@
 
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 <script>

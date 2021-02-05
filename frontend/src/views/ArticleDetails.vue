@@ -1,7 +1,7 @@
 <!--PAGE AFFICHANT LES DETAILS D'UN ARTICLE SELECTIONNE, SES COMMENTAIRES, ET PERMETTANT SUPPRESSION ET MODIFICATION-->
 
 <template>
-    <div>
+    <main>
         <div class="jumbotron container articlePage">
             <div id="header">
                 <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary" id="arrow-only" aria-label="Lien vers la page d'accueil"><i class="fas fa-arrow-left"></i></button></router-link>
@@ -137,7 +137,7 @@
         </div>
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 

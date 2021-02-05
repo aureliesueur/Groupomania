@@ -1,7 +1,7 @@
 <!--PAGE D'INSCRIPTION D'UN NOUVEAU USER -->
 
 <template>
-    <div class="jumbotron">
+    <main class="jumbotron">
         <h1>Vous souhaitez rejoindre la communauté Groupomania ?</h1>
         <div v-if="!submitted" class="container text-center">
             <h2>Merci de remplir les champs suivants :</h2>
@@ -97,7 +97,7 @@
             <!--Importation du component Footer-->
             <Footer />
         </div>
-    </div>
+    </main>
 </template>
 
 

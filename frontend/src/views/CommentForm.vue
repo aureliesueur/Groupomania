@@ -1,7 +1,7 @@
 <!--PAGE PERMETTANT DE POSTER UN NOUVEAU COMMENTAIRE-->
 
 <template>
-    <div>
+    <main>
         <div class="container jumbotron text-center comment">
             <img src="/images/network11.jpg" width="250" alt="Groupe échangeant des commentaires" aria-label="Groupe échangeant des commentaires" class="comment__img" />
             <!--Utilisation de Vee-Validate : ValidationObserver pour suspendre la soumission du formulaire à l'existence ou non d'une erreur-->
@@ -22,7 +22,8 @@
                                             required
                                             v-model="comment.content"
                                             placeholder="Formidable !"
-                                            name="content" />
+                                            name="content"
+                                            aria-label="Contenu du commentaire" />
                                             <p class="error">{{ errors[0] }}</p><!--Une erreur s'affiche si l'input ne respecte pas les règles de ValidationProvider-->
                                     </div>
                                 </ValidationProvider>
@@ -48,7 +49,7 @@
 
         <!--Importation du component Footer-->
         <Footer />
-    </div>
+    </main>
 </template>
 
 
