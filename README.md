@@ -15,4 +15,4 @@ This app uses the plugin dotenv to mask the connexion data. In this folder, you'
 
 RUN THE APP
 
-You will need two terminal windows : one for frontend, one for backend. On frontend terminal : run "npm runserve". The app's frontend is visible on http://localhost:8080/. On backend terminal : run "npm install" (ou "sudo npm install" sur Mac) puis "node server" ou "nodemon server.js". The server should run on localhost with default port 3000.
+You will need two terminal windows : one for frontend, one for backend. On frontend terminal : run "npm run serve". The app's frontend is visible on http://localhost:8080/. On backend terminal : run "npm install" (ou "sudo npm install" sur Mac) puis "node server" ou "nodemon server.js". The server should run on localhost with default port 3000.
