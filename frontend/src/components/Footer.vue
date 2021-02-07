@@ -108,9 +108,7 @@ $color-footerbkg: #101010;
         }
     }
 }  
-
-
-    
+  
 .img-large {
     display: none!important;
 }
@@ -118,7 +116,12 @@ $color-footerbkg: #101010;
 .img-narrow {
     display: block!important;
 }
-   
+ 
+/*ANIMATION A L'ARRIVEE SUR LA PAGE*/    
+
+.footer {
+    animation: revelation 700ms both ease-in-out;
+}
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

@@ -5,7 +5,7 @@
         <div class="jumbotron container articlePage">
             <div id="header">
                 <router-link to="/articles" aria-label="Lien vers la liste d'articles"><button type= "button" class="btn btn-primary" id="arrow-only" aria-label="Lien vers la page d'accueil"><i class="fas fa-arrow-left"></i></button></router-link>
-                <h1>{{ title }}</h1>
+                <h1 class="articlePage__title">{{ title }}</h1>
             </div>
             <div class="row articlePage__box">
                 <div v-if="currentArticle[0]" class="container col-12 col-md-10">
@@ -523,7 +523,11 @@ h1 {
    
 /*ANIMATION A L'ARRIVEE SUR LA PAGE*/    
 
-.article-item {
+    
+.articlePage__title {
+    animation: reverseRevelation 700ms both ease-in-out;
+}
+.articlePage__box {
     animation: revelation 700ms both ease-in-out;
 } 
     
