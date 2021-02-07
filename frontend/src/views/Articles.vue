@@ -6,42 +6,55 @@
             <h1>Plateforme de partage d'articles</h1>
             <div>
                 <h2>Derniers articles postés</h2>
-                <div class="container">
-                    <div class='row articles__box'>
-                        <ul class="col-12 col-lg-9">
-                            <!--Boucle sur le tableau des articles récupérés depuis la base de données-->
-                            <li v-for="article in articles" :key="article.title" class="articles-item">
-                                <!--Importation du component ArticlesItem-->
-                                <ArticlesItem 
-                                :id="article.id"
-                                :title="article.title"
-                                :slug="article.slug"
-                                :description="article.description"
-                                :subject="article.subject"
-                                :lien_web="article.lien_web"
-                                :username="article.username"
-                                :date_post="article.date_post" 
-                                />
-                            </li>
-                        </ul>
-                        <div class="col-12 col-lg-3">
-                            <router-link to="/articles/add" aria-label="Poster un nouvel article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
-                        </div> 
+                    <div class="search">
+                        <label class="search__text">Recherche par thème : </label>
+                        <select class="search__select" name="subject" v-model="search">
+                            <option value="">--Liste complète--</option>
+                            <option value="Economie">Economie</option>
+                            <option value="Politique">Politique</option>
+                            <option value="Média">Médias</option>
+                            <option value="Société">Société</option>
+                            <option value="Psychologie">Psychologie</option>
+                            <option value="Climat">Climat</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Culture">Culture</option>
+                            <option value="Santé">Santé</option>
+                            <option value="Autre">Autre</option>
+                        </select>
                     </div>
-                </div>
+                    <div class="container">
+                        <div class='row articles__box'>
+                            <ul class="col-12 col-lg-9">
+                                <!--Boucle sur le tableau des articles filtrés-->
+                                <li v-for="article in filteredArticles" :key="article.title" class="articles-item">
+                                    <!--Importation du component ArticlesItem-->
+                                    <ArticlesItem 
+                                    :id="article.id"
+                                    :title="article.title"
+                                    :slug="article.slug"
+                                    :description="article.description"
+                                    :subject="article.subject"
+                                    :lien_web="article.lien_web"
+                                    :username="article.username"
+                                    :date_post="article.date_post" 
+                                    />
+                                </li>
+                            </ul>
+                            <div class="col-12 col-lg-3">
+                                <router-link to="/articles/add" aria-label="Poster un nouvel article"><button  type= "button" class="btn btn-primary btn-add"><i class="far fa-plus-square"></i> Poster un nouvel article</button></router-link>
+                            </div> 
+                        </div>
+                    </div>
                 <p v-if="articles.length == 0">{{ message }}</p>
             </div>
-
             <!--Importation du component CallToLogin-->
             <CallToLogin v-if="!isLoggedIn" />
-
             <!--Importation du component Identification-->
             <Identification
                 :logout="logout"
                 :isUserAdmin="isUserAdmin"
                 :isLoggedIn="isLoggedIn"
                   />
-
         </div> 
         <!--Importation du component Footer-->
         <Footer />
@@ -67,14 +80,21 @@ export default {
             //Initialisation des variables
             articles:[],
             activeArticle: null,
-            message: "Il n'y a aucun article posté sur la plateforme à ce jour."
+            message: "Il n'y a aucun article posté sur la plateforme à ce jour.",
+            search:""
         }
     },
    computed: {
        //Utilisation de Vuex pour déterminer les rôles et les autorisations du user (toutes ces informations étant conservées dans le store Vuex)
         ...mapGetters(['isLoggedIn']),
         ...mapGetters(['isUserAdmin']),
-        ...mapState({ token: "token"})
+        ...mapState({ token: "token"}),
+       //Fontion de filtrage des articles par sujet
+        filteredArticles() {
+            return this.articles.filter(article => {
+            return article.subject.includes(this.search);
+            })
+        }
     },
     methods: {
         /**
@@ -110,8 +130,7 @@ export default {
 //Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
-    
-    
+       
 .articles {
     width: 80%;
     margin: auto;
@@ -119,6 +138,20 @@ $color-secondary: #324392;
     background: url("/images/network3.jpg") fixed no-repeat!important;
     background-size: cover!important;
  }
+  
+.search {
+    margin-bottom : 20px;
+    &__text {
+        color: $color-secondary;
+        font-style: italic;
+        margin-right: 10px;
+    }
+    &__select {
+        outline: 0; 
+        border: 0;
+        text-align: center;
+    }
+}
     
 ul, li {
     list-style: none;
