@@ -1,4 +1,4 @@
-
+/*RESET AND CREATION SECTION*/
 DROP DATABASE IF EXISTS groupomania;
 CREATE DATABASE IF NOT EXISTS groupomania;
 USE groupomania;
@@ -11,6 +11,8 @@ DROP TABLE IF EXISTS Articles;
 DROP TABLE IF EXISTS Thumbs;
 DROP TABLE IF EXISTS Comments;
 
+
+/*TABLE CREATION SECTION*/
 /*Création de la table des utilisateurs, avec id, username, mail, password, nom, prénom. is_admin détermine si le user est administrateur du site ou juste utilisateur */
 CREATE TABLE Users (
     id SMALLINT UNSIGNED NOT NULL  AUTO_INCREMENT,
@@ -64,6 +66,7 @@ CREATE TABLE Comments (
 ) ENGINE = InnoDB ;
 
 
+/*INPUT SECTION*/
 INSERT INTO Users VALUES 
     (1, 'Bambi', 'aureliesueur@wanadoo.fr', 'bambi01as', 'Aurélie', 'Sueur', 0),
     (2, 'Chipolata', 'pauline.amartin@free.fr', 'figaro22', 'Pauline', 'Amartin', 0),
@@ -100,8 +103,9 @@ INSERT INTO Comments VALUES
     (7, 'ls31i','J''ai pris du plaisir à lire cet article bien documenté. Bravo à ce site qui a toujours des articles de grande qualité et des points de vue passionnants.', 7, 4, '2021-01-18', false),
     (8, '89nh9', 'Article très décevant, surtout que je suis un spécialiste de ce domaine...', 7, 1, '2021-01-21', false),
     (9, 'gye54', 'Merci de nous faire partager votre passion et vos compétences, c''est vraiment intéressant et inspirant... Je suis vos rubriques chaque mois avec beaucoup d''intérêt, continuez !', 5, 2, '2021-01-11', false);
-    
-
+   
+   
+/*FOREIGN KEYS SECTION*/
 /*Foreign keys qui associent les articles aux users qui les ont écrit, et les commentaires aux articles qu'ils concernent et aux users qui les font */
 ALTER TABLE Articles ADD CONSTRAINT fk_article_user FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE ON UPDATE CASCADE;
 
