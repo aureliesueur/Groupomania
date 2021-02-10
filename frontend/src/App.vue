@@ -77,7 +77,7 @@ button:hover {
     box-shadow: 2px 2px 4px $color-tertiary;
 }
 
-.auth__btn, .deconnect__btn, .card__btnWeb, .account__btn, .confirm__btn {
+.auth__btn, .deconnect__btn, .card__btnWeb, .account__btn, .confirm__btn, .confirmSuppress__btn {
     margin-bottom: 10px!important;
     background-color: #FFF!important;
     border: 2px solid $color-primary!important;
