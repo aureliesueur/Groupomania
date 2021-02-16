@@ -172,6 +172,7 @@ $color-bkg: #f1f1f2;
         }
     }
     &__comments {
+        border-radius: 8px 8px 0 0!important;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -236,6 +237,8 @@ $color-bkg: #f1f1f2;
         }
         &__comments {
             font-size: 0.7em;
+            min-height: 50px!important;
+            text-align: center;
         }
     
     }
