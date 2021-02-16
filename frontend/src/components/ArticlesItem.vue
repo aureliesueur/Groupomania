@@ -141,7 +141,6 @@ export default {
 
 <style scoped lang="scss">
   
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
 $color-bkg: #f1f1f2;
@@ -228,7 +227,6 @@ $color-bkg: #f1f1f2;
     }
 }
  
-
     
 //Média query pour adapter la page au smartphone
 @media screen and (max-width : 768px) {  

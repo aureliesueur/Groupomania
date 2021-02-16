@@ -1,12 +1,8 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE LES REQUETES SUR LES COMMENTAIRES POSTES A PROPOS D'UN ARTICLE */
 
-//Importation du modèle Comment
 const Comment = require("../models/Comment"); 
-//Importation du fichier de configuration de la connection à MySQL
-var db = require("../services/mysql.config.js");
-//Importation du middleware de vérification des inputs par express-validator 
+var db = require("../services/mysql.config.js"); 
 const {body} = require('express-validator');
-//Importation du plugin qui permet de créer un slug aléatoire pour chaque comment
 var cryptoRandomString = require('crypto-random-string');
 
 //Fonction de validation des inputs pour les requêtes post et put

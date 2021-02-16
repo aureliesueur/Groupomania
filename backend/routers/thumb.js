@@ -1,11 +1,8 @@
 /*LOGIQUE ROUTE POUR CE QUI CONCERNE LES REQUETES SUR LES LIKES/DISLIKES */
 
 const express = require("express");
-//Création d'un router Express qui contient toutes les routes des requêtes "Comments"
 const router = express.Router({ mergeParams: true });
-//Importation du middleware d'authentification pour protéger les routes
 const auth = require("../middleware/auth");
-//Importation du controller
 const thumbCtrl = require("../controllers/thumb");
 
 
@@ -21,7 +18,6 @@ router.get("/thumbs", auth, thumbCtrl.getAllThumbs);
 //Requête GET pour afficher le like ou le dislike d'un user sur un article
 router.get("/thumbs/user", auth, thumbCtrl.getUserThumb); 
 
-//Exportation du router
 module.exports = router;
 
 

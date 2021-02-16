@@ -1,15 +1,10 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE LES REQUETES SUR LES ARTICLES POSTES */
 
 
-//Importation du modèle Article 
 const Article = require("../models/Article"); 
-//Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");
-//Importation du middleware de vérification des inputs par express-validator 
 const {body} = require('express-validator');
-//Importation du package qui permet de créer et de vérifier les tokens d'authentification 
 const jwt = require("jsonwebtoken");
-//Importation du plugin qui permet de créer un slug à partir du titre de l'article
 var slug = require("slug");
 
 //Fonction de validation des inputs pour les requêtes post et put

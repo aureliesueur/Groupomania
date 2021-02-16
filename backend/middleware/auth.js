@@ -1,6 +1,5 @@
 /*MIDDLEWARE D'AUTHENTIFICATION ET D'AUTORISATION DU USER */
 
-//Importation du package qui permet de créer et de vérifier les tokens d'authentification 
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {

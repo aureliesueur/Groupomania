@@ -54,7 +54,6 @@
 
 
 <script>
-//Importation des components et plugins nécessaires dans la page 
 import Footer from "../components/Footer"
 import CommentsDataServices from "../services/CommentsDataServices"
 import { mapState } from 'vuex'
@@ -67,7 +66,6 @@ export default {
     },
     data () {
         return {
-            //Initialisation des variables
             comment: {
                 content: "",
                 user_id: "", 
@@ -123,7 +121,6 @@ export default {
 
 <style scoped lang="scss">
  
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
  

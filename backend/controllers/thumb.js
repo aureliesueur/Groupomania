@@ -1,12 +1,8 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE LES REQUETES SUR LES LIKES/DISLIKES */
 
-//Importation du modèle Thumb 
 const Thumb = require("../models/Thumb"); 
-//Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");
-//Importation du middleware de vérification des inputs par express-validator 
 const {body} = require('express-validator');
-//Importation du package qui permet de créer et de vérifier les tokens d'authentification 
 const jwt = require("jsonwebtoken");
 
 

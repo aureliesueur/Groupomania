@@ -1,6 +1,5 @@
 /* Structuration des données "articles" dans la base de données MySQL */
 
-//Importation du plugin mysql 
 var mysql = require("mysql");
 
 //Constructeur
@@ -16,5 +15,4 @@ const Article = function(article) {
     this.deleted = article.deleted
 };
 
-//Exportation du modèle de données
 module.exports = Article;

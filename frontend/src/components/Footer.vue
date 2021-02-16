@@ -56,7 +56,6 @@ export default {
 
 <style scoped lang="scss">
    
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
 $color-footerbkg: #101010;
@@ -122,6 +121,8 @@ $color-footerbkg: #101010;
 .footer {
     animation: revelation 700ms both ease-in-out;
 }
+  
+/*MEDIA QUERIES POUR ASSURER UNE MISE EN PAGE RESPONSIVE */
     
 //Média query pour adapter la page à la tablette
 @media screen and (min-width : 768px) and (max-width : 1024px) { 

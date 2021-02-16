@@ -1,6 +1,5 @@
-//Importation du package http nécessaire pour créer un serveur
+
 const http = require("http");
-//Importation de l'appli app.js pour connecter appli et serveur
 const app = require("./app");
 
 //Fonction qui permet de transformer en PORT qui est en string, en nombre
@@ -40,10 +39,9 @@ const errorHandler = error => {
     }
 };
 
-//Création du serveur en lui-même
+
 const server = http.createServer(app);
-   
-//Création d'événements, en cas d'erreur ou en cas d'écoute réussie
+
 server.on("error", errorHandler);
 server.on("listening", () => {
     const address = server.address();
@@ -51,5 +49,4 @@ server.on("listening", () => {
     console.log("Listening on " + bind);
 });
 
-//Mise en route de l'écoute serveur
 server.listen(port); 

@@ -1,12 +1,9 @@
 /*FICHIER EXTERNALISE DE CONFIGURATION POUR PERMETTRE LA CONNECTION A LA BASE DE DE DONNEES MYSQL */
 
-//Plugin dotenv (masquage des données de connexion à la DBbase via un fichier dotenv et une création de variables pour le nom du user, le password et le nom de la base de données)
 const dotenv = require("dotenv");
-
-//Importation du package mysql
 var mysql = require("mysql");
 
-//Configuration du plugin dotenv
+//Configuration du plugin dotenv (masquage des données de connexion à la DBbase via un fichier dotenv et une création de variables pour le nom du user, le password et le nom de la base de données)
 dotenv.config();
 var connection = mysql.createConnection({
     host : "localhost",

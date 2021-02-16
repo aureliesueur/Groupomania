@@ -1,11 +1,8 @@
 /*LOGIQUE ROUTE POUR CE QUI CONCERNE LES REQUETES SUR LES ARTICLES POSTES */
 
 const express = require("express");
-//Création d'un router Express qui contient toutes les routes des requêtes "Articles"
 const router = express.Router({ mergeParams: true });
-//Importation du middleware d'authentification pour protéger les routes et donner les autorisations aux users selon leur rôle et leur id
 const auth = require("../middleware/auth");
-//Importation du controller
 const articleCtrl = require("../controllers/article");
 
 
@@ -24,7 +21,6 @@ router.get("/", auth, articleCtrl.getAllArticles);
 //Requête GET pour afficher un article en particulier
 router.get("/:slug", auth, articleCtrl.getOneArticle); 
 
-//Exportation du router
 module.exports = router;
 
 

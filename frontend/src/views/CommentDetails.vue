@@ -68,7 +68,6 @@
 </template>
 
 <script>
-//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import CommentsItem from "../components/CommentsItem"
@@ -82,7 +81,6 @@ export default {
     },
     data () {
         return { 
-            //Initialisation des variables
             message: "",
             deleted: null,
             currentComment: {
@@ -196,7 +194,6 @@ export default {
 
 <style lang="scss">
     
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
     

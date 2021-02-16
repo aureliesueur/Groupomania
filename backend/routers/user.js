@@ -1,9 +1,7 @@
 /*LOGIQUE ROUTE POUR CE QUI CONCERNE L'AUTHENTIFICATION DES USERS */
 
 const express = require("express");
-//Création d'un router Express qui contient toutes les routes des requêtes User
 const router = express.Router();
-//Importation du controller
 const userCtrl = require("../controllers/user");
 
 
@@ -19,5 +17,4 @@ router.get("/:id", userCtrl.getOneUser);
 //Requête DELETE pour suppression de compte d'un user existant
 router.delete("/:id", userCtrl.deleteAccount);
 
-//Exportation du router
 module.exports = router;

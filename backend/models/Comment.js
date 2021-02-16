@@ -1,6 +1,5 @@
 /* Structuration des données "commentaires" dans la base de données MySQL */
-
-//Importation du plugin mysql 
+ 
 var mysql = require("mysql");
 
 //Constructeur
@@ -14,5 +13,4 @@ const Comment = function(comment) {
     this.deleted = comment.deleted
 };
 
-//Exportation du modèle de données
 module.exports = Comment;

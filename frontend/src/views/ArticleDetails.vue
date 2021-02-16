@@ -142,7 +142,6 @@
 
 
 <script>
-//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import ArticlesItem from "../components/ArticlesItem"
@@ -159,7 +158,6 @@ export default {
 	},
     data () {
         return {
-            //Initialisation des variables
             title: "Cet article vous intéresse ? Découvrez-le en détails...",
             currentArticle: [],
             comments: [],
@@ -437,7 +435,6 @@ export default {
 
 <style scoped lang="scss">
    
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
  
@@ -471,6 +468,7 @@ h1 {
     position: absolute;
     top: 20%;
     left: 15%;
+    z-index: 4;
     max-width: 60%;
     background-color: #DDD;
     border-radius: 20px;

@@ -81,7 +81,6 @@
 
 
 <script>
-//Importation des components et plugins nécessaires dans la page
 import Footer from "../components/Footer"
 import Identification from "../components/Identification"
 import CallToLogin from "../components/CallToLogin"
@@ -95,7 +94,6 @@ export default {
 	},
 	data() {
 		return {
-            //Initialisation des variables
             loginCalled: false,
             accountAsked: false,
             username: "",
@@ -185,7 +183,6 @@ export default {
 
 <style lang="scss">
  
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
 $color-tertiary: #6f757b;

@@ -72,7 +72,6 @@ export default {
 
 <style scoped lang="scss">
     
-//Déclaration variables SASS
 $color-primary: #cc2810;
 $color-secondary: #324392;
 
@@ -105,7 +104,8 @@ $color-secondary: #324392;
 .icon-only {
     display: none;
 }
-    
+
+//Média query pour adapter la page au smartphone   
 @media screen and (max-width : 768px) {  
     .icon-only {
         display: block;

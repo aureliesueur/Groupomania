@@ -1,6 +1,5 @@
 //CONFIGURATION GENERALE DE LA LA SINGLE PAGE APPLICATION AVEC VUE
 
-//Importation des plugins nécessaires
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'

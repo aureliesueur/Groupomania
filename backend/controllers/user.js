@@ -1,14 +1,9 @@
 /*LOGIQUE METIER POUR CE QUI CONCERNE L'AUTHENTIFICATION DES USERS */
 
-//Importation du fichier de configuration de la connection à MySQL
 var db = require("../services/mysql.config.js");
-//Importation du modèle User
 const User = require("../models/User");
-//Importation du package de cryptage des mots de passe
-const bcrypt = require("bcrypt");
-//Importation du package qui permet de créer et de vérifier les tokens d'authentification 
+const bcrypt = require("bcrypt"); 
 const jwt = require("jsonwebtoken");
-//Importation du middleware de vérification des inputs par express-validator 
 const {body} = require('express-validator');
 
 //Fonction de validation des inputs pour les requêtes post user
@@ -108,7 +103,7 @@ exports.login = (req, res, next) => {
     });
 };
     
-  
+
 //Fonction qui gère la logique métier de la route GET (affichage des données d'un user)
 exports.getOneUser = (req, res, next) => {
     let sql = `SELECT * FROM Users WHERE id = ?`;

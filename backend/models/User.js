@@ -1,6 +1,5 @@
 /* Structuration des données "users" dans la base de données MySQL */
 
-//Importation du module mysql
 var mysql = require("mysql");
 
 //Constructeur
@@ -14,7 +13,6 @@ const User = function(user) {
     this.is_admin = user.is_admin;
 };
 
-//Exportation du modèle de données
 module.exports = User;
 
 
